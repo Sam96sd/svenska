@@ -1,4 +1,4 @@
-import { type ButtonHTMLAttributes, type HTMLAttributes, type ReactNode } from 'react'
+import { type ComponentProps, type HTMLAttributes, type ReactNode } from 'react'
 import { buttonClass, cx, type ButtonSize, type ButtonVariant } from './styles'
 
 export function Button({
@@ -7,7 +7,7 @@ export function Button({
   className,
   type = 'button',
   ...rest
-}: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: ButtonVariant; size?: ButtonSize }) {
+}: ComponentProps<'button'> & { variant?: ButtonVariant; size?: ButtonSize }) {
   return <button type={type} className={cx(buttonClass(variant, size), className)} {...rest} />
 }
 

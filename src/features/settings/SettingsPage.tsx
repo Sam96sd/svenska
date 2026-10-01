@@ -42,7 +42,7 @@ export default function SettingsPage() {
     <div className="animate-fade-up">
       <PageHeader title="Settings" subtitle={`For ${profile.name}`} />
 
-      <div className="grid gap-4">
+      <div className="grid grid-cols-1 gap-4">
         <Section title="Learning">
           <Segmented<DailyGoal>
             label="Daily goal"
@@ -63,7 +63,7 @@ export default function SettingsPage() {
         </Section>
 
         <Section title="Audio">
-          <label className="grid gap-2">
+          <label className="grid grid-cols-1 gap-2">
             <span className="text-sm font-semibold">
               Speaking speed{' '}
               <span className="text-muted font-normal">({s.audioRate.toFixed(2)}×)</span>
@@ -186,7 +186,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <Card>
       <h2 className="mb-4 text-lg font-semibold">{title}</h2>
-      <div className="grid gap-5">{children}</div>
+      <div className="grid grid-cols-1 gap-5">{children}</div>
     </Card>
   )
 }

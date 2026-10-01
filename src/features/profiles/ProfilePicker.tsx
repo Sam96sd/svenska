@@ -44,7 +44,7 @@ export default function ProfilePicker() {
         />
       ) : (
         <>
-          <ul className="grid gap-3">
+          <ul className="grid grid-cols-1 gap-3">
             {profiles.map((p) => (
               <li key={p.id} className="flex items-center gap-2">
                 <button
@@ -105,7 +105,7 @@ function ProfileForm({
 
   return (
     <Card className="animate-fade-up">
-      <form onSubmit={save} className="grid gap-5">
+      <form onSubmit={save} className="grid grid-cols-1 gap-5">
         <h2 className="text-lg font-semibold">{profile ? 'Edit learner' : 'New learner'}</h2>
         <div className="flex items-center gap-4">
           <Avatar name={name || '?'} color={color} size={56} />

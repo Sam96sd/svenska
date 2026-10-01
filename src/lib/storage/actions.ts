@@ -1,4 +1,6 @@
 import { addXp } from '../progress'
+import { applyLessonResult, applyReview, type LessonResult } from '../learning'
+import { type Rating } from '../srs'
 import {
   AVATAR_COLORS,
   defaultSettings,
@@ -92,4 +94,29 @@ function mapProfile(s: AppState, id: string, fn: (p: Profile) => Profile): AppSt
     return fn(p)
   })
   return changed ? { ...s, profiles } : s
+}
+
+export function completeLesson(id: string, result: LessonResult) {
+  updateProfile(id, (p) => applyLessonResult(p, result))
+}
+
+export function reviewCard(id: string, cardId: string, rating: Rating) {
+  updateProfile(id, (p) => applyReview(p, cardId, rating))
+}
+
+export function recordMistakes(id: string, vocabIds: string[]) {
+  if (!vocabIds.length) return
+  const now = Date.now()
+  updateProfile(id, (p) => {
+    const mistakes = { ...p.mistakes }
+    for (const v of new Set(vocabIds))
+      mistakes[v] = { count: (mistakes[v]?.count ?? 0) + 1, lastAt: now }
+    return { ...p, mistakes }
+  })
+}
+
+export function unlockUnit(id: string, unitId: string) {
+  updateProfile(id, (p) =>
+    p.unlockedUnits.includes(unitId) ? p : { ...p, unlockedUnits: [...p.unlockedUnits, unitId] },
+  )
 }

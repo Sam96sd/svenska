@@ -164,7 +164,10 @@ export const BuildSchema = z.object({
 export const MatchSchema = z.object({
   ...base,
   type: z.literal('match'),
-  pairs: z.array(z.object({ sv: text, en: text })).min(3).max(6),
+  pairs: z
+    .array(z.object({ sv: text, en: text }))
+    .min(3)
+    .max(6),
 })
 
 export const GapSchema = z
@@ -186,11 +189,16 @@ export const MinimalPairSchema = z
     type: z.literal('minimalPair'),
     /** What to listen for, e.g. "long or short a?" */
     focus: text.optional(),
-    options: z.array(z.object({ sv: text, en: text.optional(), hint: text.optional() })).min(2).max(4),
+    options: z
+      .array(z.object({ sv: text, en: text.optional(), hint: text.optional() }))
+      .min(2)
+      .max(4),
     /** The option (sv) that is played. */
     answer: text,
   })
-  .refine((e) => e.options.some((o) => o.sv === e.answer), { message: 'answer must be one of the options' })
+  .refine((e) => e.options.some((o) => o.sv === e.answer), {
+    message: 'answer must be one of the options',
+  })
 
 export const SpeakSchema = z.object({
   ...base,

@@ -8,6 +8,8 @@ import { ThemeController } from './ThemeController'
 const ProfilePicker = lazy(() => import('../features/profiles/ProfilePicker'))
 const HomePage = lazy(() => import('../features/home/HomePage'))
 const SettingsPage = lazy(() => import('../features/settings/SettingsPage'))
+const UnitPage = lazy(() => import('../features/home/UnitPage'))
+const LessonPage = lazy(() => import('../features/lesson/LessonPage'))
 
 function RequireProfile({ children }: { children: ReactNode }) {
   const profile = useActiveProfile()
@@ -30,7 +32,16 @@ export default function App() {
           >
             <Route index element={<HomePage />} />
             <Route path="settings" element={<SettingsPage />} />
+            <Route path="unit/:unitId" element={<UnitPage />} />
           </Route>
+          <Route
+            path="/lesson/:lessonId"
+            element={
+              <RequireProfile>
+                <LessonPage />
+              </RequireProfile>
+            }
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

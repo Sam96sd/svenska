@@ -131,3 +131,17 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+.confetti-piece {
+  transform: translateY(-20px) rotate(var(--rot));
+  animation-name: confetti-fall;
+  animation-timing-function: cubic-bezier(0.25, 0.6, 0.5, 1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes confetti-fall {
+  to {
+    transform: translate(var(--drift), 105vh) rotate(calc(var(--rot) + 540deg));
+    opacity: 0.9;
+  }
+}
