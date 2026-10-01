@@ -5,6 +5,7 @@ import { cx } from '../../components/styles'
 import { Avatar, Card, ProgressBar } from '../../components/ui'
 import { VoiceBanner } from '../../components/VoiceBanner'
 import { units } from '../../content/course'
+import { BADGES, earnedBadgeIds } from '../../lib/badges'
 import { courseProgress, nextUp, unitDoneCount, unitStatus } from '../../lib/courseProgress'
 import { weekDayKeys } from '../../lib/dates'
 import { dueCardIds } from '../../lib/learning'
@@ -103,6 +104,8 @@ export default function HomePage() {
 
       {profile.settings.showCouple && <ThisWeek profile={profile} />}
 
+      <Badges profile={profile} />
+
       <section aria-labelledby="units-heading">
         <div className="mb-3 flex items-baseline justify-between">
           <h2 id="units-heading" className="text-xl font-semibold">
@@ -179,6 +182,49 @@ function Stat({ icon, value, label }: { icon: ReactNode; value: number; label: s
         <p className="text-2xl font-bold">{value}</p>
       </div>
       <p className="text-muted text-sm">{label}</p>
+    </Card>
+  )
+}
+
+function Badges({ profile }: { profile: Profile }) {
+  const earned = new Set(earnedBadgeIds(profile))
+  return (
+    <Card>
+      <div className="mb-4 flex items-baseline justify-between">
+        <h2 className="text-lg font-semibold">Badges</h2>
+        <p className="text-muted text-sm">
+          {earned.size} of {BADGES.length}
+        </p>
+      </div>
+      <ul className="grid grid-cols-4 gap-3 sm:grid-cols-7">
+        {BADGES.map((b) => {
+          const has = earned.has(b.id)
+          return (
+            <li key={b.id} className="text-center" title={b.description}>
+              <span
+                className={cx(
+                  'mx-auto flex h-12 w-12 items-center justify-center rounded-full text-2xl',
+                  has ? 'bg-accent-soft' : 'bg-surface-2 opacity-40 grayscale',
+                )}
+                aria-hidden="true"
+              >
+                {b.emoji}
+              </span>
+              <span
+                className={cx(
+                  'mt-1 block text-[11px] leading-tight font-semibold',
+                  !has && 'text-muted',
+                )}
+              >
+                {b.title}
+              </span>
+              <span className="sr-only">
+                {has ? 'Earned' : 'Not earned yet'}: {b.description}
+              </span>
+            </li>
+          )
+        })}
+      </ul>
     </Card>
   )
 }

@@ -17,14 +17,14 @@ npm install
 npm run dev        # http://localhost:5173/svenska/
 ```
 
-| Command | What it does |
-| --- | --- |
-| `npm run dev` | Start the dev server |
-| `npm run build` | Type-check and build to `dist/` |
-| `npm run preview` | Serve the production build |
-| `npm test` | Unit tests (Vitest) |
-| `npm run test:e2e` | End-to-end smoke test (Playwright) |
-| `npm run lint` / `npm run format` | ESLint / Prettier |
+| Command                           | What it does                       |
+| --------------------------------- | ---------------------------------- |
+| `npm run dev`                     | Start the dev server               |
+| `npm run build`                   | Type-check and build to `dist/`    |
+| `npm run preview`                 | Serve the production build         |
+| `npm test`                        | Unit tests (Vitest)                |
+| `npm run test:e2e`                | End-to-end smoke test (Playwright) |
+| `npm run lint` / `npm run format` | ESLint / Prettier                  |
 
 Pushing to `main` builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`.
 

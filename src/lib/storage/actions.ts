@@ -1,4 +1,5 @@
 import { addXp } from '../progress'
+import { newBadges, type Badge } from '../badges'
 import { applyLessonResult, applyReview, type LessonResult } from '../learning'
 import { type Rating } from '../srs'
 import {
@@ -119,4 +120,14 @@ export function unlockUnit(id: string, unitId: string) {
   updateProfile(id, (p) =>
     p.unlockedUnits.includes(unitId) ? p : { ...p, unlockedUnits: [...p.unlockedUnits, unitId] },
   )
+}
+
+/** Records newly earned badges on the profile and returns them (for a celebration). */
+export function claimBadges(id: string): Badge[] {
+  const p = store.get().profiles.find((x) => x.id === id)
+  if (!p) return []
+  const fresh = newBadges(p)
+  if (fresh.length)
+    updateProfile(id, (q) => ({ ...q, badges: [...q.badges, ...fresh.map((b) => b.id)] }))
+  return fresh
 }

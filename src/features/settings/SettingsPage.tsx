@@ -1,4 +1,4 @@
-import { Download, LogOut, RotateCcw, Trash2, Upload } from 'lucide-react'
+import { Download, LogOut, RotateCcw, Trash2, Upload, Volume2 } from 'lucide-react'
 import { useRef, useState, type ChangeEvent, type ReactNode } from 'react'
 import { useNavigate } from 'react-router'
 import { Segmented } from '../../components/Segmented'
@@ -9,6 +9,7 @@ import {
   setActiveProfile,
   updateSettings,
 } from '../../lib/storage/actions'
+import { speak, useSwedishVoices } from '../../lib/audio'
 import { downloadBackup, parseBackup, restoreBackup } from '../../lib/storage/backup'
 import { useProfile } from '../../lib/storage/hooks'
 import { type DailyGoal } from '../../lib/storage/schema'
@@ -63,6 +64,7 @@ export default function SettingsPage() {
         </Section>
 
         <Section title="Audio">
+          <VoicePicker value={s.voiceURI} onChange={(voiceURI) => set({ voiceURI })} />
           <label className="grid grid-cols-1 gap-2">
             <span className="text-sm font-semibold">
               Speaking speed{' '}
@@ -216,5 +218,61 @@ function Toggle({
         className="bg-line checked:bg-primary relative mt-0.5 h-7 w-12 shrink-0 cursor-pointer appearance-none rounded-full transition-colors before:absolute before:top-1 before:left-1 before:h-5 before:w-5 before:rounded-full before:bg-white before:shadow before:transition-transform checked:before:translate-x-5"
       />
     </label>
+  )
+}
+
+function VoicePicker({
+  value,
+  onChange,
+}: {
+  value: string | null
+  onChange: (voiceURI: string | null) => void
+}) {
+  const { voices, loaded, supported } = useSwedishVoices()
+  const best = voices[0]
+  if (!supported) {
+    return (
+      <p className="text-muted text-sm">
+        This browser can't play speech. Try Chrome, Edge or Safari.
+      </p>
+    )
+  }
+  if (loaded && voices.length === 0) {
+    return (
+      <p className="text-muted text-sm">
+        No Swedish voice is installed on this device. The app shows how to add one on the home
+        screen.
+      </p>
+    )
+  }
+  return (
+    <div className="grid grid-cols-1 gap-2">
+      <label htmlFor="voice" className="text-sm font-semibold">
+        Swedish voice
+      </label>
+      <div className="flex flex-wrap items-center gap-2">
+        <select
+          id="voice"
+          value={value ?? ''}
+          onChange={(e) => onChange(e.target.value || null)}
+          className="border-line bg-bg h-11 min-w-0 flex-1 rounded-xl border px-3 text-sm"
+        >
+          <option value="">Automatic{best ? ` (${best.name})` : ''}</option>
+          {voices.map((v) => (
+            <option key={v.voiceURI} value={v.voiceURI}>
+              {v.name}
+              {v.localService ? '' : ' · online'}
+            </option>
+          ))}
+        </select>
+        <Button variant="secondary" onClick={() => speak('Hej! Välkommen till svenska.')}>
+          <Volume2 size={18} /> Test
+        </Button>
+      </div>
+      <p className="text-muted text-xs">
+        {voices.length} Swedish {voices.length === 1 ? 'voice' : 'voices'} on this device. Voices
+        marked “online” need an internet connection.
+      </p>
+    </div>
   )
 }
