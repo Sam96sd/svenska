@@ -56,7 +56,7 @@ export default defineLesson({
       sv: 'varsågod',
       en: 'here you go / you’re welcome',
       pos: 'phrase',
-      pron: 'VAR-sho-goo',
+      pron: 'vah-sho-GOO(D)',
       note: 'Said when you hand something over or offer something.',
     },
     { id: 'bra', sv: 'bra', en: 'good / fine', pos: 'adjective', pron: 'brah' },
