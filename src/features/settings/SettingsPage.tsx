@@ -1,4 +1,4 @@
-import { Download, LogOut, RotateCcw, Trash2, Upload, Volume2 } from 'lucide-react'
+import { Download, LogOut, RotateCcw, Trash2, Smartphone, Upload, Volume2 } from 'lucide-react'
 import { useRef, useState, type ChangeEvent, type ReactNode } from 'react'
 import { useNavigate } from 'react-router'
 import { Segmented } from '../../components/Segmented'
@@ -10,6 +10,7 @@ import {
   updateSettings,
 } from '../../lib/storage/actions'
 import { speak, useSwedishVoices } from '../../lib/audio'
+import { isStandalone, useInstallPrompt } from '../../lib/install'
 import { downloadBackup, parseBackup, restoreBackup } from '../../lib/storage/backup'
 import { useProfile } from '../../lib/storage/hooks'
 import { type DailyGoal } from '../../lib/storage/schema'
@@ -106,6 +107,8 @@ export default function SettingsPage() {
             onChange={(v) => set({ showCouple: v })}
           />
         </Section>
+
+        <InstallSection />
 
         <Section title="Backup">
           <p className="text-muted text-sm">
@@ -274,5 +277,45 @@ function VoicePicker({
         marked “online” need an internet connection.
       </p>
     </div>
+  )
+}
+
+function InstallSection() {
+  const { canInstall, install } = useInstallPrompt()
+  if (isStandalone()) return null
+  const ios = /iPhone|iPad|iPod/.test(navigator.userAgent)
+  return (
+    <Section title="Install on your phone">
+      <p className="text-muted text-sm">
+        Install Svenska like an app: it gets its own icon, opens full screen and works offline.
+      </p>
+      {canInstall ? (
+        <Button onClick={install} className="justify-self-start">
+          <Smartphone size={18} /> Install app
+        </Button>
+      ) : (
+        <ol className="grid list-decimal gap-1 pl-5 text-sm">
+          {ios ? (
+            <>
+              <li>Open this page in Safari.</li>
+              <li>
+                Tap the <strong>Share</strong> button (the square with an arrow).
+              </li>
+              <li>
+                Choose <strong>Add to Home Screen</strong>, then <strong>Add</strong>.
+              </li>
+            </>
+          ) : (
+            <>
+              <li>Open this page in Chrome (Android) or Edge/Chrome (computer).</li>
+              <li>
+                Open the browser menu (⋮) and choose <strong>Install app</strong> or{' '}
+                <strong>Add to Home screen</strong>.
+              </li>
+            </>
+          )}
+        </ol>
+      )}
+    </Section>
   )
 }

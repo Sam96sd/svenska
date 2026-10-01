@@ -104,8 +104,6 @@ export default function HomePage() {
 
       {profile.settings.showCouple && <ThisWeek profile={profile} />}
 
-      <Badges profile={profile} />
-
       <section aria-labelledby="units-heading">
         <div className="mb-3 flex items-baseline justify-between">
           <h2 id="units-heading" className="text-xl font-semibold">
@@ -170,6 +168,8 @@ export default function HomePage() {
           })}
         </ol>
       </section>
+
+      <Badges profile={profile} />
     </div>
   )
 }

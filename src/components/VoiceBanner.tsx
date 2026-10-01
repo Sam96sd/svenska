@@ -1,6 +1,7 @@
 import { Info, X } from 'lucide-react'
 import { useState } from 'react'
 import { useSwedishVoices } from '../lib/audio'
+import { cx } from './styles'
 
 type Platform = 'ios' | 'android' | 'windows' | 'mac' | 'other'
 
@@ -28,7 +29,7 @@ const STEPS: Record<Platform, string> = {
 const DISMISS_KEY = 'svenska:voice-banner-dismissed'
 
 /** Shown when this device has no Swedish voice, with steps to install one. */
-export function VoiceBanner() {
+export function VoiceBanner({ className }: { className?: string }) {
   const { voices, loaded, supported } = useSwedishVoices()
   const [dismissed, setDismissed] = useState(() => {
     try {
@@ -52,7 +53,10 @@ export function VoiceBanner() {
   return (
     <div
       role="note"
-      className="bg-accent-soft border-accent/40 relative mb-6 rounded-2xl border p-4 pr-12"
+      className={cx(
+        'bg-accent-soft border-accent/40 relative rounded-2xl border p-4 pr-12',
+        className,
+      )}
     >
       <div className="flex gap-3">
         <Info className="text-accent-ink mt-0.5 shrink-0" size={20} aria-hidden="true" />

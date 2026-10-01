@@ -33,6 +33,8 @@ export function normalize(input: string, lang: 'sv' | 'en' = 'sv'): string {
     .replace(/\s+/g, ' ')
     .trim()
   if (lang === 'en') s = s.replace(/^(to|a|an|the) /, '')
+  // "idag" and "i dag" (imorgon / i morgon …) are both standard spellings.
+  else s = s.replace(/(^| )i (dag|morgon|går|kväll|natt|morse|förrgår)(?= |$)/g, '$1i$2')
   return s
 }
 

@@ -13,25 +13,72 @@ export interface Generated {
   production: Exercise[]
 }
 
-const same = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLowerCase()
+/** The separate meanings in an English gloss: "girl / young woman" → ["girl", "young woman"]. */
+export function meanings(v: Pick<Vocab, 'en' | 'enAlt'>): Set<string> {
+  return new Set(
+    [v.en, ...(v.enAlt ?? [])]
+      .flatMap((e) => e.split(/\/|,|;|\bor\b/))
+      .map((m) =>
+        m
+          .toLowerCase()
+          .replace(/\(.*?\)/g, '')
+          .replace(/[’']/g, "'")
+          .replace(/^\s*(to|a|an|the)\s+/, '')
+          .trim(),
+      )
+      .filter(Boolean),
+  )
+}
 
-/** Up to `n` distractor words for `word`, preferring the same part of speech. */
+const overlaps = (a: Set<string>, b: Set<string>) => [...a].some((m) => b.has(m))
+
+/**
+ * Up to `n` distractor words for `word`, preferring the same part of speech.
+ * A distractor never shares a meaning or a spelling with the answer or with another distractor,
+ * so there is always exactly one right choice.
+ */
 export function distractors(word: Vocab, pool: Vocab[], n: number, rng: Rng): Vocab[] {
-  const usable = uniqueBy(
-    pool.filter(
-      (v) => v.id !== word.id && !same(v.en, word.en) && !same(svDisplay(v), svDisplay(word)),
+  const candidates = [
+    ...shuffle(
+      pool.filter((v) => v.pos === word.pos),
+      rng,
     ),
-    (v) => v.en.toLowerCase(),
-  )
-  const samePos = shuffle(
-    usable.filter((v) => v.pos === word.pos),
-    rng,
-  )
-  const other = shuffle(
-    usable.filter((v) => v.pos !== word.pos),
-    rng,
-  )
-  return [...samePos, ...other].slice(0, n)
+    ...shuffle(
+      pool.filter((v) => v.pos !== word.pos),
+      rng,
+    ),
+  ]
+  const picked: Vocab[] = []
+  const taken = [meanings(word)]
+  const spellings = new Set([svDisplay(word).toLowerCase()])
+  for (const v of candidates) {
+    if (picked.length >= n) break
+    if (v.id === word.id) continue
+    const m = meanings(v)
+    const sv = svDisplay(v).toLowerCase()
+    if (spellings.has(sv) || taken.some((t) => overlaps(t, m))) continue
+    picked.push(v)
+    taken.push(m)
+    spellings.add(sv)
+  }
+  return picked
+}
+
+/** Up to `max` words whose meanings and spellings don't overlap (so match pairs are unambiguous). */
+function distinctWords(words: Vocab[], max: number): Vocab[] {
+  const out: Vocab[] = []
+  const taken: Set<string>[] = []
+  const spellings = new Set<string>()
+  for (const w of words) {
+    if (out.length >= max) break
+    const m = meanings(w)
+    const sv = svDisplay(w).toLowerCase()
+    if (spellings.has(sv) || taken.some((t) => overlaps(t, m))) continue
+    out.push(w)
+    taken.push(m)
+    spellings.add(sv)
+  }
+  return out
 }
 
 function uniqueBy<T>(items: T[], key: (t: T) => string): T[] {
@@ -107,14 +154,12 @@ export function generateExercises(
 
   const fullPool = uniqueBy([...words, ...pool], (v) => v.id)
 
-  if (words.length >= 3) {
+  const pairs = distinctWords(sample(words, words.length, rng), 5)
+  if (pairs.length >= 3) {
     out.recognition.push({
       type: 'match',
-      pairs: sample(words, Math.min(5, words.length), rng).map((v) => ({
-        sv: svDisplay(v),
-        en: v.en,
-      })),
-      vocab: words.map((w) => w.id),
+      pairs: pairs.map((v) => ({ sv: svDisplay(v), en: v.en })),
+      vocab: pairs.map((w) => w.id),
     })
   }
 

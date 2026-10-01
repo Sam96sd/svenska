@@ -82,7 +82,7 @@ export function LessonPlayer({ lesson, pool }: { lesson: Lesson; pool: Vocab[] }
           title={lesson.title}
           subtitle={lesson.goal}
         >
-          <VoiceBanner />
+          <VoiceBanner className="mb-6" />
           <div className="grid grid-cols-1 gap-4">
             {lesson.learn.map((s, i) => (
               <SectionView key={i} section={s} />

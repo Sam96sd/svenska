@@ -6,6 +6,12 @@ describe('normalize', () => {
     expect(normalize('  Hej,   hur MÅR du? ')).toBe('hej hur mår du')
     expect(normalize('Jag heter Anna.')).toBe('jag heter anna')
   })
+  it('treats idag and i dag (and friends) as the same', () => {
+    expect(normalize('Jag är ledig i dag.')).toBe(normalize('Jag är ledig idag'))
+    expect(normalize('I morgon åker vi')).toBe('imorgon åker vi')
+    expect(normalize('i kväll')).toBe('ikväll')
+    expect(normalize('i dagarna')).toBe('i dagarna')
+  })
   it('keeps å, ä and ö', () => {
     expect(normalize('ÅÄÖ')).toBe('åäö')
   })

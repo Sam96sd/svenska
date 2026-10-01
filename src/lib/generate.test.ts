@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { type Vocab } from '../content/schema'
-import { distractors, generateExercises } from './generate'
+import { distractors, generateExercises, meanings } from './generate'
 import { seededRng } from './random'
 
 const v = (id: string, sv: string, en: string, extra: Partial<Vocab> = {}): Vocab => ({
@@ -64,5 +64,21 @@ describe('distractors', () => {
     const d = distractors(words[0]!, pool, 3, seededRng(2))
     expect(d.map((x) => x.en)).not.toContain('car')
     expect(d.every((x) => x.pos === 'noun')).toBe(true)
+  })
+})
+
+describe('meanings', () => {
+  it('splits glosses and drops articles, "to" and notes', () => {
+    expect([...meanings({ en: 'girl / young woman' })]).toEqual(['girl', 'young woman'])
+    expect([...meanings({ en: 'to speak (formal)', enAlt: ['talk'] })]).toEqual(['speak', 'talk'])
+  })
+
+  it('never offers a distractor that shares a meaning with the answer', () => {
+    const tjej = v('tjej', 'tjej', 'girl / young woman')
+    const pool = [v('flicka', 'flicka', 'girl'), v('kvinna', 'kvinna', 'woman'), ...words]
+    for (let seed = 0; seed < 20; seed++) {
+      const d = distractors(tjej, pool, 3, seededRng(seed))
+      expect(d.map((x) => x.id)).not.toContain('flicka')
+    }
   })
 })
