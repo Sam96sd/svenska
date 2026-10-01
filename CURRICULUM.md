@@ -5,6 +5,8 @@ Vocab ids are unique across the whole course: a word is introduced once and reus
 Words in dialogues and exercises should come from the current or earlier lessons; a few extra
 words are fine in dialogues (they always have translations), never in typing or tile exercises.
 
+Extra words added while writing (ids with a unit suffix): `fran-u2` (från), `trevligt-att-traffas-u2`, `ingen-orsak-u2`, `vad-ar-klockan-u3`, `med-u7`, `det-finns-u7`, `mot-u7`, `van-u8` (vän), `hemma-u8`. Check this list before adding a new word.
+
 Levels: Units 1–2 ≈ A0, Units 3–6 ≈ A1, Units 7–11 ≈ A2.
 
 ---
@@ -51,12 +53,72 @@ Levels: Units 1–2 ≈ A0, Units 3–6 ≈ A1, Units 7–11 ≈ A2.
 | u04-l04 My and your           | min/mitt/mina … deras                               | min, din, hans, hennes, var-our: vår, er, deras, cykel, hund, katt                               |
 | u04-l05 Where is it?          | på, under, bredvid … + ligger/står                  | pa: på, under, bredvid, framfor: framför, bakom, mellan, hitta, borta, ligga, sta: stå           |
 
-## Units 5–11 (outline, detailed before writing)
+## Unit 5 · Verbs: the present tense · _Verb i presens_ (A1)
 
-5. **Present tense** — -ar / -er / short verbs, vara & ha, kan/vill/ska + infinitive, _lagom_ (culture)
-6. **Word order** — statements, the V2 rule, yes/no questions, question words, where _inte_ goes
-7. **Food & café** — fika vocabulary, _Kan jag få …?_, prices in kronor, the supermarket, _fika_ (culture)
-8. **Family & daily life** — family, home and rooms, daily routine (reflexive verbs), describing people
-9. **Adjectives & plurals** — stor/stort/stora, definite adjectives, plural groups 1–5, colours
-10. **Past & future** — preteritum (regular and irregular), perfekt, _ska_ / _kommer att_
-11. **Getting around** — directions, transport, tickets, weather, _allemansrätten_ (culture)
+| Lesson                            | Focus                                                  | New vocab                                                                                                                                |
+| --------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| u05-l01 Verbs ending in -ar       | one form for every person; infinitive -a → present -ar | tala, arbeta, jobba, titta, lyssna, laga, stada: städa, spela, dansa, vanta: vänta, fraga: fråga, svara                                  |
+| u05-l02 Verbs ending in -er       | infinitive -a → present -er (or just -r after r)       | lasa: läsa, skriva, tycka, hora: höra, ringa, stanga: stänga, resa, leka, anvanda: använda, behova: behöva, hjalpa: hjälpa, kanna: känna |
+| u05-l03 Short and irregular verbs | vara/är, ha/har, gå/går, short verbs in -r             | vara, ha, ga-go: gå, tro, se, ata: äta, dricka, sova, veta, fa: få, ta                                                                   |
+| u05-l04 kan, vill, ska            | modal + infinitive (no "att"), måste, börjar/slutar    | kunna, vilja, ska, maste: måste, borja: börja, sluta, simma, cykla, sjunga                                                               |
+| u05-l05 Lagom (culture)           | lagom, free time, stress; "för mycket"                 | lagom, lugn, stressad, ledig, semester, fritid, trivas, mycket, for-too: för                                                             |
+
+## Unit 6 · Word order · _Ordföljd_ (A1)
+
+| Lesson                        | Focus                                               | New vocab                                                                                                                          |
+| ----------------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| u06-l01 Simple sentences      | subject–verb–object, frequency adverbs              | alltid, ofta, ibland, sallan: sällan, aldrig, varje, dag, morgon, kvall: kväll, te, mjolk: mjölk                                   |
+| u06-l02 The verb comes second | V2 after time/place words                           | sedan, darfor: därför, nasta: nästa, forra: förra, snart, redan, fortfarande, efter, fore: före                                    |
+| u06-l03 Yes/no questions      | verb first; ja / nej / jo                           | jo, eller, val-tag: väl, verkligen, forsta: förstå, gilla, alska: älska, hata, sport, musik, film                                  |
+| u06-l04 Question words        | vem, när, varför, vart, hur mycket, eftersom        | vem, vart, nar: när, varfor: varför, hur-mycket: hur mycket, hur-lange: hur länge, eftersom, fest, fodelsedag: födelsedag, present |
+| u06-l05 Where does inte go?   | inte after the verb; before the verb in att-clauses | att, saga: säga, tanka: tänka, hoppas, nog, heller, ingen, nagon: någon, alls                                                      |
+
+## Unit 7 · Food & café · _Mat och fika_ (A2)
+
+| Lesson                          | Focus                                   | New vocab                                                                                                                                               |
+| ------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| u07-l01 Fika (culture)          | the coffee break, fika as verb and noun | fika, kanelbulle, kaka, tarta: tårta, smorgas: smörgås, socker, choklad, varm, kall                                                                     |
+| u07-l02 Ordering: Kan jag få …? | ordering, eat in / take away, paying    | bestalla: beställa, meny, ta-med: ta med, ata-har: äta här, nota, betala, servitor: servitör, hungrig, torstig: törstig, smaklig-maltid: smaklig måltid |
+| u07-l03 Prices in kronor        | Vad kostar …?, numbers + kronor, Swish  | krona, kosta, billig, dyr, pris, swisha, kvitto, rea, kontant                                                                                           |
+| u07-l04 At the supermarket      | groceries, amounts                      | affar: affär, brod: bröd, smor: smör, ost, agg: ägg, frukt, gronsak: grönsak, kott: kött, fisk, potatis, pase: påse                                     |
+| u07-l05 Meals of the day        | meals, likes and dislikes, allergies    | frukost, lunch, middag, recept, sallad, soppa, kyckling, ris, pasta, vegetarian, allergisk                                                              |
+
+## Unit 8 · Family & daily life · _Familj och vardag_ (A2)
+
+| Lesson                          | Focus                                         | New vocab                                                                                                                                                                                        |
+| ------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| u08-l01 My family               | family words; mormor/farmor/morfar/farfar     | familj, mamma, pappa, foralder: förälder, bror, syster, son, dotter, mormor, farmor, morfar, farfar                                                                                              |
+| u08-l02 Partners and relatives  | sambo, gift, släkt                            | man, fru, sambo, gift, skild, pojkvan: pojkvän, flickvan: flickvän, kusin, slakt: släkt, barnbarn, kvinna                                                                                        |
+| u08-l03 At home                 | rooms and things at home                      | lagenhet: lägenhet, vardagsrum, sovrum, badrum, hall, balkong, trappa, golv, vagg: vägg, kylskap: kylskåp, dusch                                                                                 |
+| u08-l04 My day                  | reflexive verbs (mig, dig, sig, oss, er, sig) | vakna, ga-upp: gå upp, duscha, tvatta-sig: tvätta sig, kla-pa-sig: klä på sig, borsta-tanderna: borsta tänderna, satta-sig: sätta sig, lagga-sig: lägga sig, skynda-sig: skynda sig, somna, jobb |
+| u08-l05 What do they look like? | describing looks and personality, se ut       | lang-tall: lång, kort-short: kort, ung, snall: snäll, rolig, blyg, smart, har-hair: hår, oga: öga, glasogon: glasögon, skagg: skägg, se-ut: se ut                                                |
+
+## Unit 9 · Adjectives & plurals · _Adjektiv och plural_ (A2)
+
+| Lesson                            | Focus                                          | New vocab                                                                                       |
+| --------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| u09-l01 Adjective endings         | en stor / ett stort / stora; liten–litet–små   | stor, liten, ny, dalig: dålig, fin, ful, latt: lätt, svar-difficult: svår, ren, smutsig, tung   |
+| u09-l02 Colours and "the big car" | den röda bilen, det stora huset, de nya skorna | rod: röd, bla: blå, gul, gron: grön, vit, svart, gra: grå, brun, rosa, orange, lila, farg: färg |
+| u09-l03 Plurals: -or and -ar      | groups 1 (-a → -or) and 2 (-ar)                | blomma, gurka, skola, tidning, fagel: fågel, arm, sten, kudde                                   |
+| u09-l04 Plurals: -er              | group 3, with vowel changes (stad → städer)    | sak, manad: månad, ide: idé, person, restaurang, stad, hand, fot, natt, land                    |
+| u09-l05 Plurals: -n and no ending | groups 4 (-n) and 5 (no ending); irregulars    | hjarta: hjärta, stalle: ställe, djur, trad: träd, ord, sprak: språk, lakare: läkare, mus, ben   |
+
+## Unit 10 · Past & future · _Dåtid och framtid_ (A2)
+
+| Lesson                            | Focus                                                            | New vocab                                                                                                                                      |
+| --------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| u10-l01 Yesterday: -ade           | preteritum of -ar verbs; time expressions                        | i-morse: i morse, i-forrgar: i förrgår, plotsligt: plötsligt, tyvarr: tyvärr, sist, stanna, flytta, traffa: träffa, handla, visa, oppna: öppna |
+| u10-l02 -de, -te and strong verbs | -er verbs in the past; gick, var, hade, åt, drack, kom, såg, tog | springa, sitta, flyga, glomma: glömma, vinna, forlora: förlora, handa: hända, forsoka: försöka, bli, ge                                        |
+| u10-l03 Have you ever…?           | perfekt: har + supine                                            | nagonsin: någonsin, just, an-yet: än, besoka: besöka, prova, lara-sig: lära sig, utomlands, plugga, uppleva                                    |
+| u10-l04 Plans: ska                | ska / tänker + infinitive; om en vecka                           | planera, framtid, senare, om-in: om, resa-trip: resa, hyra, boka, sommarstuga, packa, langta: längta                                           |
+| u10-l05 Predictions: kommer att   | kommer att, blir                                                 | troligen, sakert: säkert, forhoppningsvis: förhoppningsvis, lyckas, klara, prov, drom: dröm                                                    |
+
+## Unit 11 · Getting around Sweden · _Ta sig fram_ (A2)
+
+| Lesson                              | Focus                                       | New vocab                                                                                                                                        |
+| ----------------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| u11-l01 Asking the way              | directions, imperatives (gå, sväng, ta)     | vanster: vänster, hoger: höger, rakt-fram: rakt fram, horn: hörn, korsning, torg, nara: nära, langt-bort: långt bort, karta, svanga: svänga, bro |
+| u11-l02 Getting around              | åka vs gå, public transport                 | aka: åka, buss, tag-train: tåg, tunnelbana, sparvagn: spårvagn, flyg, hallplats: hållplats, byta, forsenad: försenad, avga: avgå                 |
+| u11-l03 Buying a ticket             | tickets, prices, apps                       | biljett, enkel, tur-och-retur: tur och retur, app, plats, resenar: resenär, rabatt, vuxen, giltig                                                |
+| u11-l04 The weather                 | det regnar / snöar / blåser, degrees        | vader: väder, sol, regn, regna, sno: snö, snoa: snöa, blasa: blåsa, molnig, grad, paraply, blot: blöt                                            |
+| u11-l05 The right to roam (culture) | allemansrätten: what you may and may not do | natur, skog, talt: tält, talta: tälta, plocka, svamp, bar-berry: bär, fjall: fjäll, skrap: skräp, eld                                            |
