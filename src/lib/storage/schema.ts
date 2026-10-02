@@ -5,7 +5,7 @@ import { z } from 'zod'
  * corrupt or older data is repaired field by field instead of being thrown away.
  * Bump STORAGE_VERSION and add a step in migrate.ts when the shape changes.
  */
-export const STORAGE_VERSION = 1
+export const STORAGE_VERSION = 2
 
 export const AVATAR_COLORS = [
   '#2C5D8F',
@@ -72,8 +72,14 @@ export const ProfileSchema = z.object({
   color: z.string().catch(AVATAR_COLORS[0]),
   createdAt: z.number().catch(0),
   settings: SettingsSchema.catch(defaultSettings),
+  /** Total XP and XP per local day. Both are derived from `xpDevices`. */
   xp: z.number().min(0).catch(0),
   xpByDay: record(z.number()),
+  /**
+   * XP per device per day. Each device only ever adds to its own counters, so progress
+   * made on two devices can be merged by sync without counting anything twice.
+   */
+  xpDevices: record(record(z.number())),
   streak: StreakSchema.catch({ current: 0, longest: 0, lastDay: null }),
   lessons: record(LessonProgressSchema),
   srs: record(SrsCardSchema),
@@ -81,6 +87,11 @@ export const ProfileSchema = z.object({
   /** Units unlocked early by passing a placement test. */
   unlockedUnits: z.array(z.string()).catch([]),
   badges: z.array(z.string()).catch([]),
+  /** When the name/color and the settings last changed (sync keeps the newest). */
+  metaAt: z.number().catch(0),
+  settingsAt: z.number().catch(0),
+  /** When progress was last reset: sync drops progress older than a reset. */
+  resetAt: z.number().catch(0),
 })
 export type Profile = z.infer<typeof ProfileSchema>
 
@@ -97,6 +108,8 @@ export const AppStateSchema = z.object({
       }),
     ),
   activeProfileId: z.string().nullable().catch(null),
+  /** Deleted profile ids → when, so sync doesn't bring them back from another device. */
+  deleted: record(z.number()),
 })
 export type AppState = z.infer<typeof AppStateSchema>
 
@@ -104,4 +117,5 @@ export const defaultState = (): AppState => ({
   version: STORAGE_VERSION,
   profiles: [],
   activeProfileId: null,
+  deleted: {},
 })

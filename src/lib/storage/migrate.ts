@@ -8,6 +8,22 @@ type Raw = Record<string, unknown>
  */
 const migrations: Record<number, (data: Raw) => Raw> = {
   0: (data) => ({ ...data, version: 1 }),
+  // v2 (sync): XP is counted per device. Existing XP becomes one "legacy" device per profile.
+  // The key depends only on the profile id, so migrating the same data twice (two tabs, or
+  // an old backup restored on another device) never counts that XP twice.
+  1: (data) => ({
+    ...data,
+    version: 2,
+    profiles: Array.isArray(data.profiles)
+      ? data.profiles.map((p: unknown) => {
+          if (!p || typeof p !== 'object') return p
+          const profile = p as Raw
+          if (profile.xpDevices || !profile.xpByDay || typeof profile.xpByDay !== 'object')
+            return profile
+          return { ...profile, xpDevices: { [`legacy-${String(profile.id)}`]: profile.xpByDay } }
+        })
+      : data.profiles,
+  }),
 }
 
 export function migrate(raw: unknown): AppState {

@@ -86,12 +86,11 @@ export function applyReview(
   let mistakes = profile.mistakes
   if (rating === 'again') {
     mistakes = addMistakes(mistakes, [vid], now)
-  } else if (rating !== 'hard' && mistakes[vid]) {
-    // Remembering a weak word well slowly clears it from the weak list.
-    const weak = mistakes[vid]
-    mistakes = { ...mistakes }
-    if (weak.count <= 1) delete mistakes[vid]
-    else mistakes[vid] = { ...weak, count: weak.count - 1 }
+  } else if (rating !== 'hard' && isWeak(profile, vid)) {
+    // Remembering a weak word well slowly clears it from the weak list. A cleared word keeps
+    // count 0 (instead of being deleted) so sync knows it was cleared, not never missed.
+    const count = mistakes[vid]?.count ?? 0
+    mistakes = { ...mistakes, [vid]: { count: Math.max(0, count - 1), lastAt: now } }
   }
   const updated = { ...profile, srs: { ...profile.srs, [id]: review(card, rating, now) }, mistakes }
   return addXp(updated, XP.reviewCard, now)
@@ -105,9 +104,13 @@ export function dueCardIds(profile: Profile, now = Date.now()): string[] {
     .map(([id]) => id)
 }
 
+export const isWeak = (profile: Profile, vocabId: string) =>
+  (profile.mistakes[vocabId]?.count ?? 0) > 0
+
 /** Weak words: most mistakes first. */
 export function weakVocabIds(profile: Profile): string[] {
   return Object.entries(profile.mistakes)
+    .filter(([, m]) => m.count > 0)
     .sort(([, a], [, b]) => b.count - a.count || b.lastAt - a.lastAt)
     .map(([id]) => id)
 }

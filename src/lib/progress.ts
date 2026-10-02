@@ -1,8 +1,14 @@
 import { dayKey, previousDayKey } from './dates'
+import { deviceId } from './device'
 import { XP_PER_MINUTE, type Profile } from './storage/schema'
 
 /** Returns a copy of the profile with XP added and today's activity counted toward the streak. */
-export function addXp(profile: Profile, amount: number, now = Date.now()): Profile {
+export function addXp(
+  profile: Profile,
+  amount: number,
+  now = Date.now(),
+  device = deviceId(),
+): Profile {
   const today = dayKey(now)
   const gained = Math.max(0, Math.round(amount))
   const { streak } = profile
@@ -12,12 +18,39 @@ export function addXp(profile: Profile, amount: number, now = Date.now()): Profi
     current = streak.lastDay === previousDayKey(today) ? streak.current + 1 : 1
   }
 
+  const mine = profile.xpDevices[device] ?? {}
   return {
     ...profile,
     xp: profile.xp + gained,
+    xpDevices: {
+      ...profile.xpDevices,
+      [device]: { ...mine, [today]: (mine[today] ?? 0) + gained },
+    },
     xpByDay: { ...profile.xpByDay, [today]: (profile.xpByDay[today] ?? 0) + gained },
     streak: { current, longest: Math.max(streak.longest, current), lastDay: today },
   }
+}
+
+/** XP per day and in total, summed over every device. */
+export function xpTotals(xpDevices: Profile['xpDevices']): Pick<Profile, 'xp' | 'xpByDay'> {
+  const xpByDay: Record<string, number> = {}
+  for (const days of Object.values(xpDevices))
+    for (const [day, xp] of Object.entries(days)) xpByDay[day] = (xpByDay[day] ?? 0) + xp
+  const xp = Object.values(xpByDay).reduce((a, b) => a + b, 0)
+  return { xp, xpByDay }
+}
+
+/** The streak implied by the days with activity (`longest` never goes down). */
+export function streakFromDays(xpByDay: Profile['xpByDay'], longest = 0): Profile['streak'] {
+  const days = Object.keys(xpByDay).sort()
+  let run = 0
+  let prev: string | null = null
+  for (const d of days) {
+    run = prev !== null && previousDayKey(d) === prev ? run + 1 : 1
+    longest = Math.max(longest, run)
+    prev = d
+  }
+  return { current: run, longest, lastDay: prev }
 }
 
 /** The streak as it stands now: it is broken if neither today nor yesterday had activity. */

@@ -15,6 +15,7 @@ const FlashcardsPage = lazy(() => import('../features/review/FlashcardsPage'))
 const ReviewPracticePage = lazy(() => import('../features/review/ReviewPracticePage'))
 const DictionaryPage = lazy(() => import('../features/dictionary/DictionaryPage'))
 const PlacementPage = lazy(() => import('../features/placement/PlacementPage'))
+const ConnectPage = lazy(() => import('../features/sync/ConnectPage'))
 
 function RequireProfile({ children }: { children: ReactNode }) {
   const profile = useActiveProfile()
@@ -28,6 +29,7 @@ export default function App() {
       <Suspense fallback={<PageSpinner />}>
         <Routes>
           <Route path="/profiles" element={<ProfilePicker />} />
+          <Route path="/connect" element={<ConnectPage />} />
           <Route
             element={
               <RequireProfile>

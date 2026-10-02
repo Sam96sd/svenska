@@ -15,6 +15,7 @@ import { downloadBackup, parseBackup, restoreBackup } from '../../lib/storage/ba
 import { useProfile } from '../../lib/storage/hooks'
 import { type DailyGoal } from '../../lib/storage/schema'
 import { store } from '../../lib/storage/store'
+import { SyncSection } from '../sync/SyncSection'
 
 export default function SettingsPage() {
   const profile = useProfile()
@@ -45,6 +46,8 @@ export default function SettingsPage() {
       <PageHeader title="Settings" subtitle={`For ${profile.name}`} />
 
       <div className="grid grid-cols-1 gap-4">
+        <SyncSection />
+
         <Section title="Learning">
           <Segmented<DailyGoal>
             label="Daily goal"
@@ -102,7 +105,7 @@ export default function SettingsPage() {
           />
           <Toggle
             label="Show “This week” card"
-            description="Compare XP with the other learners on this device."
+            description="Compare this week’s XP with the other learners."
             checked={s.showCouple}
             onChange={(v) => set({ showCouple: v })}
           />
@@ -112,8 +115,8 @@ export default function SettingsPage() {
 
         <Section title="Backup">
           <p className="text-muted text-sm">
-            Save everyone's progress to a file, then import it on another device (for example from
-            your phone to your laptop). Importing replaces the progress on that device.
+            Save everyone's progress to a file to keep a copy. Importing replaces the progress on
+            this device (with sync on, it is then merged with your other devices).
           </p>
           <div className="flex flex-wrap gap-2">
             <Button variant="secondary" onClick={downloadBackup}>

@@ -4,6 +4,7 @@ import { Link, NavLink, Outlet } from 'react-router'
 import { cx } from '../components/styles'
 import { Avatar } from '../components/ui'
 import { useProfile } from '../lib/storage/hooks'
+import { SyncBadge } from '../features/sync/SyncBadge'
 import { PageSpinner } from './PageSpinner'
 
 const NAV = [
@@ -48,14 +49,17 @@ export default function AppLayout() {
               </NavLink>
             ))}
           </nav>
-          <Link
-            to="/profiles"
-            className="hover:bg-surface-2 ml-auto flex items-center gap-2 rounded-full py-1 pr-3 pl-1 transition-colors"
-            aria-label={`Switch learner (current: ${profile.name})`}
-          >
-            <Avatar name={profile.name} color={profile.color} size={32} />
-            <span className="text-sm font-semibold">{profile.name}</span>
-          </Link>
+          <div className="ml-auto flex items-center gap-1">
+            <SyncBadge />
+            <Link
+              to="/profiles"
+              className="hover:bg-surface-2 flex items-center gap-2 rounded-full py-1 pr-3 pl-1 transition-colors"
+              aria-label={`Switch learner (current: ${profile.name})`}
+            >
+              <Avatar name={profile.name} color={profile.color} size={32} />
+              <span className="text-sm font-semibold">{profile.name}</span>
+            </Link>
+          </div>
         </div>
       </header>
 

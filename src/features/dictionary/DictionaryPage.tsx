@@ -9,7 +9,7 @@ import { units } from '../../content/course'
 import { formsLine, POS_LABEL, svDisplay } from '../../content/display'
 import { useCourseData } from '../../content/useCourse'
 import { normalize, stripAccents } from '../../lib/answer'
-import { cardId } from '../../lib/learning'
+import { cardId, isWeak } from '../../lib/learning'
 import { isMature } from '../../lib/srs'
 import { useProfile } from '../../lib/storage/hooks'
 import { GenderBadge } from '../lesson/views'
@@ -31,7 +31,7 @@ export default function DictionaryPage() {
     const needle = fold(q)
     return course.vocab.filter((w) => {
       if (scope === 'mine' && !profile.srs[cardId(w.id)]) return false
-      if (scope === 'weak' && !profile.mistakes[w.id]) return false
+      if (scope === 'weak' && !isWeak(profile, w.id)) return false
       if (unitId && w.unitId !== unitId) return false
       if (!needle) return true
       return [w.sv, svDisplay(w), w.en, ...Object.values(w.forms ?? {})].some((s) =>
@@ -144,7 +144,7 @@ export default function DictionaryPage() {
                   <Strength
                     learned={!!card}
                     mature={card ? isMature(card) : false}
-                    weak={!!profile.mistakes[w.id]}
+                    weak={isWeak(profile, w.id)}
                   />
                 </li>
               )

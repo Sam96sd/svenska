@@ -26,12 +26,16 @@ export function makeProfile(name: string, color: string, now = Date.now()): Prof
     settings: defaultSettings(),
     xp: 0,
     xpByDay: {},
+    xpDevices: {},
     streak: { current: 0, longest: 0, lastDay: null },
     lessons: {},
     srs: {},
     mistakes: {},
     unlockedUnits: [],
     badges: [],
+    metaAt: 0,
+    settingsAt: 0,
+    resetAt: 0,
   }
 }
 
@@ -40,12 +44,15 @@ export function ensureDefaultProfiles() {
   if (store.get().profiles.length > 0) return
   store.set((s) => ({
     ...s,
-    profiles: [makeProfile('Samer', AVATAR_COLORS[0]), makeProfile('Partner', AVATAR_COLORS[1])],
+    profiles: [
+      makeProfile('Samer', AVATAR_COLORS[0], Date.now()),
+      makeProfile('Partner', AVATAR_COLORS[1], Date.now() + 1),
+    ],
   }))
 }
 
 export function addProfile(name: string, color: string): Profile {
-  const profile = makeProfile(name, color)
+  const profile = { ...makeProfile(name, color), metaAt: Date.now() }
   store.set((s) => ({ ...s, profiles: [...s.profiles, profile] }))
   return profile
 }
@@ -59,7 +66,7 @@ export function updateProfile(id: string, fn: (p: Profile) => Profile) {
 }
 
 export function renameProfile(id: string, name: string, color: string) {
-  updateProfile(id, (p) => ({ ...p, name: name.trim() || p.name, color }))
+  updateProfile(id, (p) => ({ ...p, name: name.trim() || p.name, color, metaAt: Date.now() }))
 }
 
 export function deleteProfile(id: string) {
@@ -67,6 +74,7 @@ export function deleteProfile(id: string) {
     ...s,
     profiles: s.profiles.filter((p) => p.id !== id),
     activeProfileId: s.activeProfileId === id ? null : s.activeProfileId,
+    deleted: { ...s.deleted, [id]: Date.now() },
   }))
 }
 
@@ -76,11 +84,18 @@ export function resetProfile(id: string) {
     ...makeProfile(p.name, p.color, p.createdAt),
     id: p.id,
     settings: p.settings,
+    metaAt: p.metaAt,
+    settingsAt: p.settingsAt,
+    resetAt: Date.now(),
   }))
 }
 
 export function updateSettings(id: string, patch: Partial<Settings>) {
-  updateProfile(id, (p) => ({ ...p, settings: { ...p.settings, ...patch } }))
+  updateProfile(id, (p) => ({
+    ...p,
+    settings: { ...p.settings, ...patch },
+    settingsAt: Date.now(),
+  }))
 }
 
 export function awardXp(id: string, amount: number) {

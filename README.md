@@ -22,8 +22,25 @@ every learner has their own profile and progress on the same device.
   a weak-words list, and a searchable dictionary.
 - **Motivation**: XP, daily goal, streaks, levels, badges, and a friendly "This week" card
   comparing learners.
-- **Installable PWA** that works offline. No accounts, no servers, no tracking: progress stays in
-  your browser and can be exported/imported as a JSON file.
+- **Sync between devices** (optional): both learners' progress on every phone and computer,
+  stored in a private GitHub Gist in your own account. No other account or server.
+- **Installable PWA** that works offline. No tracking. Without sync, progress stays in your
+  browser and can be exported/imported as a JSON file.
+
+## Sync between devices
+
+1. On one device, open **Settings → Sync between devices** and follow the link to create a GitHub
+   token. The form comes pre-filled with only the `gist` scope; choose _No expiration_.
+2. Paste the token and tap **Connect**. The app creates a private gist named
+   `svenska-sync.json` (or finds the existing one).
+3. On each other device, tap **Add another device** on a connected device and scan the QR code
+   (or paste the link into the same box; needed for apps installed on an iPhone home screen,
+   which don't share storage with Safari).
+
+The app syncs on start, a few seconds after each change, when it comes back to the foreground
+and every minute while open. Merging is conflict-free: XP is counted per device and added up,
+the most recent review of each card wins, lessons keep their best score, and deletes and
+resets carry over. Voice and theme stay per device. The code is in `src/lib/sync/`.
 
 ## Run locally
 
