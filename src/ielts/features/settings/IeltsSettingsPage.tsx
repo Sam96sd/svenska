@@ -204,10 +204,10 @@ function KeySlot({
           {draft.trim() ? 'Save and test' : stored ? 'Remove' : 'Save'}
         </Button>
       </div>
-      {formatWarning && (
+      {formatWarning && status.state !== 'ok' && (
         <p className="text-accent-ink text-sm">
-          That doesn’t look like a Gemini key (they usually start with “AIza”). Check it was copied
-          in full.
+          Unusual format: Gemini keys usually start with “AIza”. If you copied it from AI Studio’s
+          “Copy key” button, tap “Save and test” — the test will tell you if it works.
         </p>
       )}
       {status.state !== 'idle' && (
