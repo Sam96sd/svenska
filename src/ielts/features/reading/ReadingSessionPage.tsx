@@ -302,7 +302,7 @@ export function ReadingRun({
                 tab !== 'questions' && 'hidden lg:block',
               )}
             >
-              <div className="mx-auto grid max-w-2xl gap-8">
+              <div className="mx-auto grid max-w-2xl grid-cols-1 gap-8">
                 {done && session.marked && (
                   <>
                     <ResultsSummary

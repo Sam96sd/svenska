@@ -115,8 +115,9 @@ export default function SettingsPage() {
 
         <Section title="Backup">
           <p className="text-muted text-sm">
-            Save everyone's progress to a file to keep a copy. Importing replaces the progress on
-            this device (with sync on, it is then merged with your other devices).
+            Save everyone's progress (Swedish and IELTS, without API keys or recordings) to a file
+            to keep a copy. Importing replaces the progress on this device (with sync on, it is then
+            merged with your other devices).
           </p>
           <div className="flex flex-wrap gap-2">
             <Button variant="secondary" onClick={downloadBackup}>
@@ -163,11 +164,13 @@ export default function SettingsPage() {
             <Button
               variant="secondary"
               onClick={() => {
-                if (confirm(`Reset all of ${profile.name}'s progress? This can't be undone.`))
+                if (
+                  confirm(`Reset all of ${profile.name}'s Swedish progress? This can't be undone.`)
+                )
                   resetProfile(profile.id)
               }}
             >
-              <RotateCcw size={18} /> Reset progress
+              <RotateCcw size={18} /> Reset Swedish progress
             </Button>
             <Button
               variant="ghost"

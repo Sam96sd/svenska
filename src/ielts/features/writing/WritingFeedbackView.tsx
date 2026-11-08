@@ -77,7 +77,7 @@ export function WritingFeedbackView({
   const current: Tab = tabs.some((t) => t.value === tab) ? tab : tabs[0]!.value
 
   return (
-    <div className="grid gap-5">
+    <div className="grid grid-cols-1 gap-5">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="font-display text-2xl font-semibold">Your feedback</h1>
@@ -176,7 +176,7 @@ function FeedbackTab({ fb }: { fb: WritingFeedback }) {
     return [...counts].sort((a, b) => b[1] - a[1])
   }, [fb.errors])
   return (
-    <div className="grid gap-5">
+    <div className="grid grid-cols-1 gap-5">
       <CriteriaBands items={fb.criteria} criteria={WRITING_CRITERIA} />
 
       <section>

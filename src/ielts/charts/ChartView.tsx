@@ -227,6 +227,9 @@ function PieCharts({ c }: { c: Extract<SimpleChart, { kind: 'pie' }> }) {
                           fontSize={13}
                           fontWeight={700}
                           fill="#fff"
+                          stroke="rgb(0 0 0 / 0.55)"
+                          strokeWidth={3}
+                          paintOrder="stroke"
                         >
                           {s.value}%
                         </text>

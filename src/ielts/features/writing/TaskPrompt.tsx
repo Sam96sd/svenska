@@ -6,7 +6,7 @@ const ChartView = lazy(() => import('../../charts/ChartView'))
 /** The task as it appears on the test: prompt text, bullets, and the visual for Academic Task 1. */
 export function TaskPrompt({ task }: { task: WritingTask }) {
   return (
-    <div className="grid gap-3 text-[15px]">
+    <div className="grid grid-cols-1 gap-3 text-[15px]">
       <p className="whitespace-pre-line">{task.prompt}</p>
       {task.bullets && (
         <ul className="grid list-disc gap-1 pl-6">

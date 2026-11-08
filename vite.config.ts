@@ -18,7 +18,8 @@ export default defineConfig({
       manifest: {
         name: 'Svenska — Learn Swedish',
         short_name: 'Svenska',
-        description: 'Learn Swedish from zero: short lessons, audio, and spaced review.',
+        description:
+          'Learn Swedish from zero, and prepare for IELTS Academic and General Training with AI feedback.',
         lang: 'en',
         theme_color: '#2C5D8F',
         background_color: '#FAF8F4',

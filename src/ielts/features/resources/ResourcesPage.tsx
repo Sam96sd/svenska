@@ -4,34 +4,39 @@ import { Card, PageHeader } from '../../../components/ui'
 /** Official free practice material: links only, no copied content. */
 const RESOURCES = [
   {
-    name: 'IELTS.org — free practice tests',
-    url: 'https://ielts.org/take-a-test/preparation-resources',
-    what: 'The official IELTS site: sample tests for all four skills in both modules, with answers.',
+    name: 'IELTS.org — sample test questions',
+    url: 'https://ielts.org/take-a-test/preparation-resources/sample-test-questions',
+    what: 'Official free practice papers for Academic and General Training, all four skills, with answers.',
   },
   {
-    name: 'British Council — Take IELTS',
-    url: 'https://takeielts.britishcouncil.org/take-ielts/prepare',
-    what: 'Free practice tests, sample questions and the official computer-delivered test familiarisation.',
+    name: 'IELTS.org — IELTS Trial Test',
+    url: 'https://ielts.org/take-a-test/preparation-resources/ielts-trial-test',
+    what: 'An official full trial test under timed conditions, to check you are ready before booking.',
   },
   {
-    name: 'IDP IELTS — prepare',
+    name: 'IDP IELTS — free practice tests',
+    url: 'https://ielts.idp.com/prepare/all-test-types/all-skills/practice-test',
+    what: 'IDP’s practice tests, including the computer-delivered familiarisation tests for Listening, Reading and Writing.',
+  },
+  {
+    name: 'IDP IELTS — preparation library',
     url: 'https://ielts.idp.com/prepare',
-    what: 'IDP’s free practice tests, sample questions and preparation articles and webinars.',
+    what: 'Free and paid official preparation: articles, webinars, sample answers and Speaking audio.',
   },
   {
-    name: 'IELTS Ready (British Council)',
+    name: 'British Council — Take IELTS: prepare',
+    url: 'https://takeielts.britishcouncil.org/take-ielts/prepare',
+    what: 'Free practice tests, sample questions and the British Council’s preparation courses.',
+  },
+  {
+    name: 'British Council — IELTS Ready',
     url: 'https://takeielts.britishcouncil.org/take-ielts/prepare/ielts-ready',
     what: 'Free official preparation platform with practice tests and progress tracking (free account).',
   },
   {
-    name: 'Computer-delivered test familiarisation',
-    url: 'https://ielts.org/take-a-test/test-types/ielts-on-computer',
-    what: 'See exactly how the on-screen test looks and works before exam day.',
-  },
-  {
-    name: 'Public band descriptors',
-    url: 'https://ielts.org/take-a-test/preparation-resources/understanding-band-scores',
-    what: 'The official band score explanations and the public Writing and Speaking band descriptors.',
+    name: 'IELTS.org — scoring in detail',
+    url: 'https://ielts.org/take-a-test/your-results/ielts-scoring-in-detail',
+    what: 'How each skill is scored, including the public Writing and Speaking band descriptors.',
   },
 ]
 

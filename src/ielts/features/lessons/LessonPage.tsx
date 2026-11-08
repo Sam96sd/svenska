@@ -50,7 +50,7 @@ export default function LessonPage() {
         }
       />
       <p className="text-muted -mt-3 mb-6">{lesson.summary}</p>
-      <div className="grid gap-5">
+      <div className="grid grid-cols-1 gap-5">
         {lesson.sections.map((s, i) => (
           <SectionView key={i} section={s} />
         ))}

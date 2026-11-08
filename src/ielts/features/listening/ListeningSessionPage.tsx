@@ -348,7 +348,7 @@ export function ListeningRun({
         }
       >
         <div className="h-full overflow-y-auto px-5 py-5">
-          <div className="mx-auto grid max-w-3xl gap-6">
+          <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6">
             {!done && (
               <Card className="grid gap-3">
                 <div className="flex flex-wrap items-center gap-3">

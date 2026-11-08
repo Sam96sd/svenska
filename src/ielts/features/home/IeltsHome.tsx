@@ -10,7 +10,7 @@ import { currentBands, errorPatterns, estimatedOverall } from '../../insights/st
 import { usePlanDays } from '../../insights/usePlan'
 import { formatBand } from '../../scoring'
 import { useIelts } from '../../storage/hooks'
-import { BandBadge, Pill } from '../../components/ui'
+import { BandBadge } from '../../components/ui'
 import { TodayTasks } from '../plan/TodayTasks'
 import { TargetArithmetic } from '../shared/TargetPicker'
 
@@ -33,7 +33,6 @@ export default function IeltsHome() {
         subtitle={
           <span className="flex flex-wrap items-center gap-2">
             IELTS {MODULE_LABEL[module]} · target Band {formatBand(target)}
-            <Pill tone="accent">Beta</Pill>
           </span>
         }
       />
