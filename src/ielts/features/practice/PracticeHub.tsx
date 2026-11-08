@@ -1,10 +1,10 @@
 import { ChevronRight } from 'lucide-react'
 import { type ReactNode } from 'react'
 import { Link } from 'react-router'
-import { Card, PageHeader } from '../../../components/ui'
+import { PageHeader } from '../../../components/ui'
 import { catalogFor, type CatalogItem } from '../../content/catalog'
 import { QUESTION_TYPE_LABEL } from '../../content/schema'
-import { MODULE_LABEL, SKILL_LABEL, SPEAKING, WRITING, type Skill } from '../../examSpec'
+import { MODULE_LABEL, SKILL_LABEL, type Skill } from '../../examSpec'
 import { formatBand } from '../../scoring'
 import { Pill } from '../../components/ui'
 import { SKILL_ICON } from '../../components/skillIcons'
@@ -20,14 +20,45 @@ const SECTION_LABEL: Record<string, string> = {
   part2: 'Part 2',
   part3: 'Part 3',
   part4: 'Part 4',
+  task1: 'Task 1',
+  task2: 'Task 2',
 }
 
-function best(ielts: IeltsProfile, id: string) {
-  let top: { correct: number; total: number; band: number | null } | null = null
-  for (const a of Object.values(ielts.attempts))
-    if (a.contentId === id && a.correct !== null && a.total)
-      if (!top || a.correct / a.total > top.correct / top.total)
-        top = { correct: a.correct, total: a.total, band: a.band }
+const TYPE_LABEL: Record<string, string> = {
+  opinion: 'Opinion essay',
+  discussion: 'Discussion essay',
+  'adv-disadv': 'Advantages / disadvantages',
+  'problem-solution': 'Problem / solution',
+  'two-part': 'Two-part question',
+  complaint: 'Complaint letter',
+  request: 'Request letter',
+  apology: 'Apology letter',
+  invitation: 'Invitation letter',
+  thanks: 'Thank-you letter',
+  explanation: 'Explanation letter',
+  line: 'Line graph',
+  bar: 'Bar chart',
+  pie: 'Pie chart',
+  table: 'Table',
+  mixed: 'Mixed charts',
+  map: 'Maps',
+  process: 'Process',
+  part1: 'Part 1',
+  part2: 'Part 2 cue card',
+  part3: 'Part 3 discussion',
+}
+
+/** Best result so far: "11/14" for reading/listening, the band for writing/speaking. */
+function best(ielts: IeltsProfile, id: string): { label: string; band: number | null } | null {
+  let top: { score: number; label: string; band: number | null } | null = null
+  for (const a of Object.values(ielts.attempts)) {
+    if (a.contentId !== id) continue
+    if (a.correct !== null && a.total) {
+      const score = a.correct / a.total
+      if (!top || score > top.score) top = { score, label: `${a.correct}/${a.total}`, band: a.band }
+    } else if (a.band !== null && (!top || a.band / 9 > top.score))
+      top = { score: a.band / 9, label: `Band ${formatBand(a.band)}`, band: a.band }
+  }
   return top
 }
 
@@ -46,20 +77,21 @@ function ItemList({ items, ielts }: { items: CatalogItem[]; ielts: IeltsProfile 
               <div className="min-w-0 flex-1">
                 <p className="font-semibold">{c.title}</p>
                 <p className="text-muted text-sm">
-                  {SECTION_LABEL[c.section] ?? c.section} · {c.questions} questions · {c.minutes}{' '}
-                  min
+                  {SECTION_LABEL[c.section] ?? c.section}
+                  {c.skill === 'reading' || c.skill === 'listening'
+                    ? ` · ${c.questions} questions`
+                    : ''}{' '}
+                  · {c.minutes} min
                 </p>
                 <div className="mt-1.5 flex flex-wrap gap-1">
                   {c.types.map((t) => (
-                    <Pill key={t}>{QUESTION_TYPE_LABEL[t] ?? t}</Pill>
+                    <Pill key={t}>{QUESTION_TYPE_LABEL[t] ?? TYPE_LABEL[t] ?? t}</Pill>
                   ))}
                 </div>
               </div>
               {b && (
                 <span className="text-right text-sm">
-                  <span className="block font-semibold tabular-nums">
-                    {b.correct}/{b.total}
-                  </span>
+                  <span className="block font-semibold tabular-nums">{b.label}</span>
                   <span className="text-muted text-xs">best · ≈{formatBand(b.band)}</span>
                 </span>
               )}
@@ -98,16 +130,10 @@ export default function PracticeHub() {
           <ItemList items={catalogFor('reading', module)} ielts={ielts} />
         </SkillSection>
         <SkillSection skill="writing">
-          <Card className="text-sm">
-            Task 1 ({WRITING.task1.minWords}+ words) and Task 2 ({WRITING.task2.minWords}+ words)
-            with AI feedback. <Pill>Coming soon</Pill>
-          </Card>
+          <ItemList items={catalogFor('writing', module)} ielts={ielts} />
         </SkillSection>
         <SkillSection skill="speaking">
-          <Card className="text-sm">
-            Parts 1–3 with an examiner voice and a {SPEAKING.part2.prepSeconds}-second cue-card
-            timer. <Pill>Coming soon</Pill>
-          </Card>
+          <ItemList items={catalogFor('speaking', module)} ielts={ielts} />
         </SkillSection>
       </div>
     </div>

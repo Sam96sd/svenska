@@ -7,7 +7,10 @@ import {
   type ListeningPart,
   type Passage,
   type QuestionGroup,
+  type SpeakingItem,
+  type WritingTask,
 } from './schema'
+import { WRITING } from '../examSpec'
 
 /**
  * Checks that go beyond the schema: the review pass in code form. Returns a list of problems
@@ -181,4 +184,42 @@ export function validateListening(l: ListeningPart): string[] {
   if (us.length && l.speakers.every((s) => s.accent !== 'en-US' && s.accent !== 'en-CA'))
     problems.push(`${l.id}: American spellings: ${[...new Set(us)].join(', ')}`)
   return problems
+}
+
+export const wordCount = (text: string) => text.trim().split(/\s+/).filter(Boolean).length
+
+export function validateWritingTask(t: WritingTask): string[] {
+  const problems: string[] = []
+  const min = t.task === 1 ? WRITING.task1.minWords : WRITING.task2.minWords
+  const bands = t.models.map((m) => m.band).join(',')
+  if (bands !== '6,7,8.5')
+    problems.push(`${t.id}: model answers must be Band 6, 7, 8.5 in that order (got ${bands})`)
+  for (const m of t.models) {
+    const words = wordCount(m.text)
+    if (words < min)
+      problems.push(`${t.id} Band ${m.band}: ${words} words, under the ${min}-word minimum`)
+    for (const a of m.annotations)
+      if (!m.text.includes(a.quote))
+        problems.push(`${t.id} Band ${m.band}: annotation quote not found: "${a.quote}"`)
+    const us = britishSpellingIssues(m.text)
+    if (us.length) problems.push(`${t.id} Band ${m.band}: American spellings: ${us.join(', ')}`)
+  }
+  if (t.task === 1 && t.module === 'general' && (t.bullets?.length !== 3 || !t.tone))
+    problems.push(`${t.id}: GT letters need exactly three bullets and a tone`)
+  if (t.task === 1 && t.module === 'academic' && !t.chart)
+    problems.push(`${t.id}: Academic Task 1 needs a chart`)
+  if (t.task === 2 && t.module === 'general' && t.chart)
+    problems.push(`${t.id}: Task 2 has no chart`)
+  const us = britishSpellingIssues([t.prompt, ...(t.bullets ?? []), ...t.planHints].join(' '))
+  if (us.length) problems.push(`${t.id}: American spellings in the task: ${us.join(', ')}`)
+  return problems
+}
+
+export function validateSpeaking(s: SpeakingItem): string[] {
+  const text =
+    s.kind === 'part1'
+      ? s.questions.join(' ')
+      : [s.prompt, ...s.points, s.explain, ...s.part3].join(' ')
+  const us = britishSpellingIssues(text)
+  return us.length ? [`${s.id}: American spellings: ${us.join(', ')}`] : []
 }

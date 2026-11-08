@@ -389,3 +389,150 @@ export const QUESTION_TYPE_LABEL: Record<string, string> = {
   'completion-short-answer': 'Short answer',
   'completion-diagram': 'Diagram labelling',
 }
+
+// ---------- Writing ----------
+
+const SeriesSchema = z.object({ name: z.string(), values: z.array(z.number()) })
+
+const SimpleChartSchema = z.discriminatedUnion('kind', [
+  z.object({
+    kind: z.literal('line'),
+    title: z.string(),
+    xLabels: z.array(z.string()).min(2),
+    yLabel: z.string(),
+    unit: z.string().default(''),
+    series: z.array(SeriesSchema).min(1).max(6),
+  }),
+  z.object({
+    kind: z.literal('bar'),
+    title: z.string(),
+    categories: z.array(z.string()).min(2),
+    yLabel: z.string(),
+    unit: z.string().default(''),
+    series: z.array(SeriesSchema).min(1).max(5),
+    horizontal: z.boolean().default(false),
+  }),
+  z.object({
+    kind: z.literal('pie'),
+    title: z.string(),
+    pies: z
+      .array(
+        z.object({
+          label: z.string(),
+          slices: z.array(z.object({ name: z.string(), value: z.number() })).min(2),
+        }),
+      )
+      .min(1)
+      .max(3),
+  }),
+  z.object({
+    kind: z.literal('table'),
+    title: z.string(),
+    columns: z.array(z.string()).min(2),
+    rows: z
+      .array(z.object({ label: z.string(), values: z.array(z.union([z.number(), z.string()])) }))
+      .min(2),
+    unit: z.string().default(''),
+  }),
+  z.object({
+    kind: z.literal('map'),
+    title: z.string(),
+    maps: z
+      .array(z.object({ label: z.string(), diagram: DiagramSchema }))
+      .min(1)
+      .max(2),
+  }),
+  z.object({
+    kind: z.literal('process'),
+    title: z.string(),
+    steps: z.array(z.object({ label: z.string(), detail: z.string().optional() })).min(4),
+    cycle: z.boolean().default(false),
+  }),
+])
+export const ChartSchema = z.union([
+  SimpleChartSchema,
+  z.object({
+    kind: z.literal('mixed'),
+    title: z.string(),
+    charts: z.array(SimpleChartSchema).min(2).max(2),
+  }),
+])
+export type Chart = z.infer<typeof ChartSchema>
+export type SimpleChart = z.infer<typeof SimpleChartSchema>
+
+export const TASK2_TYPES = [
+  'opinion',
+  'discussion',
+  'adv-disadv',
+  'problem-solution',
+  'two-part',
+] as const
+export const TASK1A_TYPES = ['line', 'bar', 'pie', 'table', 'mixed', 'map', 'process'] as const
+export const TASK1G_TYPES = [
+  'complaint',
+  'request',
+  'apology',
+  'invitation',
+  'thanks',
+  'explanation',
+] as const
+
+export const ModelAnswerSchema = z.object({
+  band: z.union([z.literal(6), z.literal(7), z.literal(8.5)]),
+  text: z.string().min(400),
+  /** Notes on what lifts (or holds back) this answer, anchored to quotes from it. */
+  annotations: z.array(z.object({ quote: z.string().min(3), note: z.string().min(10) })).min(2),
+})
+export type ModelAnswer = z.infer<typeof ModelAnswerSchema>
+
+export const WritingTaskSchema = z.object({
+  id: Id,
+  skill: z.literal('writing'),
+  module: z.enum(['academic', 'general', 'both']),
+  task: z.union([z.literal(1), z.literal(2)]),
+  type: z.enum([...TASK2_TYPES, ...TASK1A_TYPES, ...TASK1G_TYPES]),
+  topic: z.string().min(3),
+  title: z.string().min(3),
+  /** The task as printed on the paper. */
+  prompt: z.string().min(20),
+  /** General Training letters: the three bullet points. */
+  bullets: z.array(z.string()).optional(),
+  tone: z.enum(['formal', 'semi-formal', 'informal']).optional(),
+  chart: ChartSchema.optional(),
+  /** Planning prompts shown in the planning pane. */
+  planHints: z.array(z.string()).min(2),
+  models: z.array(ModelAnswerSchema).length(3),
+})
+export type WritingTask = z.infer<typeof WritingTaskSchema>
+
+// ---------- Speaking ----------
+
+export const Part1TopicSchema = z.object({
+  id: Id,
+  skill: z.literal('speaking'),
+  kind: z.literal('part1'),
+  topic: z.string().min(3),
+  questions: z.array(z.string().min(5)).min(3).max(6),
+})
+export type Part1Topic = z.infer<typeof Part1TopicSchema>
+
+export const CueCardSchema = z.object({
+  id: Id,
+  skill: z.literal('speaking'),
+  kind: z.literal('cue-card'),
+  theme: z.string().min(3),
+  /** "Describe a place you visited that…" */
+  prompt: z.string().min(10),
+  /** "You should say:" points. */
+  points: z.array(z.string()).min(3).max(4),
+  /** "and explain…" */
+  explain: z.string().min(5),
+  /** Rounding-off question the examiner may ask after Part 2. */
+  followUp: z.string().optional(),
+  /** Linked Part 3 discussion questions. */
+  part3: z.array(z.string().min(10)).min(4).max(8),
+})
+export type CueCard = z.infer<typeof CueCardSchema>
+
+export const SpeakingItemSchema = z.discriminatedUnion('kind', [Part1TopicSchema, CueCardSchema])
+export type SpeakingItem = z.infer<typeof SpeakingItemSchema>

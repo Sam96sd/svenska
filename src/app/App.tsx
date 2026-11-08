@@ -27,6 +27,8 @@ const IeltsSettings = lazy(() => import('../ielts/features/settings/IeltsSetting
 const IeltsExamFormat = lazy(() => import('../ielts/features/exam/ExamFormatPage'))
 const IeltsReading = lazy(() => import('../ielts/features/reading/ReadingSessionPage'))
 const IeltsListening = lazy(() => import('../ielts/features/listening/ListeningSessionPage'))
+const IeltsWriting = lazy(() => import('../ielts/features/writing/WritingTaskPage'))
+const IeltsSpeaking = lazy(() => import('../ielts/features/speaking/SpeakingSessionPage'))
 
 function RequireProfile({ children }: { children: ReactNode }) {
   const profile = useActiveProfile()
@@ -107,6 +109,22 @@ export default function App() {
             element={
               <RequireProfile>
                 <IeltsListening />
+              </RequireProfile>
+            }
+          />
+          <Route
+            path="/ielts/writing/:id"
+            element={
+              <RequireProfile>
+                <IeltsWriting />
+              </RequireProfile>
+            }
+          />
+          <Route
+            path="/ielts/speaking/:id"
+            element={
+              <RequireProfile>
+                <IeltsSpeaking />
               </RequireProfile>
             }
           />

@@ -5,10 +5,20 @@ import {
   ListeningPartSchema,
   PassageSchema,
   screenOrder,
+  SpeakingItemSchema,
+  WritingTaskSchema,
   type ListeningPart,
   type Passage,
+  type SpeakingItem,
+  type WritingTask,
 } from './schema'
-import { britishSpellingIssues, validateListening, validatePassage } from './validate'
+import {
+  britishSpellingIssues,
+  validateListening,
+  validatePassage,
+  validateSpeaking,
+  validateWritingTask,
+} from './validate'
 
 async function loadAll<T>(
   files: Record<string, () => Promise<{ default: unknown }>>,
@@ -25,6 +35,25 @@ describe('IELTS content', async () => {
   const parts = await loadAll<ListeningPart>(contentFiles.listening, (x) =>
     ListeningPartSchema.parse(x),
   )
+
+  const writing = await loadAll<WritingTask>(contentFiles.writing, (x) =>
+    WritingTaskSchema.parse(x),
+  )
+  const speaking = await loadAll<SpeakingItem>(contentFiles.speaking, (x) =>
+    SpeakingItemSchema.parse(x),
+  )
+
+  for (const { path, data } of writing)
+    it(`writing ${data.id} is valid`, () => {
+      expect(contentFiles.idOf(path)).toBe(data.id)
+      expect(validateWritingTask(data)).toEqual([])
+    })
+
+  for (const { path, data } of speaking)
+    it(`speaking ${data.id} is valid`, () => {
+      expect(contentFiles.idOf(path)).toBe(data.id)
+      expect(validateSpeaking(data)).toEqual([])
+    })
 
   it('has content to check', () => {
     expect(passages.length).toBeGreaterThan(0)
@@ -58,6 +87,21 @@ describe('IELTS content', async () => {
         module: 'both',
         title: data.title,
         n: screenOrder(data.groups).length,
+      })),
+      ...writing.map(({ data }) => ({
+        id: data.id,
+        skill: 'writing',
+        module: data.module,
+        title: data.title,
+        n: 1,
+      })),
+      ...speaking.map(({ data }) => ({
+        id: data.id,
+        skill: 'speaking',
+        module: 'both',
+        title:
+          data.kind === 'part1' ? data.topic : (CATALOG.find((c) => c.id === data.id)?.title ?? ''),
+        n: data.kind === 'part1' ? data.questions.length : 1 + data.part3.length,
       })),
     ]
     expect(new Set(CATALOG.map((c) => c.id)).size).toBe(CATALOG.length)
