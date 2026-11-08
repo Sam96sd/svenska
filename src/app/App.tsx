@@ -32,6 +32,9 @@ const IeltsLesson = lazy(() => import('../ielts/features/lessons/LessonPage'))
 const IeltsDictation = lazy(() => import('../ielts/features/drills/DictationTrainerPage'))
 const IeltsCriteria = lazy(() => import('../ielts/features/criteria/CriteriaPage'))
 const IeltsResources = lazy(() => import('../ielts/features/resources/ResourcesPage'))
+const IeltsDiagnostic = lazy(() => import('../ielts/features/diagnostic/DiagnosticPage'))
+const IeltsPlan = lazy(() => import('../ielts/features/plan/PlanPage'))
+const IeltsErrors = lazy(() => import('../ielts/features/errors/ErrorLogPage'))
 const IeltsSpeaking = lazy(() => import('../ielts/features/speaking/SpeakingSessionPage'))
 
 function RequireProfile({ children }: { children: ReactNode }) {
@@ -70,6 +73,9 @@ export default function App() {
               <Route path="progress" element={<IeltsProgress />} />
               <Route path="lessons/:id" element={<IeltsLesson />} />
               <Route path="drills/dictation" element={<IeltsDictation />} />
+              <Route path="diagnostic" element={<IeltsDiagnostic />} />
+              <Route path="plan" element={<IeltsPlan />} />
+              <Route path="errors" element={<IeltsErrors />} />
             </Route>
           </Route>
           <Route

@@ -128,3 +128,30 @@ export function pruneIeltsProfiles(deletedIds: Iterable<string>) {
     return { ...s, profiles }
   })
 }
+
+/** Starts (or restarts) the study plan from today. */
+export function startPlan(profileId: string, weeks: number, dailyMinutes: number) {
+  const now = Date.now()
+  updateIelts(profileId, (p) => ({
+    ...p,
+    plan: { weeks, dailyMinutes, startedAt: now, updatedAt: now, done: {} },
+  }))
+}
+
+/** Changes the plan's length or daily time without losing progress. */
+export function updatePlan(profileId: string, patch: { weeks?: number; dailyMinutes?: number }) {
+  updateIelts(profileId, (p) =>
+    p.plan ? { ...p, plan: { ...p.plan, ...patch, updatedAt: Date.now() } } : p,
+  )
+}
+
+export function setPlanTaskDone(profileId: string, day: number, key: string, done: boolean) {
+  updateIelts(profileId, (p) => {
+    if (!p.plan) return p
+    const k = `${day}:${key}`
+    const next = { ...p.plan.done }
+    if (done) next[k] = Date.now()
+    else delete next[k]
+    return { ...p, plan: { ...p.plan, done: next, updatedAt: Date.now() } }
+  })
+}
