@@ -5,7 +5,7 @@ import { PageSpinner } from '../../../app/PageSpinner'
 import { cx } from '../../../components/styles'
 import { Button, Card } from '../../../components/ui'
 import { gradeWriting } from '../../ai/grade'
-import { hasFreeKey, useAiConfig } from '../../ai/keys'
+import { hasFreeKey, hasPremiumKey, useAiConfig } from '../../ai/keys'
 import { type WritingFeedback } from '../../ai/schemas'
 import { loadWritingTask } from '../../content/index'
 import { type WritingTask } from '../../content/schema'
@@ -20,6 +20,7 @@ import { type Attempt } from '../../storage/schema'
 import { TaskPrompt } from './TaskPrompt'
 import { WritingFeedbackView } from './WritingFeedbackView'
 import { useGrader } from '../shared/useGrader'
+import { attemptKind, useSpecialRun } from '../shared/runKind'
 import { taskInput } from './taskInput'
 
 type Phase = 'intro' | 'plan' | 'write' | 'feedback'
@@ -52,7 +53,7 @@ export default function WritingTaskPage() {
     <WritingRun
       key={run}
       task={task}
-      timed={search.get('mode') === 'exam'}
+      timed={search.get('mode') === 'exam' || search.get('kind') !== null}
       onRetry={() => setRun((r) => r + 1)}
     />
   )
@@ -91,6 +92,9 @@ function WritingRun({
   const [text, setText] = useState(draft.text)
   const [phase, setPhase] = useState<Phase>('intro')
   const [timed, setTimed] = useState(initialTimed)
+  const { special, back } = useSpecialRun()
+  // The diagnostic and full mocks are graded by the Pro model when a premium key is set.
+  const firstTier = special && hasPremiumKey(ai) ? 'pro' : 'standard'
   const [startedAt, setStartedAt] = useState(0)
   const [showPrompt, setShowPrompt] = useState(true)
   const [attempt, setAttempt] = useState<Attempt | null>(null)
@@ -138,7 +142,7 @@ function WritingRun({
       skill: 'writing',
       contentId: task.id,
       module,
-      kind: timed ? 'exam' : 'practice',
+      kind: attemptKind(special, timed),
       task: task.task,
       text,
       startedAt,
@@ -151,7 +155,8 @@ function WritingRun({
     } catch {
       // Ignore.
     }
-    if (hasFreeKey(ai) && text.trim()) void grade(a, 'standard')
+    if ((hasFreeKey(ai) || (firstTier === 'pro' && hasPremiumKey(ai))) && text.trim())
+      void grade(a, firstTier)
   }
 
   function exit() {
@@ -161,7 +166,7 @@ function WritingRun({
       !confirm('Leave? Your draft is saved on this device.')
     )
       return
-    navigate('/ielts/practice')
+    navigate(back)
   }
 
   const title = `Writing Task ${task.task} · ${task.title}`
@@ -207,7 +212,7 @@ function WritingRun({
 
   if (phase === 'feedback' && attempt)
     return (
-      <ExamShell title={title} clock={null} onExit={() => navigate('/ielts/practice')}>
+      <ExamShell title={title} clock={null} onExit={() => navigate(back)}>
         <div className="h-full overflow-y-auto px-4 py-6">
           <div className="mx-auto max-w-5xl">
             <WritingFeedbackView
@@ -217,6 +222,7 @@ function WritingRun({
               grader={grader}
               onGrade={(tier) => void grade(attempt, tier)}
               onRetry={onRetry}
+              backTo={back}
             />
           </div>
         </div>

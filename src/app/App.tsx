@@ -28,6 +28,10 @@ const IeltsExamFormat = lazy(() => import('../ielts/features/exam/ExamFormatPage
 const IeltsReading = lazy(() => import('../ielts/features/reading/ReadingSessionPage'))
 const IeltsListening = lazy(() => import('../ielts/features/listening/ListeningSessionPage'))
 const IeltsWriting = lazy(() => import('../ielts/features/writing/WritingTaskPage'))
+const IeltsLesson = lazy(() => import('../ielts/features/lessons/LessonPage'))
+const IeltsDictation = lazy(() => import('../ielts/features/drills/DictationTrainerPage'))
+const IeltsCriteria = lazy(() => import('../ielts/features/criteria/CriteriaPage'))
+const IeltsResources = lazy(() => import('../ielts/features/resources/ResourcesPage'))
 const IeltsSpeaking = lazy(() => import('../ielts/features/speaking/SpeakingSessionPage'))
 
 function RequireProfile({ children }: { children: ReactNode }) {
@@ -58,10 +62,14 @@ export default function App() {
             <Route path="ielts/setup" element={<IeltsSetup />} />
             <Route path="ielts/settings" element={<IeltsSettings />} />
             <Route path="ielts/format" element={<IeltsExamFormat />} />
+            <Route path="ielts/criteria" element={<IeltsCriteria />} />
+            <Route path="ielts/resources" element={<IeltsResources />} />
             <Route path="ielts" element={<IeltsGate />}>
               <Route index element={<IeltsHome />} />
               <Route path="practice" element={<IeltsPractice />} />
               <Route path="progress" element={<IeltsProgress />} />
+              <Route path="lessons/:id" element={<IeltsLesson />} />
+              <Route path="drills/dictation" element={<IeltsDictation />} />
             </Route>
           </Route>
           <Route

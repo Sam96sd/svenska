@@ -7,6 +7,7 @@ import {
   type ListeningPart,
   type Passage,
   type QuestionGroup,
+  type Lesson,
   type SpeakingItem,
   type WritingTask,
 } from './schema'
@@ -17,9 +18,12 @@ import { WRITING } from '../examSpec'
  * (empty = fine). Used by content.test.ts for every passage and listening part.
  */
 
-/** American spellings that shouldn't appear in British-English content. */
+/**
+ * American spellings that shouldn't appear in British-English content. ("program" is fine:
+ * British English uses it for software.)
+ */
 const US_SPELLINGS =
-  /\b(color|colors|colored|favor|favorite|behavior|neighbor|neighborhood|labor|honor|humor|center|centers|theater|meter|meters|liter|liters|organiz\w*|realiz\w*|recogniz\w*|analyz\w*|prioritiz\w*|traveled|traveling|traveler|canceled|canceling|labeled|modeling|program|programs|catalog|defense|offense|license|gray|tire|tires|aluminum|jewelry|enrollment|fulfill)\b/i
+  /\b(color|colors|colored|favor|favorite|behavior|neighbor|neighborhood|labor|honor|humor|center|centers|theater|meter|meters|liter|liters|organiz\w*|realiz\w*|recogniz\w*|analyz\w*|prioritiz\w*|traveled|traveling|traveler|canceled|canceling|labeled|modeling|catalog|defense|offense|license|gray|tire|tires|aluminum|jewelry|enrollment|fulfill)\b/i
 
 export function britishSpellingIssues(text: string): string[] {
   const out: string[] = []
@@ -179,10 +183,15 @@ export function validateListening(l: ListeningPart): string[] {
   for (let i = 1; i < order.length; i++)
     if (order[i]!.line < order[i - 1]!.line)
       problems.push(`${l.id}: Q${order[i]!.n} is heard before Q${order[i - 1]!.n}`)
-  const us = britishSpellingIssues([...lines.values(), JSON.stringify(l.groups)].join(' '))
-  // A speaker with an American accent may say American words, but the written questions stay British.
-  if (us.length && l.speakers.every((s) => s.accent !== 'en-US' && s.accent !== 'en-CA'))
-    problems.push(`${l.id}: American spellings: ${[...new Set(us)].join(', ')}`)
+  // Questions are always British English; a US/Canadian speaker may say American words.
+  const inQuestions = britishSpellingIssues(JSON.stringify(l.groups) + l.title + l.context)
+  if (inQuestions.length)
+    problems.push(
+      `${l.id}: American spellings in the questions: ${[...new Set(inQuestions)].join(', ')}`,
+    )
+  const inScript = britishSpellingIssues([...lines.values()].join(' '))
+  if (inScript.length && l.speakers.every((s) => s.accent !== 'en-US' && s.accent !== 'en-CA'))
+    problems.push(`${l.id}: American spellings in the script: ${[...new Set(inScript)].join(', ')}`)
   return problems
 }
 
@@ -218,8 +227,20 @@ export function validateWritingTask(t: WritingTask): string[] {
 export function validateSpeaking(s: SpeakingItem): string[] {
   const text =
     s.kind === 'part1'
-      ? s.questions.join(' ')
-      : [s.prompt, ...s.points, s.explain, ...s.part3].join(' ')
+      ? [s.topic, ...s.questions].join(' ')
+      : [s.title, s.theme, s.prompt, ...s.points, s.explain, s.followUp ?? '', ...s.part3].join(' ')
   const us = britishSpellingIssues(text)
   return us.length ? [`${s.id}: American spellings: ${us.join(', ')}`] : []
+}
+
+export function validateLesson(l: Lesson): string[] {
+  const problems: string[] = []
+  const us = britishSpellingIssues(JSON.stringify(l.sections) + l.title + l.summary)
+  if (us.length) problems.push(`${l.id}: American spellings: ${[...new Set(us)].join(', ')}`)
+  if (
+    !l.sections.some((s) => s.kind === 'example') &&
+    (l.skill === 'reading' || l.skill === 'listening')
+  )
+    problems.push(`${l.id}: reading and listening lessons need a worked example`)
+  return problems
 }

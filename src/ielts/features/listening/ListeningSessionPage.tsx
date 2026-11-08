@@ -19,6 +19,7 @@ import { useExamClock } from '../../engine/timers'
 import { jumpToQuestion, useQuestionSession } from '../../engine/useQuestionSession'
 import { useIelts } from '../../storage/hooks'
 import { recordObjectiveAttempt } from '../../storage/record'
+import { attemptKind, useSpecialRun } from '../shared/runKind'
 import { type RunMode } from '../reading/ReadingSessionPage'
 
 const NARRATOR = 'narrator'
@@ -27,7 +28,8 @@ const PREVIEW_MS = { exam: 30_000, practice: 4_000 }
 export default function ListeningSessionPage() {
   const { id = '' } = useParams()
   const [search] = useSearchParams()
-  const mode: RunMode = search.get('mode') === 'exam' ? 'exam' : 'practice'
+  const { special } = useSpecialRun()
+  const mode: RunMode = search.get('mode') === 'exam' || special ? 'exam' : 'practice'
   const [part, setPart] = useState<ListeningPart | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [run, setRun] = useState(0)
@@ -68,6 +70,7 @@ function ListeningRun({
   const navigate = useNavigate()
   const { profileId, ielts } = useIelts()
   const module = ielts.settings.module ?? 'academic'
+  const { special, back } = useSpecialRun()
   const [mode, setMode] = useState<RunMode>(initialMode)
   const [phase, setPhase] = useState<'intro' | 'running' | 'done'>('intro')
   const [rate, setRate] = useState(1)
@@ -122,7 +125,7 @@ function ListeningRun({
       skill: 'listening',
       contentId: part.id,
       module,
-      kind: mode === 'exam' ? 'exam' : 'practice',
+      kind: attemptKind(special, mode === 'exam'),
       startedAt,
       durationMs: clock.elapsedMs,
       marked,
@@ -147,7 +150,7 @@ function ListeningRun({
   function exit() {
     if (phase === 'running' && !confirm('Leave this test? Your answers will be lost.')) return
     player.stop()
-    navigate('/ielts/practice')
+    navigate(back)
   }
 
   const ctx = useMemo(
@@ -349,6 +352,7 @@ function ListeningRun({
 
             {done && session.marked && (
               <ResultsSummary
+                backTo={back}
                 marked={session.marked}
                 skill="listening"
                 module={module}

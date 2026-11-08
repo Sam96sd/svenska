@@ -18,6 +18,7 @@ import { MODULE_LABEL, READING } from '../../examSpec'
 import { Notice, Pill } from '../../components/ui'
 import { useIelts } from '../../storage/hooks'
 import { recordObjectiveAttempt } from '../../storage/record'
+import { attemptKind, useSpecialRun } from '../shared/runKind'
 import { type MarkedQuestion } from '../../engine/marking'
 
 export type RunMode = 'practice' | 'exam'
@@ -25,7 +26,8 @@ export type RunMode = 'practice' | 'exam'
 export default function ReadingSessionPage() {
   const { id = '' } = useParams()
   const [search] = useSearchParams()
-  const mode: RunMode = search.get('mode') === 'exam' ? 'exam' : 'practice'
+  const { special } = useSpecialRun()
+  const mode: RunMode = search.get('mode') === 'exam' || special ? 'exam' : 'practice'
   const [passage, setPassage] = useState<Passage | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [run, setRun] = useState(0)
@@ -69,7 +71,10 @@ function ReadingRun({
   onRetry: () => void
 }) {
   const navigate = useNavigate()
-  const { profileId } = useIelts()
+  const { profileId, ielts } = useIelts()
+  // Drills suit both modules: score them on the learner's own module.
+  const module = passage.module === 'both' ? (ielts.settings.module ?? 'academic') : passage.module
+  const { special, back } = useSpecialRun()
   const [mode, setMode] = useState<RunMode>(initialMode)
   const [phase, setPhase] = useState<'intro' | 'running' | 'done'>('intro')
   const [startedAt, setStartedAt] = useState(0)
@@ -93,8 +98,8 @@ function ReadingRun({
     recordObjectiveAttempt(profileId, {
       skill: 'reading',
       contentId: passage.id,
-      module: passage.module,
-      kind: mode === 'exam' ? 'exam' : 'practice',
+      module,
+      kind: attemptKind(special, mode === 'exam'),
       startedAt,
       durationMs: clock.elapsedMs,
       marked,
@@ -122,7 +127,7 @@ function ReadingRun({
       !confirm('Leave this test? Your answers will be lost.')
     )
       return
-    navigate('/ielts/practice')
+    navigate(back)
   }
 
   const ctx = useMemo(
@@ -144,7 +149,7 @@ function ReadingRun({
     return (
       <ExamShell
         title={passage.title}
-        subtitle={`Reading · ${MODULE_LABEL[passage.module]}`}
+        subtitle={`Reading · ${MODULE_LABEL[module]}`}
         clock={null}
         onExit={exit}
       >
@@ -216,7 +221,7 @@ function ReadingRun({
     <QuestionContext.Provider value={ctx}>
       <ExamShell
         title={passage.title}
-        subtitle={`Reading · ${MODULE_LABEL[passage.module]}${mode === 'exam' ? ' · timed' : ''}`}
+        subtitle={`Reading · ${MODULE_LABEL[module]}${mode === 'exam' ? ' · timed' : ''}`}
         clock={
           done
             ? null
@@ -299,9 +304,10 @@ function ReadingRun({
                 {done && session.marked && (
                   <>
                     <ResultsSummary
+                      backTo={back}
                       marked={session.marked}
                       skill="reading"
-                      module={passage.module}
+                      module={module}
                       durationMs={duration}
                       onRetry={onRetry}
                     />

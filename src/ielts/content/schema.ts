@@ -14,6 +14,12 @@ import { z } from 'zod'
 
 export const Id = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'ids are kebab-case')
 
+/**
+ * Where an item appears: in the Practice lists, as a short drill attached to a lesson, or
+ * only inside a full mock test or the diagnostic.
+ */
+export const UseSchema = z.enum(['practice', 'drill', 'mock', 'diagnostic']).default('practice')
+
 export const OptionSchema = z.object({ key: z.string().min(1).max(6), text: z.string().min(1) })
 export type Option = z.infer<typeof OptionSchema>
 
@@ -273,9 +279,11 @@ export const ReadingTextSchema = z.object({
 export const PassageSchema = z.object({
   id: Id,
   skill: z.literal('reading'),
-  module: z.enum(['academic', 'general']),
-  /** academic = one long passage; gt1/gt2/gt3 = General Training sections 1–3. */
-  section: z.enum(['academic', 'gt1', 'gt2', 'gt3']),
+  /** "both" for short drills that suit either module. */
+  module: z.enum(['academic', 'general', 'both']),
+  /** academic = one long passage; gt1/gt2/gt3 = General Training sections 1–3; drill = short practice text. */
+  section: z.enum(['academic', 'gt1', 'gt2', 'gt3', 'drill']),
+  use: UseSchema,
   title: z.string().min(3),
   topic: z.string().min(3),
   /** Suggested minutes for this passage in a timed run. */
@@ -320,6 +328,7 @@ export const ListeningPartSchema = z.object({
   id: Id,
   skill: z.literal('listening'),
   part: z.number().int().min(1).max(4),
+  use: UseSchema,
   title: z.string().min(3),
   topic: z.string().min(3),
   /** Read by the narrator before the recording, e.g. "You will hear a woman phoning…". */
@@ -354,7 +363,10 @@ export function bodyGaps(body: Block[]): number[] {
     else if (b.kind === 'table') b.rows.flat().forEach((t) => out.push(...gapsIn(t)))
     else if (b.kind === 'flow') b.steps.forEach((t) => out.push(...gapsIn(t)))
     else if (b.kind === 'diagram')
-      b.diagram.items.forEach((i) => i.shape === 'gap' && out.push(i.n))
+      // Diagram gaps in number order, whatever order they were drawn in.
+      out.push(
+        ...b.diagram.items.flatMap((i) => (i.shape === 'gap' ? [i.n] : [])).sort((x, y) => x - y),
+      )
   }
   return out
 }
@@ -388,6 +400,19 @@ export const QUESTION_TYPE_LABEL: Record<string, string> = {
   'completion-form': 'Form completion',
   'completion-short-answer': 'Short answer',
   'completion-diagram': 'Diagram labelling',
+  // Skills taught in lessons (not question types on the paper).
+  skimming: 'Skimming',
+  scanning: 'Scanning',
+  paraphrase: 'Paraphrase',
+  reference: 'Reference words',
+  timing: 'Timing',
+  prediction: 'Predicting answers',
+  signposting: 'Signpost language',
+  distractor: 'Distractors',
+  spelling: 'Spelling',
+  numbers: 'Numbers and dates',
+  'word-limit': 'Word limits',
+  pronunciation: 'Pronunciation',
 }
 
 // ---------- Writing ----------
@@ -488,6 +513,7 @@ export type ModelAnswer = z.infer<typeof ModelAnswerSchema>
 export const WritingTaskSchema = z.object({
   id: Id,
   skill: z.literal('writing'),
+  use: UseSchema,
   module: z.enum(['academic', 'general', 'both']),
   task: z.union([z.literal(1), z.literal(2)]),
   type: z.enum([...TASK2_TYPES, ...TASK1A_TYPES, ...TASK1G_TYPES]),
@@ -510,6 +536,7 @@ export type WritingTask = z.infer<typeof WritingTaskSchema>
 export const Part1TopicSchema = z.object({
   id: Id,
   skill: z.literal('speaking'),
+  use: UseSchema,
   kind: z.literal('part1'),
   topic: z.string().min(3),
   questions: z.array(z.string().min(5)).min(3).max(6),
@@ -519,7 +546,10 @@ export type Part1Topic = z.infer<typeof Part1TopicSchema>
 export const CueCardSchema = z.object({
   id: Id,
   skill: z.literal('speaking'),
+  use: UseSchema,
   kind: z.literal('cue-card'),
+  /** Short name for lists, e.g. "Useful advice". */
+  title: z.string().min(3),
   theme: z.string().min(3),
   /** "Describe a place you visited that…" */
   prompt: z.string().min(10),
@@ -536,3 +566,69 @@ export type CueCard = z.infer<typeof CueCardSchema>
 
 export const SpeakingItemSchema = z.discriminatedUnion('kind', [Part1TopicSchema, CueCardSchema])
 export type SpeakingItem = z.infer<typeof SpeakingItemSchema>
+
+// ---------- Strategy lessons ----------
+
+export const LessonSectionSchema = z.discriminatedUnion('kind', [
+  /** Paragraphs; **bold** and *italic* are allowed. */
+  z.object({
+    kind: z.literal('text'),
+    heading: z.string().optional(),
+    paragraphs: z.array(z.string().min(10)).min(1),
+  }),
+  /** A numbered method, e.g. the 3-step TFNG decision tree. */
+  z.object({
+    kind: z.literal('steps'),
+    heading: z.string(),
+    items: z.array(z.string().min(5)).min(2),
+  }),
+  z.object({
+    kind: z.literal('list'),
+    heading: z.string().optional(),
+    items: z.array(z.string().min(3)).min(2),
+  }),
+  z.object({ kind: z.literal('tip'), text: z.string().min(10) }),
+  /** A common trap that loses marks. */
+  z.object({ kind: z.literal('trap'), text: z.string().min(10) }),
+  /** A worked example: the text, the question, the answer, and the reasoning step by step. */
+  z.object({
+    kind: z.literal('example'),
+    heading: z.string(),
+    context: z.string().min(20),
+    question: z.string().min(5),
+    answer: z.string().min(1),
+    reasoning: z.array(z.string().min(10)).min(2),
+  }),
+  /** A comparison table, e.g. False vs Not Given, or Band 7 vs 8 vs 9. */
+  z.object({
+    kind: z.literal('compare'),
+    heading: z.string(),
+    headers: z.array(z.string()).min(2).max(4),
+    rows: z.array(z.array(z.string())).min(2),
+  }),
+  /** Useful language: phrase + when to use it. */
+  z.object({
+    kind: z.literal('phrases'),
+    heading: z.string(),
+    items: z.array(z.object({ phrase: z.string().min(2), use: z.string().min(3) })).min(3),
+  }),
+])
+export type LessonSection = z.infer<typeof LessonSectionSchema>
+
+export const LessonSchema = z.object({
+  id: Id,
+  skill: z.enum(['listening', 'reading', 'writing', 'speaking']),
+  module: z.enum(['academic', 'general', 'both']).default('both'),
+  /** Sort order inside the skill (lower first). */
+  order: z.number().int().min(0),
+  title: z.string().min(5),
+  /** One sentence shown in the lesson list. */
+  summary: z.string().min(15),
+  /** Question/task types this lesson covers (keys of QUESTION_TYPE_LABEL or writing types). */
+  types: z.array(z.string()).min(1),
+  minutes: z.number().int().min(2).max(30),
+  sections: z.array(LessonSectionSchema).min(3),
+  /** Ids of drill passages or listening parts (use: "drill") to practise this lesson. */
+  drills: z.array(Id).default([]),
+})
+export type Lesson = z.infer<typeof LessonSchema>

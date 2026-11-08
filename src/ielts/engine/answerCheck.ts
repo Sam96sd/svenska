@@ -107,6 +107,22 @@ const MONTHS = [
   'december',
 ]
 
+/** Runs of number words → digits ("twenty five" → "25"). Expects lower case. */
+export function numberWordsToDigits(text: string): string {
+  const words = [
+    ...Object.keys(SMALL),
+    ...Object.keys(TENS),
+    'hundred',
+    'thousand',
+    'million',
+  ].join('|')
+  const run = new RegExp(`\\b(?:${words})(?:[\\s-]+(?:and\\s+)?(?:${words}))*\\b`, 'g')
+  return text.replace(run, (m) => {
+    const n = wordsToNumber(m)
+    return n === null ? m : String(n)
+  })
+}
+
 /** Basic clean-up: case, curly quotes, dashes, spaces, final full stop. */
 export function normalise(text: string): string {
   return text
@@ -138,15 +154,7 @@ export function canonical(text: string): string {
   )
   s = s.replace(/\b(\d{1,2}) ?(am|pm|a\.m\.?|p\.m\.?)/g, (_, h, ap) => `${h}${ap[0]}m`)
   s = s.replace(/-/g, ' ')
-  // Runs of number words → digits ("twenty five" → "25").
-  const numberWord = new RegExp(
-    `\\b(?:${[...Object.keys(SMALL), ...Object.keys(TENS), 'hundred', 'thousand', 'million'].join('|')})(?:\\s+(?:and\\s+)?(?:${[...Object.keys(SMALL), ...Object.keys(TENS), 'hundred', 'thousand', 'million'].join('|')}))*\\b`,
-    'g',
-  )
-  s = s.replace(numberWord, (m) => {
-    const n = wordsToNumber(m)
-    return n === null ? m : String(n)
-  })
+  s = numberWordsToDigits(s)
   // "march 15" → "15 march"
   s = s.replace(new RegExp(`\\b(${MONTHS.join('|')}) (\\d{1,2})\\b`, 'g'), '$2 $1')
   // Drop "the" before a month-day date: "the 15 march" → "15 march"
@@ -218,7 +226,8 @@ export function acceptedForms(keys: string[]): Set<string> {
 
 /** Words as IELTS counts them: hyphenated words are one word; a number is a number. */
 export function countWords(answer: string): { words: number; numbers: number } {
-  const tokens = normalise(answer)
+  // A number written in words counts as a number, not as words.
+  const tokens = numberWordsToDigits(normalise(answer))
     .replace(/[£$€]/g, '')
     .replace(/(\d) ?(am|pm|a\.m\.?|p\.m\.?)(?=\s|$)/g, '$1$2')
     .split(' ')

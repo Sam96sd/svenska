@@ -20,6 +20,7 @@ import { Notice } from '../../components/ui'
 import { newId } from '../../storage/actions'
 import { cueText } from './cue'
 import { SpeakingReview } from './SpeakingReview'
+import { useSpecialRun } from '../shared/runKind'
 
 export interface Step {
   part: 1 | 2 | 3
@@ -70,7 +71,9 @@ function SpeakingRun({ item, onRetry }: { item: SpeakingItem; onRetry: () => voi
     () => castVoices([{ id: 'examiner', accent: 'en-GB', gender: 'f' }], voices).examiner,
     [voices],
   )
-  const [withPart3, setWithPart3] = useState(true)
+  const { special, back } = useSpecialRun()
+  // The diagnostic uses Part 2 only.
+  const [withPart3, setWithPart3] = useState(special !== 'diagnostic')
   const [phase, setPhase] = useState<'intro' | 'running' | 'review'>('intro')
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState<Answer[]>([])
@@ -91,7 +94,7 @@ function SpeakingRun({ item, onRetry }: { item: SpeakingItem; onRetry: () => voi
     if (phase === 'running' && !confirm('Leave? Answers recorded so far are kept on this device.'))
       return
     stopAll()
-    navigate('/ielts/practice')
+    navigate(back)
   }
 
   if (phase === 'intro')
@@ -137,10 +140,16 @@ function SpeakingRun({ item, onRetry }: { item: SpeakingItem; onRetry: () => voi
 
   if (phase === 'review')
     return (
-      <ExamShell title={title} clock={null} onExit={() => navigate('/ielts/practice')}>
+      <ExamShell title={title} clock={null} onExit={() => navigate(back)}>
         <div className="h-full overflow-y-auto px-4 py-6">
           <div className="mx-auto max-w-4xl">
-            <SpeakingReview item={item} answers={answers} onRetry={onRetry} />
+            <SpeakingReview
+              item={item}
+              answers={answers}
+              onRetry={onRetry}
+              special={special}
+              backTo={back}
+            />
           </div>
         </div>
       </ExamShell>

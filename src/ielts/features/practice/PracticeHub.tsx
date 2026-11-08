@@ -1,8 +1,8 @@
-import { ChevronRight } from 'lucide-react'
+import { BookOpen, CheckCircle2, ChevronRight, Ear, ExternalLink, Scale } from 'lucide-react'
 import { type ReactNode } from 'react'
 import { Link } from 'react-router'
 import { PageHeader } from '../../../components/ui'
-import { catalogFor, type CatalogItem } from '../../content/catalog'
+import { catalogFor, lessonsFor, type CatalogItem, type LessonMeta } from '../../content/catalog'
 import { QUESTION_TYPE_LABEL } from '../../content/schema'
 import { MODULE_LABEL, SKILL_LABEL, type Skill } from '../../examSpec'
 import { formatBand } from '../../scoring'
@@ -104,6 +104,90 @@ function ItemList({ items, ielts }: { items: CatalogItem[]; ielts: IeltsProfile 
   )
 }
 
+function LessonList({ lessons, ielts }: { lessons: LessonMeta[]; ielts: IeltsProfile }) {
+  if (lessons.length === 0) return null
+  return (
+    <details
+      className="bg-surface-2 rounded-2xl p-3"
+      open={lessons.some((l) => !ielts.lessonsDone[l.id])}
+    >
+      <summary className="cursor-pointer text-sm font-semibold">
+        Strategy lessons ({lessons.filter((l) => ielts.lessonsDone[l.id]).length}/{lessons.length}{' '}
+        done)
+      </summary>
+      <ul className="mt-2 grid gap-1 sm:grid-cols-2">
+        {lessons.map((l) => (
+          <li key={l.id}>
+            <Link
+              to={`/ielts/lessons/${l.id}`}
+              className="hover:bg-surface flex items-start gap-2 rounded-xl p-2 text-sm transition-colors"
+            >
+              {ielts.lessonsDone[l.id] ? (
+                <CheckCircle2
+                  size={18}
+                  className="text-success mt-0.5 shrink-0"
+                  aria-label="Done"
+                />
+              ) : (
+                <BookOpen size={18} className="text-primary mt-0.5 shrink-0" aria-hidden="true" />
+              )}
+              <span>
+                <span className="font-semibold">{l.title}</span>
+                <span className="text-muted block text-xs">{l.summary}</span>
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </details>
+  )
+}
+
+function Tools() {
+  const tools = [
+    {
+      to: '/ielts/drills/dictation',
+      icon: Ear,
+      title: 'Dictation trainer',
+      text: 'Names, numbers, postcodes, dates',
+    },
+    {
+      to: '/ielts/criteria',
+      icon: Scale,
+      title: 'Band 7 vs 8 vs 9',
+      text: 'What each criterion rewards',
+    },
+    {
+      to: '/ielts/format',
+      icon: BookOpen,
+      title: 'How the test works',
+      text: 'Timings, parts and scoring',
+    },
+    {
+      to: '/ielts/resources',
+      icon: ExternalLink,
+      title: 'Official free tests',
+      text: 'Links to real practice material',
+    },
+  ]
+  return (
+    <ul className="grid grid-cols-2 gap-2 md:grid-cols-4">
+      {tools.map(({ to, icon: Icon, title, text }) => (
+        <li key={to}>
+          <Link
+            to={to}
+            className="bg-surface border-line hover:border-primary flex h-full flex-col gap-1 rounded-2xl border p-3 transition-colors"
+          >
+            <Icon size={20} className="text-primary" aria-hidden="true" />
+            <span className="text-sm font-semibold">{title}</span>
+            <span className="text-muted text-xs">{text}</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 function SkillSection({ skill, children }: { skill: Skill; children: ReactNode }) {
   const Icon = SKILL_ICON[skill]
   return (
@@ -123,16 +207,21 @@ export default function PracticeHub() {
     <div className="animate-fade-up">
       <PageHeader title="Practice" subtitle={`IELTS ${MODULE_LABEL[module]}`} />
       <div className="grid gap-8">
+        <Tools />
         <SkillSection skill="listening">
+          <LessonList lessons={lessonsFor('listening', module)} ielts={ielts} />
           <ItemList items={catalogFor('listening', module)} ielts={ielts} />
         </SkillSection>
         <SkillSection skill="reading">
+          <LessonList lessons={lessonsFor('reading', module)} ielts={ielts} />
           <ItemList items={catalogFor('reading', module)} ielts={ielts} />
         </SkillSection>
         <SkillSection skill="writing">
+          <LessonList lessons={lessonsFor('writing', module)} ielts={ielts} />
           <ItemList items={catalogFor('writing', module)} ielts={ielts} />
         </SkillSection>
         <SkillSection skill="speaking">
+          <LessonList lessons={lessonsFor('speaking', module)} ielts={ielts} />
           <ItemList items={catalogFor('speaking', module)} ielts={ielts} />
         </SkillSection>
       </div>

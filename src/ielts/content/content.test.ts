@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { CATALOG } from './catalog'
 import { contentFiles } from './index'
 import {
+  LessonSchema,
   ListeningPartSchema,
   PassageSchema,
-  screenOrder,
   SpeakingItemSchema,
   WritingTaskSchema,
+  type Lesson,
   type ListeningPart,
   type Passage,
   type SpeakingItem,
@@ -14,11 +14,19 @@ import {
 } from './schema'
 import {
   britishSpellingIssues,
+  validateLesson,
   validateListening,
   validatePassage,
   validateSpeaking,
   validateWritingTask,
 } from './validate'
+
+/**
+ * CONTENT_ONLY=reading/academic,lessons/ checks only matching files (handy while authoring).
+ * Without it, every content file is checked.
+ */
+const only = (process.env.CONTENT_ONLY ?? '').split(',').filter(Boolean)
+const selected = (path: string) => only.length === 0 || only.some((o) => path.includes(o))
 
 async function loadAll<T>(
   files: Record<string, () => Promise<{ default: unknown }>>,
@@ -26,7 +34,7 @@ async function loadAll<T>(
 ) {
   const out: Array<{ path: string; data: T }> = []
   for (const [path, load] of Object.entries(files))
-    out.push({ path, data: parse((await load()).default) })
+    if (selected(path)) out.push({ path, data: parse((await load()).default) })
   return out
 }
 
@@ -55,7 +63,15 @@ describe('IELTS content', async () => {
       expect(validateSpeaking(data)).toEqual([])
     })
 
-  it('has content to check', () => {
+  const lessons = await loadAll<Lesson>(contentFiles.lessons, (x) => LessonSchema.parse(x))
+
+  for (const { path, data } of lessons)
+    it(`lesson ${data.id} is valid`, () => {
+      expect(contentFiles.idOf(path)).toBe(data.id)
+      expect(validateLesson(data)).toEqual([])
+    })
+
+  it.skipIf(only.length > 0)('has content to check', () => {
     expect(passages.length).toBeGreaterThan(0)
     expect(parts.length).toBeGreaterThan(0)
   })
@@ -71,56 +87,6 @@ describe('IELTS content', async () => {
       expect(contentFiles.idOf(path)).toBe(data.id)
       expect(validateListening(data)).toEqual([])
     })
-
-  it('catalog matches the content files', () => {
-    const all = [
-      ...passages.map(({ data }) => ({
-        id: data.id,
-        skill: 'reading',
-        module: data.module,
-        title: data.title,
-        n: screenOrder(data.groups).length,
-      })),
-      ...parts.map(({ data }) => ({
-        id: data.id,
-        skill: 'listening',
-        module: 'both',
-        title: data.title,
-        n: screenOrder(data.groups).length,
-      })),
-      ...writing.map(({ data }) => ({
-        id: data.id,
-        skill: 'writing',
-        module: data.module,
-        title: data.title,
-        n: 1,
-      })),
-      ...speaking.map(({ data }) => ({
-        id: data.id,
-        skill: 'speaking',
-        module: 'both',
-        title:
-          data.kind === 'part1' ? data.topic : (CATALOG.find((c) => c.id === data.id)?.title ?? ''),
-        n: data.kind === 'part1' ? data.questions.length : 1 + data.part3.length,
-      })),
-    ]
-    expect(new Set(CATALOG.map((c) => c.id)).size).toBe(CATALOG.length)
-    for (const c of CATALOG) {
-      const file = all.find((a) => a.id === c.id)
-      expect(file, `catalog entry ${c.id} has no file`).toBeDefined()
-      expect({ skill: c.skill, module: c.module, title: c.title, n: c.questions }).toEqual({
-        skill: file!.skill,
-        module: file!.module,
-        title: file!.title,
-        n: file!.n,
-      })
-    }
-    for (const a of all)
-      expect(
-        CATALOG.some((c) => c.id === a.id),
-        `${a.id} missing from catalog`,
-      ).toBe(true)
-  })
 
   it('flags American spellings', () => {
     expect(britishSpellingIssues('The colour of the centre')).toEqual([])

@@ -1,0 +1,1927 @@
+{
+  "items": [
+    {
+      "id": "drill-listen-distractors",
+      "skill": "listening",
+      "module": "both",
+      "title": "Signing up for a pottery class",
+      "topic": "Hobbies and courses",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 8,
+      "types": [
+        "completion-note"
+      ],
+      "use": "drill",
+      "level": 0
+    },
+    {
+      "id": "drill-listen-form-spelling",
+      "skill": "listening",
+      "module": "both",
+      "title": "Joining the local library",
+      "topic": "Local services",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 7,
+      "types": [
+        "completion-form"
+      ],
+      "use": "drill",
+      "level": 0
+    },
+    {
+      "id": "l1-hall-booking",
+      "skill": "listening",
+      "module": "both",
+      "title": "Booking a community hall",
+      "topic": "Events and bookings",
+      "section": "part1",
+      "minutes": 5,
+      "questions": 10,
+      "types": [
+        "completion-form"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "l1-language-course",
+      "skill": "listening",
+      "module": "both",
+      "title": "Enrolling on a language course",
+      "topic": "Education and courses",
+      "section": "part1",
+      "minutes": 6,
+      "questions": 10,
+      "types": [
+        "completion-note",
+        "completion-table"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "l2-river-museum",
+      "skill": "listening",
+      "module": "both",
+      "title": "The new layout of a riverside museum",
+      "topic": "Tourism and museums",
+      "section": "part2",
+      "minutes": 7,
+      "questions": 10,
+      "types": [
+        "mcq",
+        "map"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "l2-volunteer-festival",
+      "skill": "listening",
+      "module": "both",
+      "title": "Briefing for festival volunteers",
+      "topic": "Volunteering and events",
+      "section": "part2",
+      "minutes": 7,
+      "questions": 10,
+      "types": [
+        "match-features",
+        "mcq"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "drill-listen-paraphrase-mcq",
+      "skill": "listening",
+      "module": "both",
+      "title": "Planning a presentation on food waste",
+      "topic": "University life",
+      "section": "part3",
+      "minutes": 5,
+      "questions": 7,
+      "types": [
+        "mcq"
+      ],
+      "use": "drill",
+      "level": 0
+    },
+    {
+      "id": "l3-group-project",
+      "skill": "listening",
+      "module": "both",
+      "title": "A research project on canteen food waste",
+      "topic": "University study",
+      "section": "part3",
+      "minutes": 8,
+      "questions": 10,
+      "types": [
+        "mcq",
+        "mcq-multi",
+        "match-features"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "l3-presentation-feedback",
+      "skill": "listening",
+      "module": "both",
+      "title": "Feedback on a presentation about coastal erosion",
+      "topic": "Geography and study skills",
+      "section": "part3",
+      "minutes": 7,
+      "questions": 10,
+      "types": [
+        "match-features",
+        "completion-sentence"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "drill-lecture-notes",
+      "skill": "listening",
+      "module": "both",
+      "title": "Green roofs",
+      "topic": "Environment",
+      "section": "part4",
+      "minutes": 4,
+      "questions": 8,
+      "types": [
+        "completion-note"
+      ],
+      "use": "drill",
+      "level": 0
+    },
+    {
+      "id": "l4-bioluminescence",
+      "skill": "listening",
+      "module": "both",
+      "title": "Bioluminescence in marine life",
+      "topic": "Marine biology",
+      "section": "part4",
+      "minutes": 7,
+      "questions": 10,
+      "types": [
+        "completion-note"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "l4-history-of-maps",
+      "skill": "listening",
+      "module": "both",
+      "title": "How city maps changed in the nineteenth century",
+      "topic": "History",
+      "section": "part4",
+      "minutes": 7,
+      "questions": 10,
+      "types": [
+        "completion-note",
+        "completion-flowchart"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "ac-ancient-glass-trade",
+      "skill": "reading",
+      "module": "academic",
+      "title": "Reading the recipe",
+      "topic": "Archaeology",
+      "section": "academic",
+      "minutes": 20,
+      "questions": 14,
+      "types": [
+        "headings",
+        "completion-summary",
+        "mcq"
+      ],
+      "use": "practice",
+      "level": 3
+    },
+    {
+      "id": "ac-hydrothermal-vents",
+      "skill": "reading",
+      "module": "academic",
+      "title": "Life without sunlight",
+      "topic": "Marine science",
+      "section": "academic",
+      "minutes": 20,
+      "questions": 14,
+      "types": [
+        "completion-diagram",
+        "mcq-multi",
+        "completion-flowchart"
+      ],
+      "use": "practice",
+      "level": 2
+    },
+    {
+      "id": "ac-procrastination-research",
+      "skill": "reading",
+      "module": "academic",
+      "title": "Rethinking procrastination",
+      "topic": "Psychology",
+      "section": "academic",
+      "minutes": 20,
+      "questions": 14,
+      "types": [
+        "ynng",
+        "mcq",
+        "match-endings"
+      ],
+      "use": "practice",
+      "level": 3
+    },
+    {
+      "id": "ac-seed-vaults",
+      "skill": "reading",
+      "module": "academic",
+      "title": "Saving seeds for an uncertain future",
+      "topic": "Agriculture",
+      "section": "academic",
+      "minutes": 20,
+      "questions": 14,
+      "types": [
+        "tfng",
+        "completion-table",
+        "completion-short-answer"
+      ],
+      "use": "practice",
+      "level": 1
+    },
+    {
+      "id": "ac-standard-time",
+      "skill": "reading",
+      "module": "academic",
+      "title": "Keeping the same time",
+      "topic": "History",
+      "section": "academic",
+      "minutes": 20,
+      "questions": 14,
+      "types": [
+        "match-info",
+        "match-features",
+        "completion-summary"
+      ],
+      "use": "practice",
+      "level": 2
+    },
+    {
+      "id": "ac-urban-heat-islands",
+      "skill": "reading",
+      "module": "academic",
+      "title": "Why cities run hot",
+      "topic": "Environment",
+      "section": "academic",
+      "minutes": 20,
+      "questions": 14,
+      "types": [
+        "headings",
+        "tfng",
+        "completion-sentence"
+      ],
+      "use": "practice",
+      "level": 1
+    },
+    {
+      "id": "drill-diagram-label",
+      "skill": "reading",
+      "module": "both",
+      "title": "The solar still",
+      "topic": "Technology and water",
+      "section": "drill",
+      "minutes": 6,
+      "questions": 7,
+      "types": [
+        "completion-diagram",
+        "completion-short-answer"
+      ],
+      "use": "drill",
+      "level": 1
+    },
+    {
+      "id": "drill-headings",
+      "skill": "reading",
+      "module": "both",
+      "title": "Headings drill: farming on the roof",
+      "topic": "Food and cities",
+      "section": "drill",
+      "minutes": 8,
+      "questions": 5,
+      "types": [
+        "headings"
+      ],
+      "use": "drill",
+      "level": 2
+    },
+    {
+      "id": "drill-match-endings",
+      "skill": "reading",
+      "module": "both",
+      "title": "The psychology of queuing",
+      "topic": "Psychology",
+      "section": "drill",
+      "minutes": 6,
+      "questions": 5,
+      "types": [
+        "match-endings"
+      ],
+      "use": "drill",
+      "level": 2
+    },
+    {
+      "id": "drill-match-features",
+      "skill": "reading",
+      "module": "both",
+      "title": "What makes people walk?",
+      "topic": "Cities and transport",
+      "section": "drill",
+      "minutes": 8,
+      "questions": 7,
+      "types": [
+        "match-features"
+      ],
+      "use": "drill",
+      "level": 2
+    },
+    {
+      "id": "drill-match-info",
+      "skill": "reading",
+      "module": "both",
+      "title": "Borrowing instead of buying",
+      "topic": "Community and environment",
+      "section": "drill",
+      "minutes": 7,
+      "questions": 7,
+      "types": [
+        "match-info"
+      ],
+      "use": "drill",
+      "level": 2
+    },
+    {
+      "id": "drill-mcq-eliminate",
+      "skill": "reading",
+      "module": "both",
+      "title": "Bringing buried rivers back to light",
+      "topic": "Environment",
+      "section": "drill",
+      "minutes": 8,
+      "questions": 5,
+      "types": [
+        "mcq"
+      ],
+      "use": "drill",
+      "level": 2
+    },
+    {
+      "id": "drill-paraphrase-match",
+      "skill": "reading",
+      "module": "both",
+      "title": "Paraphrase drill: what are city trees for?",
+      "topic": "Environment",
+      "section": "drill",
+      "minutes": 7,
+      "questions": 8,
+      "types": [
+        "match-features"
+      ],
+      "use": "drill",
+      "level": 2
+    },
+    {
+      "id": "drill-reference-words",
+      "skill": "reading",
+      "module": "both",
+      "title": "Reference drill: the return of the night train",
+      "topic": "Transport",
+      "section": "drill",
+      "minutes": 6,
+      "questions": 8,
+      "types": [
+        "mcq"
+      ],
+      "use": "drill",
+      "level": 2
+    },
+    {
+      "id": "drill-scan-dates-names",
+      "skill": "reading",
+      "module": "both",
+      "title": "Scanning drill: the Ferrand Observatory",
+      "topic": "History",
+      "section": "drill",
+      "minutes": 6,
+      "questions": 8,
+      "types": [
+        "completion-short-answer"
+      ],
+      "use": "drill",
+      "level": 1
+    },
+    {
+      "id": "drill-summary-word-bank",
+      "skill": "reading",
+      "module": "both",
+      "title": "The return of the night train",
+      "topic": "Travel and transport",
+      "section": "drill",
+      "minutes": 7,
+      "questions": 7,
+      "types": [
+        "completion-summary"
+      ],
+      "use": "drill",
+      "level": 2
+    },
+    {
+      "id": "drill-table-flowchart",
+      "skill": "reading",
+      "module": "both",
+      "title": "From fleece to insulation",
+      "topic": "Industry and recycling",
+      "section": "drill",
+      "minutes": 6,
+      "questions": 7,
+      "types": [
+        "completion-flowchart"
+      ],
+      "use": "drill",
+      "level": 1
+    },
+    {
+      "id": "drill-tfng-false-vs-ng",
+      "skill": "reading",
+      "module": "both",
+      "title": "TFNG drill: FALSE or NOT GIVEN?",
+      "topic": "Community",
+      "section": "drill",
+      "minutes": 7,
+      "questions": 8,
+      "types": [
+        "tfng"
+      ],
+      "use": "drill",
+      "level": 2
+    },
+    {
+      "id": "drill-tfng-qualifiers",
+      "skill": "reading",
+      "module": "both",
+      "title": "TFNG drill: watch the qualifiers",
+      "topic": "Science",
+      "section": "drill",
+      "minutes": 7,
+      "questions": 8,
+      "types": [
+        "tfng"
+      ],
+      "use": "drill",
+      "level": 2
+    },
+    {
+      "id": "drill-ynng-writer-view",
+      "skill": "reading",
+      "module": "both",
+      "title": "YNNG drill: car parks are the wrong answer",
+      "topic": "Urban planning",
+      "section": "drill",
+      "minutes": 6,
+      "questions": 6,
+      "types": [
+        "ynng"
+      ],
+      "use": "drill",
+      "level": 2
+    },
+    {
+      "id": "gt1-evening-courses",
+      "skill": "reading",
+      "module": "general",
+      "title": "Ashworth Adult Learning Centre: evening courses",
+      "topic": "Education and leisure",
+      "section": "gt1",
+      "minutes": 15,
+      "questions": 14,
+      "types": [
+        "match-info",
+        "tfng"
+      ],
+      "use": "practice",
+      "level": 1
+    },
+    {
+      "id": "gt1-leisure-centre",
+      "skill": "reading",
+      "module": "general",
+      "title": "Riverside Leisure Centre",
+      "topic": "Leisure and sport",
+      "section": "gt1",
+      "minutes": 15,
+      "questions": 14,
+      "types": [
+        "tfng",
+        "completion-note"
+      ],
+      "use": "practice",
+      "level": 1
+    },
+    {
+      "id": "gt2-flexible-working",
+      "skill": "reading",
+      "module": "general",
+      "title": "Calder & Moss: flexible working",
+      "topic": "Work",
+      "section": "gt2",
+      "minutes": 20,
+      "questions": 13,
+      "types": [
+        "headings",
+        "completion-flowchart"
+      ],
+      "use": "practice",
+      "level": 2
+    },
+    {
+      "id": "gt2-warehouse-induction",
+      "skill": "reading",
+      "module": "general",
+      "title": "Fenmoor Distribution Centre: safety for new staff",
+      "topic": "Work and safety",
+      "section": "gt2",
+      "minutes": 20,
+      "questions": 13,
+      "types": [
+        "completion-note",
+        "mcq"
+      ],
+      "use": "practice",
+      "level": 2
+    },
+    {
+      "id": "gt3-lighthouse-keepers",
+      "skill": "reading",
+      "module": "general",
+      "title": "Keepers of the light",
+      "topic": "History",
+      "section": "gt3",
+      "minutes": 25,
+      "questions": 13,
+      "types": [
+        "mcq",
+        "match-features",
+        "completion-sentence"
+      ],
+      "use": "practice",
+      "level": 3
+    },
+    {
+      "id": "gt3-urban-allotments",
+      "skill": "reading",
+      "module": "general",
+      "title": "Growing ground: the return of the city allotment",
+      "topic": "Cities and community",
+      "section": "gt3",
+      "minutes": 25,
+      "questions": 13,
+      "types": [
+        "match-info",
+        "ynng",
+        "completion-summary"
+      ],
+      "use": "practice",
+      "level": 3
+    },
+    {
+      "id": "p1-accommodation",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Accommodation",
+      "topic": "Accommodation",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-cooking",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Cooking",
+      "topic": "Cooking",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-daily-routine",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Daily routine",
+      "topic": "Daily routine",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-friends",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Friends",
+      "topic": "Friends",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-hometown",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Your hometown",
+      "topic": "Your hometown",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 4,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-mobile-phones",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Mobile phones",
+      "topic": "Mobile phones",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-music",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Music",
+      "topic": "Music",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-public-transport",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Public transport",
+      "topic": "Public transport",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-reading",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Reading",
+      "topic": "Reading",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-shopping",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Shopping",
+      "topic": "Shopping",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-weather",
+      "skill": "speaking",
+      "module": "both",
+      "title": "The weather",
+      "topic": "The weather",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-weekends",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Weekends",
+      "topic": "Weekends",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-work-or-studies",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Work or studies",
+      "topic": "Work or studies",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-admired-person",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A person you admire",
+      "topic": "People and relationships",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-adult-skill",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A skill learned as an adult",
+      "topic": "Education and learning",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-book-or-film",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A book or film that made you think",
+      "topic": "Media and culture",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-changed-mind",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Changing your mind",
+      "topic": "Personal experiences",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-crowded-place",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A crowded place",
+      "topic": "Places",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-family-object",
+      "skill": "speaking",
+      "module": "both",
+      "title": "An old family object",
+      "topic": "Objects and possessions",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-future-goal",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A goal for the future",
+      "topic": "Ambitions and plans",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-helpful-advice",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Useful advice",
+      "topic": "People and relationships",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-helping-someone",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Helping someone",
+      "topic": "People and relationships",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-in-a-hurry",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Being in a hurry",
+      "topic": "Personal experiences",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-memorable-meal",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A memorable meal",
+      "topic": "Food",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-outdoor-activity",
+      "skill": "speaking",
+      "module": "both",
+      "title": "An outdoor activity",
+      "topic": "Leisure and sport",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-relaxing-place",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A place to relax",
+      "topic": "Places",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-surprising-news",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Surprising news",
+      "topic": "Media and news",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-useful-app",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A useful app or website",
+      "topic": "Technology",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "a1-bar-energy-sources",
+      "skill": "writing",
+      "module": "academic",
+      "title": "Electricity sources in three countries",
+      "topic": "Energy",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "bar"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "a1-line-cinema-attendance",
+      "skill": "writing",
+      "module": "academic",
+      "title": "Cinema visits by age group",
+      "topic": "Leisure and entertainment",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "line"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "a1-map-harbour-redevelopment",
+      "skill": "writing",
+      "module": "academic",
+      "title": "Harbour redevelopment",
+      "topic": "Towns and development",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "map"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "a1-pie-household-spending",
+      "skill": "writing",
+      "module": "academic",
+      "title": "Household spending, 1995 and 2025",
+      "topic": "Economics and consumers",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "pie"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "a1-process-paper-recycling",
+      "skill": "writing",
+      "module": "academic",
+      "title": "How paper is recycled",
+      "topic": "Environment and recycling",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "process"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "a1-table-library-use",
+      "skill": "writing",
+      "module": "academic",
+      "title": "Public library use in five cities",
+      "topic": "Culture and reading",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "table"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "g1-apology-missed-event",
+      "skill": "writing",
+      "module": "general",
+      "title": "Missing a friend’s housewarming",
+      "topic": "Friends and social life",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "apology"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "g1-damaged-furniture",
+      "skill": "writing",
+      "module": "general",
+      "title": "Late, damaged delivery",
+      "topic": "Shopping and services",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "complaint"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "g1-explanation-late-rent",
+      "skill": "writing",
+      "module": "general",
+      "title": "A late rent payment",
+      "topic": "Housing",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "explanation"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "g1-invitation-reunion",
+      "skill": "writing",
+      "module": "general",
+      "title": "Inviting a classmate to a school reunion",
+      "topic": "Friends and social life",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "invitation"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "g1-request-reference",
+      "skill": "writing",
+      "module": "general",
+      "title": "Asking a former manager for a reference",
+      "topic": "Work",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "request"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "g1-thanks-host-family",
+      "skill": "writing",
+      "module": "general",
+      "title": "Thanking a host family",
+      "topic": "Travel and study abroad",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "thanks"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "t2-ageing-population",
+      "skill": "writing",
+      "module": "both",
+      "title": "Living longer",
+      "topic": "Health",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "adv-disadv"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "t2-ai-tutors",
+      "skill": "writing",
+      "module": "both",
+      "title": "AI tutors in schools",
+      "topic": "Technology",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "adv-disadv"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "t2-arts-funding",
+      "skill": "writing",
+      "module": "both",
+      "title": "Public money for the arts",
+      "topic": "Government spending",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "opinion"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "t2-minority-languages",
+      "skill": "writing",
+      "module": "both",
+      "title": "Disappearing languages",
+      "topic": "Globalisation",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "two-part"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "t2-news-social-media",
+      "skill": "writing",
+      "module": "both",
+      "title": "News from social media",
+      "topic": "Media",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "opinion"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "t2-plastic-waste",
+      "skill": "writing",
+      "module": "general",
+      "title": "Single-use plastic",
+      "topic": "Environment",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "problem-solution"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "t2-prison-rehabilitation",
+      "skill": "writing",
+      "module": "both",
+      "title": "Prison sentences or rehabilitation",
+      "topic": "Crime",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "discussion"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "t2-remote-work",
+      "skill": "writing",
+      "module": "both",
+      "title": "Remote working",
+      "topic": "Work",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "opinion"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "t2-traffic-congestion",
+      "skill": "writing",
+      "module": "both",
+      "title": "Traffic congestion in cities",
+      "topic": "Cities",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "problem-solution"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "t2-vocational-training",
+      "skill": "writing",
+      "module": "both",
+      "title": "Academic study or job training?",
+      "topic": "Education",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "discussion"
+      ],
+      "use": "practice",
+      "level": 0
+    }
+  ],
+  "lessons": [
+    {
+      "id": "l-predict",
+      "skill": "listening",
+      "module": "both",
+      "order": 1,
+      "title": "Predict before you listen",
+      "summary": "Use the reading time to predict the type of answer for every gap and underline the key words.",
+      "types": [
+        "prediction"
+      ],
+      "minutes": 8,
+      "drills": [
+        "drill-listen-form-spelling"
+      ]
+    },
+    {
+      "id": "l-signposts",
+      "skill": "listening",
+      "module": "both",
+      "order": 2,
+      "title": "Follow the signposts",
+      "summary": "Recognise the phrases speakers use in Parts 2 and 4 to show that a new point, and the next answer, is coming.",
+      "types": [
+        "signposting"
+      ],
+      "minutes": 8,
+      "drills": [
+        "drill-lecture-notes"
+      ]
+    },
+    {
+      "id": "l-distractors",
+      "skill": "listening",
+      "module": "both",
+      "order": 3,
+      "title": "Don’t fall for distractors",
+      "summary": "Spot corrections, rejected options and changed plans, and wait for the final answer before you write.",
+      "types": [
+        "distractor"
+      ],
+      "minutes": 8,
+      "drills": [
+        "drill-listen-distractors"
+      ]
+    },
+    {
+      "id": "l-paraphrase",
+      "skill": "listening",
+      "module": "both",
+      "order": 4,
+      "title": "Hear the paraphrase",
+      "summary": "Match the words in the question to the different words speakers use, especially in multiple choice and matching.",
+      "types": [
+        "paraphrase"
+      ],
+      "minutes": 9,
+      "drills": [
+        "drill-listen-paraphrase-mcq"
+      ]
+    },
+    {
+      "id": "l-spelling-numbers",
+      "skill": "listening",
+      "module": "both",
+      "order": 5,
+      "title": "Spelling, numbers and dates",
+      "summary": "Write spelled names, phone numbers, dates, prices and postcodes exactly, and avoid the classic teens-and-tens mistakes.",
+      "types": [
+        "spelling",
+        "numbers"
+      ],
+      "minutes": 10,
+      "drills": [
+        "drill-listen-form-spelling"
+      ]
+    },
+    {
+      "id": "l-word-limits",
+      "skill": "listening",
+      "module": "both",
+      "order": 6,
+      "title": "Keep to the word limit",
+      "summary": "Learn exactly what counts as a word and a number, so that a right answer is never marked wrong for being too long.",
+      "types": [
+        "word-limit"
+      ],
+      "minutes": 7,
+      "drills": [
+        "drill-lecture-notes",
+        "drill-listen-form-spelling"
+      ]
+    },
+    {
+      "id": "l-lecture-notes",
+      "skill": "listening",
+      "module": "both",
+      "order": 7,
+      "title": "Part 4: lecture note completion",
+      "summary": "Follow the headings, predict each gap and keep up with a ten-question lecture with no break in the middle.",
+      "types": [
+        "completion-note"
+      ],
+      "minutes": 10,
+      "drills": [
+        "drill-lecture-notes"
+      ]
+    },
+    {
+      "id": "r-skim-scan",
+      "skill": "reading",
+      "module": "both",
+      "order": 1,
+      "title": "Skimming and scanning",
+      "summary": "Read for the big picture in two minutes, then find exact details without reading every word.",
+      "types": [
+        "skimming",
+        "scanning"
+      ],
+      "minutes": 8,
+      "drills": [
+        "drill-scan-dates-names"
+      ]
+    },
+    {
+      "id": "r-paraphrase",
+      "skill": "reading",
+      "module": "both",
+      "order": 2,
+      "title": "Spotting paraphrase",
+      "summary": "The answer rarely uses the question’s words: learn the six ways the test rewrites an idea.",
+      "types": [
+        "paraphrase"
+      ],
+      "minutes": 8,
+      "drills": [
+        "drill-paraphrase-match"
+      ]
+    },
+    {
+      "id": "r-reference-words",
+      "skill": "reading",
+      "module": "both",
+      "order": 3,
+      "title": "Tracking reference words",
+      "summary": "Follow this, which, such, it, the former and the latter back to what they mean, so ideas connect across sentences.",
+      "types": [
+        "reference"
+      ],
+      "minutes": 7,
+      "drills": [
+        "drill-reference-words"
+      ]
+    },
+    {
+      "id": "r-tfng",
+      "skill": "reading",
+      "module": "both",
+      "order": 10,
+      "title": "True, False or Not Given",
+      "summary": "A 3-step decision tree that separates FALSE from NOT GIVEN, plus the qualifier traps that cost Band 7 candidates marks.",
+      "types": [
+        "tfng"
+      ],
+      "minutes": 10,
+      "drills": [
+        "drill-tfng-false-vs-ng",
+        "drill-tfng-qualifiers"
+      ]
+    },
+    {
+      "id": "r-ynng",
+      "skill": "reading",
+      "module": "both",
+      "order": 11,
+      "title": "Yes, No or Not Given",
+      "summary": "Judge statements against the writer’s opinions, not the facts, by learning to spot the language of views and claims.",
+      "types": [
+        "ynng"
+      ],
+      "minutes": 8,
+      "drills": [
+        "drill-ynng-writer-view"
+      ]
+    },
+    {
+      "id": "r-headings",
+      "skill": "reading",
+      "module": "both",
+      "order": 12,
+      "title": "Matching headings",
+      "summary": "Find each paragraph’s controlling idea first, then eliminate headings that only match a detail or borrow its words.",
+      "types": [
+        "headings"
+      ],
+      "minutes": 9,
+      "drills": [
+        "drill-headings"
+      ]
+    },
+    {
+      "id": "r-match-info",
+      "skill": "reading",
+      "module": "both",
+      "order": 13,
+      "title": "Matching information: which paragraph contains…?",
+      "summary": "Scan for the type of information — a reason, an example, a comparison — not the topic, and expect the answers in any order.",
+      "types": [
+        "match-info"
+      ],
+      "minutes": 9,
+      "drills": [
+        "drill-match-info"
+      ]
+    },
+    {
+      "id": "r-match-features",
+      "skill": "reading",
+      "module": "both",
+      "order": 14,
+      "title": "Matching features: people, dates and places",
+      "summary": "Find every mention of each name first, note what each person says, then match the paraphrased statements.",
+      "types": [
+        "match-features"
+      ],
+      "minutes": 9,
+      "drills": [
+        "drill-match-features"
+      ]
+    },
+    {
+      "id": "r-match-endings",
+      "skill": "reading",
+      "module": "both",
+      "order": 15,
+      "title": "Matching sentence endings",
+      "summary": "The completed sentence must be grammatical and say what the passage says — eliminate endings that are true but do not complete that beginning.",
+      "types": [
+        "match-endings"
+      ],
+      "minutes": 8,
+      "drills": [
+        "drill-match-endings"
+      ]
+    },
+    {
+      "id": "r-mcq",
+      "skill": "reading",
+      "module": "both",
+      "order": 16,
+      "title": "Multiple choice: predict, match, eliminate",
+      "summary": "Answer the question before you read the options, then prove every wrong option wrong: too broad, too narrow, reversed or mentioned but not the answer.",
+      "types": [
+        "mcq",
+        "mcq-multi"
+      ],
+      "minutes": 10,
+      "drills": [
+        "drill-mcq-eliminate"
+      ]
+    },
+    {
+      "id": "r-completion",
+      "skill": "reading",
+      "module": "both",
+      "order": 17,
+      "title": "Sentence, summary, note, table and flow-chart completion",
+      "summary": "Predict the word class, obey the word limit, copy the spelling exactly and check the grammar of the finished sentence.",
+      "types": [
+        "completion-sentence",
+        "completion-summary",
+        "completion-note",
+        "completion-table",
+        "completion-flowchart"
+      ],
+      "minutes": 11,
+      "drills": [
+        "drill-summary-word-bank",
+        "drill-table-flowchart"
+      ]
+    },
+    {
+      "id": "r-diagram-short-answer",
+      "skill": "reading",
+      "module": "both",
+      "order": 18,
+      "title": "Diagram labelling and short-answer questions",
+      "summary": "Follow the description in the text step by step to label a diagram, and let the wh- word tell you what kind of short answer to write.",
+      "types": [
+        "completion-diagram",
+        "completion-short-answer"
+      ],
+      "minutes": 9,
+      "drills": [
+        "drill-diagram-label"
+      ]
+    },
+    {
+      "id": "r-timing",
+      "skill": "reading",
+      "module": "both",
+      "order": 30,
+      "title": "Timing the Reading test",
+      "summary": "A 17 / 20 / 23-minute plan for the three sections, the 2-minute rule, and the order to tackle question types.",
+      "types": [
+        "timing"
+      ],
+      "minutes": 7,
+      "drills": []
+    },
+    {
+      "id": "s-extend-answers",
+      "skill": "speaking",
+      "module": "both",
+      "order": 1,
+      "title": "Extending your answers",
+      "summary": "Turn one-line replies into developed answers with Answer → Reason → Example → Contrast, and judge the right length for Part 1 and Part 3.",
+      "types": [
+        "part1",
+        "part3"
+      ],
+      "minutes": 8,
+      "drills": []
+    },
+    {
+      "id": "s-discourse-markers",
+      "skill": "speaking",
+      "module": "both",
+      "order": 2,
+      "title": "Natural discourse markers",
+      "summary": "Use the small spoken phrases that make you sound fluent and connected — and stop overusing the written linkers that make you sound like an essay.",
+      "types": [
+        "part1",
+        "part2",
+        "part3"
+      ],
+      "minutes": 8,
+      "drills": []
+    },
+    {
+      "id": "s-fluency-pauses",
+      "skill": "speaking",
+      "module": "both",
+      "order": 3,
+      "title": "Pauses, thinking time and missing words",
+      "summary": "Make your pauses sound like thinking about ideas rather than searching for words, buy time naturally, and talk your way round a word you do not know.",
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "minutes": 8,
+      "drills": []
+    },
+    {
+      "id": "s-tenses-range",
+      "skill": "speaking",
+      "module": "both",
+      "order": 4,
+      "title": "Mixing tenses for grammatical range",
+      "summary": "Use past simple for stories, present perfect for experience, used to and would for past habits, and conditionals for hypotheticals — accurately and naturally.",
+      "types": [
+        "part1",
+        "part2",
+        "part3"
+      ],
+      "minutes": 9,
+      "drills": []
+    },
+    {
+      "id": "s-part2-storytelling",
+      "skill": "speaking",
+      "module": "both",
+      "order": 5,
+      "title": "Part 2: planning and telling a story",
+      "summary": "Use the one-minute preparation for keywords, not sentences, and shape your two-minute talk like a story so it sounds natural rather than memorised.",
+      "types": [
+        "part2"
+      ],
+      "minutes": 9,
+      "drills": []
+    },
+    {
+      "id": "s-clarity",
+      "skill": "speaking",
+      "module": "both",
+      "order": 6,
+      "title": "Clarity over accent",
+      "summary": "What the Pronunciation criterion really rewards, and the four habits that make you easy to understand: word stress, sentence stress, chunking and clear endings.",
+      "types": [
+        "pronunciation"
+      ],
+      "minutes": 9,
+      "drills": []
+    },
+    {
+      "id": "w-a1-overview",
+      "skill": "writing",
+      "module": "academic",
+      "order": 1,
+      "title": "The overview paragraph comes first",
+      "summary": "Write a clear, number-free overview of the two main features straight after your introduction: the single biggest step from Band 7 to Band 8 in Task 1.",
+      "types": [
+        "line",
+        "bar",
+        "pie",
+        "table",
+        "mixed",
+        "map",
+        "process"
+      ],
+      "minutes": 9,
+      "drills": []
+    },
+    {
+      "id": "w-a1-trends",
+      "skill": "writing",
+      "module": "academic",
+      "order": 2,
+      "title": "Trends and comparisons in line and bar charts",
+      "summary": "Group the data, describe change with precise trend language and compare categories, without a single opinion or reason.",
+      "types": [
+        "line",
+        "bar"
+      ],
+      "minutes": 10,
+      "drills": []
+    },
+    {
+      "id": "w-a1-proportions",
+      "skill": "writing",
+      "module": "academic",
+      "order": 3,
+      "title": "Proportions, tables and mixed charts",
+      "summary": "Turn percentages into natural proportion language, pick the right figures from a busy table and link two charts in one report.",
+      "types": [
+        "pie",
+        "table",
+        "mixed"
+      ],
+      "minutes": 10,
+      "drills": []
+    },
+    {
+      "id": "w-a1-maps-process",
+      "skill": "writing",
+      "module": "academic",
+      "order": 4,
+      "title": "Maps and processes",
+      "summary": "Describe where things are and how they changed with location language and the passive, and walk through a process stage by stage with clear sequencing.",
+      "types": [
+        "map",
+        "process"
+      ],
+      "minutes": 10,
+      "drills": []
+    },
+    {
+      "id": "w-gt-tone",
+      "skill": "writing",
+      "module": "general",
+      "order": 5,
+      "title": "Getting the tone of a letter right",
+      "summary": "Choose formal, semi-formal or informal from the reader, then match the opening, closing, phrasing and structure to that choice.",
+      "types": [
+        "complaint",
+        "request",
+        "apology",
+        "invitation",
+        "thanks",
+        "explanation"
+      ],
+      "minutes": 9,
+      "drills": []
+    },
+    {
+      "id": "w-gt-letter-types",
+      "skill": "writing",
+      "module": "general",
+      "order": 6,
+      "title": "Phrases for six types of letter",
+      "summary": "Ready-to-adapt language for complaints, requests, apologies, invitations, thanks and explanations, at formal, semi-formal and informal levels.",
+      "types": [
+        "complaint",
+        "request",
+        "apology",
+        "invitation",
+        "thanks",
+        "explanation"
+      ],
+      "minutes": 10,
+      "drills": []
+    },
+    {
+      "id": "w-t2-essay-types",
+      "skill": "writing",
+      "module": "both",
+      "order": 10,
+      "title": "The five Task 2 essay types",
+      "summary": "Recognise each essay type from its wording, count the parts of the question, and use a paragraph plan that answers every part.",
+      "types": [
+        "opinion",
+        "discussion",
+        "adv-disadv",
+        "problem-solution",
+        "two-part"
+      ],
+      "minutes": 9,
+      "drills": []
+    },
+    {
+      "id": "w-t2-band8-method",
+      "skill": "writing",
+      "module": "both",
+      "order": 11,
+      "title": "The Band 8 essay method",
+      "summary": "A ten-step method for Task 2: analyse, plan, take a clear position, develop one idea per paragraph in depth, and proofread against a checklist.",
+      "types": [
+        "opinion",
+        "discussion",
+        "adv-disadv",
+        "problem-solution",
+        "two-part"
+      ],
+      "minutes": 12,
+      "drills": []
+    },
+    {
+      "id": "w-t2-peel-paragraph",
+      "skill": "writing",
+      "module": "both",
+      "order": 12,
+      "title": "Building a body paragraph with PEEL",
+      "summary": "Point, Explain, Example, Link: develop one idea fully, and watch a Band 6 paragraph become a Band 8 one.",
+      "types": [
+        "opinion",
+        "discussion",
+        "adv-disadv",
+        "problem-solution",
+        "two-part"
+      ],
+      "minutes": 10,
+      "drills": []
+    },
+    {
+      "id": "w-cohesion-referencing",
+      "skill": "writing",
+      "module": "both",
+      "order": 13,
+      "title": "Cohesion without mechanical linkers",
+      "summary": "Hold your writing together with reference words, substitution, topic sentences and contrast structures instead of a linking word at the start of every sentence.",
+      "types": [
+        "opinion",
+        "discussion",
+        "line",
+        "complaint"
+      ],
+      "minutes": 10,
+      "drills": []
+    }
+  ]
+}

@@ -16,12 +16,14 @@ export function ResultsSummary({
   module,
   durationMs,
   onRetry,
+  backTo = '/ielts/practice',
 }: {
   marked: Marked
   skill: 'reading' | 'listening'
   module: IeltsModule
   durationMs: number
   onRetry: () => void
+  backTo?: string
 }) {
   const band = scaledBand(marked.correct, marked.total, skill, module)
   const byType = new Map<string, { right: number; total: number }>()
@@ -61,8 +63,8 @@ export function ResultsSummary({
         <Button variant="secondary" onClick={onRetry}>
           <RotateCcw size={18} /> Try again
         </Button>
-        <Link to="/ielts/practice" className={buttonClass('primary', 'md')}>
-          Back to practice
+        <Link to={backTo} className={buttonClass('primary', 'md')}>
+          {backTo === '/ielts/practice' ? 'Back to practice' : 'Continue'}
         </Link>
       </div>
     </section>

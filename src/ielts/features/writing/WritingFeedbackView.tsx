@@ -39,6 +39,7 @@ export function WritingFeedbackView({
   grader,
   onGrade,
   onRetry,
+  backTo = '/ielts/practice',
 }: {
   task: WritingTask
   input: WritingTaskInput
@@ -46,6 +47,7 @@ export function WritingFeedbackView({
   grader: ReturnType<typeof useGrader<WritingFeedback>>
   onGrade: (tier: 'standard' | 'pro') => void
   onRetry: () => void
+  backTo?: string
 }) {
   const { profileId } = useIelts()
   const ai = useAiConfig(profileId)
@@ -160,8 +162,8 @@ export function WritingFeedbackView({
         </div>
       )}
 
-      <Link to="/ielts/practice" className={buttonClass('secondary', 'md') + ' justify-self-start'}>
-        Back to practice
+      <Link to={backTo} className={buttonClass('secondary', 'md') + ' justify-self-start'}>
+        {backTo === '/ielts/practice' ? 'Back to practice' : 'Continue'}
       </Link>
     </div>
   )

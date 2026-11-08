@@ -27,11 +27,14 @@ import {
   Tabs,
 } from '../shared/AiWidgets'
 import { useGrader } from '../shared/useGrader'
+import { attemptKind, type SpecialRun } from '../shared/runKind'
 import { type Answer } from './SpeakingSessionPage'
 
 const PART_LABEL = { 1: 'Part 1', 2: 'Part 2', 3: 'Part 3' } as const
 
 export function SpeakingReview({
+  special = null,
+  backTo = '/ielts/practice',
   item,
   answers,
   onRetry,
@@ -39,6 +42,8 @@ export function SpeakingReview({
   item: SpeakingItem
   answers: Answer[]
   onRetry: () => void
+  special?: SpecialRun
+  backTo?: string
 }) {
   const groups = useMemo(() => {
     const by = new Map<1 | 2 | 3, Answer[]>()
@@ -59,11 +64,11 @@ export function SpeakingReview({
       </header>
       {groups.length === 0 && <Notice>No answers were recorded.</Notice>}
       {groups.map(([part, list]) => (
-        <PartFeedback key={part} item={item} part={part} answers={list} />
+        <PartFeedback key={part} item={item} part={part} answers={list} special={special} />
       ))}
       <EarlierAttempts contentId={item.id} exclude={answers.map((a) => a.recording.id)} />
-      <Link to="/ielts/practice" className={buttonClass('secondary', 'md') + ' justify-self-start'}>
-        Back to practice
+      <Link to={backTo} className={buttonClass('secondary', 'md') + ' justify-self-start'}>
+        {backTo === '/ielts/practice' ? 'Back to practice' : 'Continue'}
       </Link>
     </div>
   )
@@ -73,10 +78,12 @@ function PartFeedback({
   item,
   part,
   answers,
+  special,
 }: {
   item: SpeakingItem
   part: 1 | 2 | 3
   answers: Answer[]
+  special: SpecialRun
 }) {
   const { profileId, ielts } = useIelts()
   const ai = useAiConfig(profileId)
@@ -94,7 +101,7 @@ function PartFeedback({
       skill: 'speaking',
       contentId: item.id,
       module: ielts.settings.module ?? 'academic',
-      kind: 'practice',
+      kind: attemptKind(special, false),
       task: part,
       text: '',
       startedAt: answers[0]?.recording.createdAt ?? Date.now(),

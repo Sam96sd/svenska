@@ -2,6 +2,8 @@ import {
   ListeningPartSchema,
   PassageSchema,
   SpeakingItemSchema,
+  LessonSchema,
+  type Lesson,
   WritingTaskSchema,
   type ListeningPart,
   type Passage,
@@ -19,6 +21,7 @@ const readingFiles = import.meta.glob<{ default: unknown }>('./reading/**/*.ts')
 const listeningFiles = import.meta.glob<{ default: unknown }>('./listening/**/*.ts')
 const writingFiles = import.meta.glob<{ default: unknown }>('./writing/**/*.ts')
 const speakingFiles = import.meta.glob<{ default: unknown }>('./speaking/**/*.ts')
+const lessonFiles = import.meta.glob<{ default: unknown }>('./lessons/**/*.ts')
 
 const idOf = (path: string) => path.split('/').pop()!.replace(/\.ts$/, '')
 
@@ -88,11 +91,14 @@ export const loadSpeaking = loader<SpeakingItem>(
   'speaking topic',
 )
 
+export const loadLesson = loader<Lesson>('ls', lessonFiles, (x) => LessonSchema.parse(x), 'lesson')
+
 /** For tests: every content file path by kind. */
 export const contentFiles = {
   reading: readingFiles,
   listening: listeningFiles,
   writing: writingFiles,
   speaking: speakingFiles,
+  lessons: lessonFiles,
   idOf,
 }

@@ -414,7 +414,9 @@ function BlockView({ block, bank }: { block: Block; bank?: Array<{ key: string; 
         </ol>
       )
     case 'diagram': {
-      const gaps = block.diagram.items.flatMap((it) => (it.shape === 'gap' ? [it.n] : []))
+      const gaps = block.diagram.items
+        .flatMap((it) => (it.shape === 'gap' ? [it.n] : []))
+        .sort((a, b) => a - b)
       return (
         <div className="grid gap-3">
           <DiagramView diagram={block.diagram} answered={answers} />

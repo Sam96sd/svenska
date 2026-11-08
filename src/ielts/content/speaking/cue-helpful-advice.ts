@@ -5,6 +5,7 @@ export default defineCueCard({
   id: 'cue-helpful-advice',
   skill: 'speaking',
   kind: 'cue-card',
+  title: 'Useful advice',
   theme: 'People and relationships',
   prompt: 'Describe a piece of advice you received that turned out to be very useful.',
   points: ['who gave you the advice', 'what the advice was', 'when you received it'],

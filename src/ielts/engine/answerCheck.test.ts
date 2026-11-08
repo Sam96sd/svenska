@@ -71,6 +71,8 @@ describe('answer checker', () => {
     expect(countWords('9.30 am')).toEqual({ words: 0, numbers: 1 })
     expect(countWords('£120')).toEqual({ words: 0, numbers: 1 })
     expect(countWords('07700 913 562')).toEqual({ words: 0, numbers: 1 })
+    expect(countWords('five working days')).toEqual({ words: 2, numbers: 1 })
+    expect(countWords('twenty-five')).toEqual({ words: 0, numbers: 1 })
   })
 
   it('applies word limits', () => {
