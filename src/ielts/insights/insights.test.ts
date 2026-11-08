@@ -49,11 +49,13 @@ function profile(attempts: Attempt[]): IeltsProfile {
 }
 
 describe('progress statistics', () => {
-  it('estimates each skill from recent results, mocks counting double', () => {
+  it('estimates each skill from recent results, timed results counting double', () => {
     const p = profile([
       attempt({ skill: 'reading', band: 6, total: 13, finishedAt: T0 }),
       attempt({ skill: 'reading', band: 7, total: 13, finishedAt: T0 + DAY }),
-      attempt({ skill: 'reading', band: 7.5, total: 40, kind: 'mock', finishedAt: T0 + 2 * DAY }),
+      attempt({ skill: 'reading', band: 7.5, total: 40, kind: 'exam', finishedAt: T0 + 2 * DAY }),
+      // A mock's sections count through its summary attempt, not one by one.
+      attempt({ skill: 'reading', band: 4, total: 40, kind: 'mock', finishedAt: T0 + 3 * DAY }),
       attempt({ skill: 'listening', band: 9, total: 4, finishedAt: T0 }), // too short to count
       attempt({ skill: 'writing', band: 6.5, finishedAt: T0 }),
       attempt({

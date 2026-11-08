@@ -94,6 +94,8 @@ function PartFeedback({
   const seconds = answers.reduce((s, a) => s + a.recording.durationMs / 1000, 0)
   const input: SpeakingInput = { part, questions: answers.map((a) => a.step.question), seconds }
   const fb = grader.state.status === 'done' ? grader.state.result : null
+  // The diagnostic and full mocks use the Pro model when a premium key is set.
+  const firstTier = special && hasPremiumKey(ai) ? 'pro' : 'standard'
 
   function ensureAttempt(): Attempt {
     if (attempt) return attempt
@@ -156,8 +158,8 @@ function PartFeedback({
           </span>
         </h2>
         <div className="flex flex-wrap gap-2">
-          {!fb && hasFreeKey(ai) && grader.state.status !== 'working' && (
-            <Button onClick={() => void grade('standard')}>
+          {!fb && (hasFreeKey(ai) || firstTier === 'pro') && grader.state.status !== 'working' && (
+            <Button onClick={() => void grade(firstTier)}>
               <Sparkles size={18} /> Get AI feedback
             </Button>
           )}

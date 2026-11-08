@@ -61,7 +61,7 @@ export default function ReadingSessionPage() {
   )
 }
 
-function ReadingRun({
+export function ReadingRun({
   passage,
   initialMode,
   onRetry,
@@ -165,34 +165,36 @@ function ReadingRun({
                 <Pill key={t}>{t}</Pill>
               ))}
             </div>
-            <fieldset className="grid gap-2">
-              <legend className="mb-1 text-sm font-semibold">Mode</legend>
-              {(['practice', 'exam'] as const).map((m) => (
-                <label
-                  key={m}
-                  className={cx(
-                    'flex cursor-pointer gap-3 rounded-2xl border p-3 text-sm',
-                    mode === m ? 'border-primary bg-primary-soft' : 'border-line',
-                  )}
-                >
-                  <input
-                    type="radio"
-                    name="mode"
-                    checked={mode === m}
-                    onChange={() => setMode(m)}
-                    className="accent-[var(--color-primary)]"
-                  />
-                  <span>
-                    <strong>{m === 'practice' ? 'Practice' : 'Timed (exam conditions)'}</strong>
-                    <span className="text-muted block">
-                      {m === 'practice'
-                        ? 'The clock counts up. Take your time and learn from the explanations.'
-                        : `${passage.minutes} minutes, counting down. Your answers are marked when time runs out.`}
+            {!special && (
+              <fieldset className="grid gap-2">
+                <legend className="mb-1 text-sm font-semibold">Mode</legend>
+                {(['practice', 'exam'] as const).map((m) => (
+                  <label
+                    key={m}
+                    className={cx(
+                      'flex cursor-pointer gap-3 rounded-2xl border p-3 text-sm',
+                      mode === m ? 'border-primary bg-primary-soft' : 'border-line',
+                    )}
+                  >
+                    <input
+                      type="radio"
+                      name="mode"
+                      checked={mode === m}
+                      onChange={() => setMode(m)}
+                      className="accent-[var(--color-primary)]"
+                    />
+                    <span>
+                      <strong>{m === 'practice' ? 'Practice' : 'Timed (exam conditions)'}</strong>
+                      <span className="text-muted block">
+                        {m === 'practice'
+                          ? 'The clock counts up. Take your time and learn from the explanations.'
+                          : `${passage.minutes} minutes, counting down. Your answers are marked when time runs out.`}
+                      </span>
                     </span>
-                  </span>
-                </label>
-              ))}
-            </fieldset>
+                  </label>
+                ))}
+              </fieldset>
+            )}
             <p className="text-muted text-sm">
               Tip: select words in the text to <strong>highlight</strong> them or add a{' '}
               <strong>note</strong>, as you can in the computer-delivered test.

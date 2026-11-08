@@ -62,6 +62,37 @@
       "level": 0
     },
     {
+      "id": "m1-l1",
+      "skill": "listening",
+      "module": "both",
+      "title": "Renting a holiday cottage",
+      "topic": "Holidays and accommodation",
+      "section": "part1",
+      "minutes": 6,
+      "questions": 10,
+      "types": [
+        "completion-form"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "m2-l1",
+      "skill": "listening",
+      "module": "both",
+      "title": "Registering for a summer activity camp",
+      "topic": "Leisure and children",
+      "section": "part1",
+      "minutes": 7,
+      "questions": 10,
+      "types": [
+        "completion-note",
+        "completion-table"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
       "id": "l2-river-museum",
       "skill": "listening",
       "module": "both",
@@ -91,6 +122,39 @@
         "mcq"
       ],
       "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "m1-l2",
+      "skill": "listening",
+      "module": "both",
+      "title": "A new community sports centre",
+      "topic": "Sport and leisure",
+      "section": "part2",
+      "minutes": 7,
+      "questions": 10,
+      "types": [
+        "mcq",
+        "map"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "m2-l2",
+      "skill": "listening",
+      "module": "both",
+      "title": "A new cycle-hire scheme",
+      "topic": "Transport",
+      "section": "part2",
+      "minutes": 7,
+      "questions": 10,
+      "types": [
+        "mcq-multi",
+        "match-features",
+        "mcq"
+      ],
+      "use": "mock",
       "level": 0
     },
     {
@@ -142,6 +206,39 @@
       "level": 0
     },
     {
+      "id": "m1-l3",
+      "skill": "listening",
+      "module": "both",
+      "title": "A dissertation on urban birdsong",
+      "topic": "University study",
+      "section": "part3",
+      "minutes": 8,
+      "questions": 10,
+      "types": [
+        "mcq",
+        "mcq-multi",
+        "match-features"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "m2-l3",
+      "skill": "listening",
+      "module": "both",
+      "title": "A study of office noise and concentration",
+      "topic": "Work and psychology",
+      "section": "part3",
+      "minutes": 7,
+      "questions": 10,
+      "types": [
+        "mcq",
+        "completion-sentence"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
       "id": "drill-lecture-notes",
       "skill": "listening",
       "module": "both",
@@ -185,6 +282,37 @@
         "completion-flowchart"
       ],
       "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "m1-l4",
+      "skill": "listening",
+      "module": "both",
+      "title": "The history of glassmaking techniques",
+      "topic": "History of technology",
+      "section": "part4",
+      "minutes": 8,
+      "questions": 10,
+      "types": [
+        "completion-note"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "m2-l4",
+      "skill": "listening",
+      "module": "both",
+      "title": "The economics of urban street markets",
+      "topic": "Economics",
+      "section": "part4",
+      "minutes": 7,
+      "questions": 10,
+      "types": [
+        "completion-note",
+        "completion-flowchart"
+      ],
+      "use": "mock",
       "level": 0
     },
     {
@@ -288,6 +416,106 @@
       ],
       "use": "practice",
       "level": 1
+    },
+    {
+      "id": "m-ac1-p1",
+      "skill": "reading",
+      "module": "academic",
+      "title": "The floor that came back",
+      "topic": "Materials and design",
+      "section": "academic",
+      "minutes": 17,
+      "questions": 13,
+      "types": [
+        "tfng",
+        "completion-note"
+      ],
+      "use": "mock",
+      "level": 1
+    },
+    {
+      "id": "m-ac1-p2",
+      "skill": "reading",
+      "module": "academic",
+      "title": "Listening to the wild",
+      "topic": "Ecology",
+      "section": "academic",
+      "minutes": 20,
+      "questions": 13,
+      "types": [
+        "headings",
+        "match-features",
+        "completion-sentence"
+      ],
+      "use": "mock",
+      "level": 2
+    },
+    {
+      "id": "m-ac1-p3",
+      "skill": "reading",
+      "module": "academic",
+      "title": "The measured life",
+      "topic": "Technology and health",
+      "section": "academic",
+      "minutes": 23,
+      "questions": 14,
+      "types": [
+        "ynng",
+        "mcq",
+        "completion-summary"
+      ],
+      "use": "mock",
+      "level": 3
+    },
+    {
+      "id": "m-ac2-p1",
+      "skill": "reading",
+      "module": "academic",
+      "title": "Paper from the mulberry",
+      "topic": "Traditional crafts",
+      "section": "academic",
+      "minutes": 17,
+      "questions": 13,
+      "types": [
+        "tfng",
+        "completion-flowchart"
+      ],
+      "use": "mock",
+      "level": 1
+    },
+    {
+      "id": "m-ac2-p2",
+      "skill": "reading",
+      "module": "academic",
+      "title": "The hidden rules of the queue",
+      "topic": "Social psychology",
+      "section": "academic",
+      "minutes": 20,
+      "questions": 13,
+      "types": [
+        "match-info",
+        "mcq-multi",
+        "completion-summary"
+      ],
+      "use": "mock",
+      "level": 2
+    },
+    {
+      "id": "m-ac2-p3",
+      "skill": "reading",
+      "module": "academic",
+      "title": "Is science really in crisis?",
+      "topic": "Philosophy of science",
+      "section": "academic",
+      "minutes": 23,
+      "questions": 14,
+      "types": [
+        "headings",
+        "ynng",
+        "match-endings"
+      ],
+      "use": "mock",
+      "level": 3
     },
     {
       "id": "drill-diagram-label",
@@ -533,6 +761,39 @@
       "level": 1
     },
     {
+      "id": "m-gt1-s1",
+      "skill": "reading",
+      "module": "general",
+      "title": "Brackford: household waste and second-hand furniture",
+      "topic": "Home and community",
+      "section": "gt1",
+      "minutes": 17,
+      "questions": 14,
+      "types": [
+        "tfng",
+        "match-info"
+      ],
+      "use": "mock",
+      "level": 1
+    },
+    {
+      "id": "m-gt2-s1",
+      "skill": "reading",
+      "module": "general",
+      "title": "Larchmere Holiday Park: day trips and guest information",
+      "topic": "Leisure and travel",
+      "section": "gt1",
+      "minutes": 17,
+      "questions": 14,
+      "types": [
+        "match-info",
+        "completion-sentence",
+        "tfng"
+      ],
+      "use": "mock",
+      "level": 1
+    },
+    {
       "id": "gt2-flexible-working",
       "skill": "reading",
       "module": "general",
@@ -562,6 +823,38 @@
         "mcq"
       ],
       "use": "practice",
+      "level": 2
+    },
+    {
+      "id": "m-gt1-s2",
+      "skill": "reading",
+      "module": "general",
+      "title": "Copperleaf Cafés: information for new team members",
+      "topic": "Work and food",
+      "section": "gt2",
+      "minutes": 20,
+      "questions": 13,
+      "types": [
+        "completion-note",
+        "mcq"
+      ],
+      "use": "mock",
+      "level": 2
+    },
+    {
+      "id": "m-gt2-s2",
+      "skill": "reading",
+      "module": "general",
+      "title": "Harrowfield Community Hospital: volunteering",
+      "topic": "Work",
+      "section": "gt2",
+      "minutes": 20,
+      "questions": 13,
+      "types": [
+        "headings",
+        "completion-table"
+      ],
+      "use": "mock",
       "level": 2
     },
     {
@@ -599,11 +892,120 @@
       "level": 3
     },
     {
+      "id": "m-gt1-s3",
+      "skill": "reading",
+      "module": "general",
+      "title": "Books for all: the long road to the public library",
+      "topic": "History",
+      "section": "gt3",
+      "minutes": 23,
+      "questions": 13,
+      "types": [
+        "headings",
+        "tfng",
+        "completion-summary"
+      ],
+      "use": "mock",
+      "level": 3
+    },
+    {
+      "id": "m-gt2-s3",
+      "skill": "reading",
+      "module": "general",
+      "title": "Pressing on: the revival of letterpress printing",
+      "topic": "Arts and crafts",
+      "section": "gt3",
+      "minutes": 23,
+      "questions": 13,
+      "types": [
+        "mcq",
+        "match-features",
+        "completion-sentence"
+      ],
+      "use": "mock",
+      "level": 3
+    },
+    {
       "id": "p1-accommodation",
       "skill": "speaking",
       "module": "both",
       "title": "Accommodation",
       "topic": "Accommodation",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-animals",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Animals",
+      "topic": "Animals",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-art",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Art",
+      "topic": "Art",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-birthdays",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Birthdays",
+      "topic": "Birthdays",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-clothes",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Clothes",
+      "topic": "Clothes",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-colours",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Colours",
+      "topic": "Colours",
       "section": "part1",
       "minutes": 4,
       "questions": 5,
@@ -644,11 +1046,86 @@
       "level": 0
     },
     {
+      "id": "p1-films",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Films",
+      "topic": "Films",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-food",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Food",
+      "topic": "Food",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
       "id": "p1-friends",
       "skill": "speaking",
       "module": "both",
       "title": "Friends",
       "topic": "Friends",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-handwriting",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Handwriting",
+      "topic": "Handwriting",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-hobbies",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Hobbies",
+      "topic": "Hobbies",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-holidays",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Holidays",
+      "topic": "Holidays",
       "section": "part1",
       "minutes": 4,
       "questions": 5,
@@ -674,6 +1151,21 @@
       "level": 0
     },
     {
+      "id": "p1-internet",
+      "skill": "speaking",
+      "module": "both",
+      "title": "The internet",
+      "topic": "The internet",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
       "id": "p1-mobile-phones",
       "skill": "speaking",
       "module": "both",
@@ -689,11 +1181,131 @@
       "level": 0
     },
     {
+      "id": "p1-mock1",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Gifts",
+      "topic": "Gifts",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "p1-mock2",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Walking",
+      "topic": "Walking",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "p1-museums",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Museums",
+      "topic": "Museums",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
       "id": "p1-music",
       "skill": "speaking",
       "module": "both",
       "title": "Music",
       "topic": "Music",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-neighbours",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Neighbours",
+      "topic": "Neighbours",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-noise",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Noise",
+      "topic": "Noise",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-parks",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Parks",
+      "topic": "Parks",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-photography",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Photography",
+      "topic": "Photography",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-plants",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Plants",
+      "topic": "Plants",
       "section": "part1",
       "minutes": 4,
       "questions": 5,
@@ -734,11 +1346,131 @@
       "level": 0
     },
     {
+      "id": "p1-restaurants",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Restaurants",
+      "topic": "Restaurants",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-shoes",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Shoes",
+      "topic": "Shoes",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
       "id": "p1-shopping",
       "skill": "speaking",
       "module": "both",
       "title": "Shopping",
       "topic": "Shopping",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-social-media",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Social media",
+      "topic": "Social media",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-sport",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Sport",
+      "topic": "Sport",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-the-sea",
+      "skill": "speaking",
+      "module": "both",
+      "title": "The sea",
+      "topic": "The sea",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-time-management",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Time management",
+      "topic": "Time management",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-travel",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Travel",
+      "topic": "Travel",
+      "section": "part1",
+      "minutes": 4,
+      "questions": 5,
+      "types": [
+        "part1"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "p1-tv",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Television",
+      "topic": "Television",
       "section": "part1",
       "minutes": 4,
       "questions": 5,
@@ -826,11 +1558,75 @@
       "level": 0
     },
     {
+      "id": "cue-beautiful-building",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A beautiful building",
+      "topic": "Architecture and cities",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-being-patient",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Being patient",
+      "topic": "Personal qualities",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
       "id": "cue-book-or-film",
       "skill": "speaking",
       "module": "both",
       "title": "A book or film that made you think",
       "topic": "Media and culture",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-busy-time",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A very busy time",
+      "topic": "Work and study",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-cafe-restaurant",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A café or restaurant you like",
+      "topic": "Food",
       "section": "part2",
       "minutes": 9,
       "questions": 7,
@@ -858,11 +1654,91 @@
       "level": 0
     },
     {
+      "id": "cue-childhood-toy",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A toy from your childhood",
+      "topic": "Childhood",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-city-to-live",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A city you would like to live in",
+      "topic": "Cities and urban life",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
       "id": "cue-crowded-place",
       "skill": "speaking",
       "module": "both",
       "title": "A crowded place",
       "topic": "Places",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-environmental-problem",
+      "skill": "speaking",
+      "module": "both",
+      "title": "An environmental problem",
+      "topic": "Environment",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-essential-technology",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Technology you couldn't live without",
+      "topic": "Technology",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-family-celebration",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A family celebration",
+      "topic": "Culture and traditions",
       "section": "part2",
       "minutes": 9,
       "questions": 7,
@@ -890,11 +1766,139 @@
       "level": 0
     },
     {
+      "id": "cue-favourite-photo",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A photograph you like",
+      "topic": "Objects and possessions",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-festival",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A festival or holiday",
+      "topic": "Culture and traditions",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
       "id": "cue-future-goal",
       "skill": "speaking",
       "module": "both",
       "title": "A goal for the future",
       "topic": "Ambitions and plans",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-future-job",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A job you would like to do",
+      "topic": "Work and careers",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-gift-given",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A gift you gave",
+      "topic": "People and relationships",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-good-at-job",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Someone good at their job",
+      "topic": "Work and careers",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-good-decision",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A decision you are glad you made",
+      "topic": "Personal experiences",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-good-service",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Good service",
+      "topic": "Shopping and services",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-habit-to-change",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A habit you want to change",
+      "topic": "Health and lifestyle",
       "section": "part2",
       "minutes": 9,
       "questions": 7,
@@ -938,11 +1942,123 @@
       "level": 0
     },
     {
+      "id": "cue-historical-place",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A historical place",
+      "topic": "History and heritage",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
       "id": "cue-in-a-hurry",
       "skill": "speaking",
       "module": "both",
       "title": "Being in a hurry",
       "topic": "Personal experiences",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-influential-teacher",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A teacher who influenced you",
+      "topic": "Education and learning",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-learning-from-mistake",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Learning from a mistake",
+      "topic": "Personal experiences",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-learning-website",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A website for learning",
+      "topic": "Education and learning",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-local-problem",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A local problem to solve",
+      "topic": "Community and local life",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-long-wait",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Waiting a long time",
+      "topic": "Personal experiences",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-memorable-advert",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A memorable advertisement",
+      "topic": "Media and culture",
       "section": "part2",
       "minutes": 9,
       "questions": 7,
@@ -970,6 +2086,54 @@
       "level": 0
     },
     {
+      "id": "cue-mock1",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A park or garden you know",
+      "topic": "Environment and green spaces",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "cue-mock2",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Losing something",
+      "topic": "Possessions and values",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "cue-musical-performance",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A musical performance",
+      "topic": "Arts and entertainment",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
       "id": "cue-outdoor-activity",
       "skill": "speaking",
       "module": "both",
@@ -986,11 +2150,123 @@
       "level": 0
     },
     {
+      "id": "cue-place-to-visit",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A place you would like to visit",
+      "topic": "Travel",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-proud-of-family",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Feeling proud of a family member",
+      "topic": "Family",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
       "id": "cue-relaxing-place",
       "skill": "speaking",
       "module": "both",
       "title": "A place to relax",
       "topic": "Places",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-rule-opinion",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A rule you agree or disagree with",
+      "topic": "Society and rules",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-saving-money",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Saving up for something",
+      "topic": "Money and spending",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-sharing",
+      "skill": "speaking",
+      "module": "both",
+      "title": "Sharing something",
+      "topic": "People and relationships",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-sports-event",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A sports event you watched",
+      "topic": "Leisure and sport",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-stranger-conversation",
+      "skill": "speaking",
+      "module": "both",
+      "title": "A conversation with a stranger",
+      "topic": "Communication",
       "section": "part2",
       "minutes": 9,
       "questions": 7,
@@ -1023,6 +2299,22 @@
       "module": "both",
       "title": "A useful app or website",
       "topic": "Technology",
+      "section": "part2",
+      "minutes": 9,
+      "questions": 7,
+      "types": [
+        "part2",
+        "part3"
+      ],
+      "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "cue-weather-plans",
+      "skill": "speaking",
+      "module": "both",
+      "title": "When the weather changed your plans",
+      "topic": "Nature and weather",
       "section": "part2",
       "minutes": 9,
       "questions": 7,
@@ -1211,6 +2503,126 @@
         "thanks"
       ],
       "use": "practice",
+      "level": 0
+    },
+    {
+      "id": "m-ac1-task1",
+      "skill": "writing",
+      "module": "academic",
+      "title": "Visitors to a national park",
+      "topic": "Tourism and leisure",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "mixed"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "m-ac2-task1",
+      "skill": "writing",
+      "module": "academic",
+      "title": "How olive oil is produced",
+      "topic": "Food production",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "process"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "m-gt1-task1",
+      "skill": "writing",
+      "module": "general",
+      "title": "Asking the council about a community garden",
+      "topic": "Community and local services",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "request"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "m-gt2-task1",
+      "skill": "writing",
+      "module": "general",
+      "title": "Telling a neighbour about building work",
+      "topic": "Home and neighbours",
+      "section": "task1",
+      "minutes": 20,
+      "questions": 1,
+      "types": [
+        "explanation"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "m-ac1-task2",
+      "skill": "writing",
+      "module": "academic",
+      "title": "Paying for space exploration",
+      "topic": "Science",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "discussion"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "m-ac2-task2",
+      "skill": "writing",
+      "module": "academic",
+      "title": "Waiting to see a doctor",
+      "topic": "Health",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "problem-solution"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "m-gt1-task2",
+      "skill": "writing",
+      "module": "general",
+      "title": "Children and household tasks",
+      "topic": "Family and children",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "opinion"
+      ],
+      "use": "mock",
+      "level": 0
+    },
+    {
+      "id": "m-gt2-task2",
+      "skill": "writing",
+      "module": "general",
+      "title": "Shopping mostly online",
+      "topic": "Shopping and consumer habits",
+      "section": "task2",
+      "minutes": 40,
+      "questions": 1,
+      "types": [
+        "adv-disadv"
+      ],
+      "use": "mock",
       "level": 0
     },
     {

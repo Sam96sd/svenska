@@ -30,8 +30,13 @@ export function addHighlight(
 }
 
 /** Stable key for a paragraph: its label ("B") or its position ("t0p2"). */
-export function paraKey(textIndex: number, paraIndex: number, label?: string): string {
-  return label ?? `t${textIndex}p${paraIndex}`
+export function paraKey(
+  textIndex: number,
+  paraIndex: number,
+  label?: string,
+  key?: string,
+): string {
+  return key ?? label ?? `t${textIndex}p${paraIndex}`
 }
 
 /** Finds the quote in the text, ignoring differences in whitespace. */

@@ -2,6 +2,8 @@ import { type z } from 'zod'
 import {
   type CueCardSchema,
   type LessonSchema,
+  type PronSetSchema,
+  type VocabDeckSchema,
   type ListeningPartSchema,
   type Part1TopicSchema,
   type PassageSchema,
@@ -15,3 +17,5 @@ export const defineWritingTask = (t: z.input<typeof WritingTaskSchema>) => t
 export const defineCueCard = (c: z.input<typeof CueCardSchema>) => c
 export const definePart1 = (p: z.input<typeof Part1TopicSchema>) => p
 export const defineLesson = (l: z.input<typeof LessonSchema>) => l
+export const defineVocabDeck = (d: z.input<typeof VocabDeckSchema>) => d
+export const definePronSet = (p: z.input<typeof PronSetSchema>) => p

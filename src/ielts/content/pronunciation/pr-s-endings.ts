@@ -1,0 +1,135 @@
+import { definePronSet } from '../define'
+
+export default definePronSet({
+  id: 'pr-s-endings',
+  focus: 'endings',
+  title: 'Plural and third-person -s: /s/, /z/ or /ɪz/',
+  intro: [
+    'The -s ending on plurals (books), verbs (he plays) and possessives follows the **last sound** of the word:',
+    '**/ɪz/** (an extra syllable) after hissing sounds /s z ʃ ʒ tʃ dʒ/: classes, changes. **/s/** after voiceless sounds /p t k f θ/: books, months. **/z/** after all other voiced sounds and vowels: plays, friends.',
+    'Most plural -s endings in English are actually /z/, a buzzing sound. Many learners say a hissing /s/ everywhere, or drop the ending. Both make your grammar sound less accurate than it is.',
+  ],
+  quiz: 'ending',
+  items: [
+    {
+      text: 'books',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/s/',
+      note: '“book” ends in voiceless /k/, so -s = /s/: /bʊks/.',
+    },
+    {
+      text: 'stops',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/s/',
+      note: '“stop” ends in voiceless /p/, so -s = /s/: /stɒps/. Keep the /p/: not “stobs”.',
+    },
+    {
+      text: 'students',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/s/',
+      note: '“student” ends in voiceless /t/, so -s = /s/: /ˈstjuːdnts/. Say /ts/ together, with no extra vowel.',
+    },
+    {
+      text: 'months',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/s/',
+      note: '“month” ends in voiceless /θ/, so -s = /s/: /mʌnθs/. Not “monthes”.',
+    },
+    {
+      text: 'laughs',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/s/',
+      note: '“laugh” ends in the sound /f/, so -s = /s/: /lɑːfs/.',
+    },
+    {
+      text: 'writes',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/s/',
+      note: '“write” ends in /t/ (the e is silent), so -s = /s/: /raɪts/.',
+    },
+    {
+      text: 'plays',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/z/',
+      note: '“play” ends in a vowel sound, so -s = /z/: /pleɪz/. Let it buzz.',
+    },
+    {
+      text: 'lives',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/z/',
+      note: '“live” ends in voiced /v/, so -s = /z/: /lɪvz/ (she lives) or /laɪvz/ (our lives). Both end in /z/.',
+    },
+    {
+      text: 'cities',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/z/',
+      note: '“city” ends in a vowel sound, so -s = /z/: /ˈsɪtiz/.',
+    },
+    {
+      text: 'jobs',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/z/',
+      note: '“job” ends in voiced /b/, so -s = /z/: /dʒɒbz/.',
+    },
+    {
+      text: 'friends',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/z/',
+      note: '“friend” ends in voiced /d/, so -s = /z/: /frendz/. Do not drop the /d/.',
+    },
+    {
+      text: 'studies',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/z/',
+      note: '“study” ends in a vowel sound, so -s = /z/: /ˈstʌdiz/. The spelling -ies does not add a syllable.',
+    },
+    {
+      text: 'learns',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/z/',
+      note: '“learn” ends in voiced /n/, so -s = /z/: /lɜːnz/.',
+    },
+    {
+      text: 'classes',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/ɪz/',
+      note: '“class” ends in /s/, so -es adds a syllable: /ˈklɑːsɪz/.',
+    },
+    {
+      text: 'buses',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/ɪz/',
+      note: '“bus” ends in /s/, so -es adds a syllable: /ˈbʌsɪz/.',
+    },
+    {
+      text: 'changes',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/ɪz/',
+      note: '“change” ends in /dʒ/, so -s adds a syllable: /ˈtʃeɪndʒɪz/.',
+    },
+    {
+      text: 'watches',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/ɪz/',
+      note: '“watch” ends in /tʃ/, so -es adds a syllable: /ˈwɒtʃɪz/.',
+    },
+    {
+      text: 'houses',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/ɪz/',
+      note: '“house” ends in /s/, so -s adds a syllable: /ˈhaʊzɪz/. Note the plural also changes /s/ to /z/ inside the word.',
+    },
+    {
+      text: 'languages',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/ɪz/',
+      note: '“language” ends in /dʒ/, so -s adds a syllable: /ˈlæŋɡwɪdʒɪz/.',
+    },
+    {
+      text: 'practises',
+      options: ['/s/', '/z/', '/ɪz/'],
+      answer: '/ɪz/',
+      note: '“practise” (the British verb spelling) ends in /s/, so -s adds a syllable: /ˈpræktɪsɪz/.',
+    },
+  ],
+})

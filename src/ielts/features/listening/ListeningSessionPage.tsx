@@ -6,6 +6,10 @@ import { Segmented } from '../../../components/Segmented'
 import { cx } from '../../../components/styles'
 import { Button, Card } from '../../../components/ui'
 import { castVoices, useEnglishVoices, useScriptPlayer, type PlayerLine } from '../../audio/tts'
+import { useAudioPlayer } from '../../audio/audioPlayer'
+import { geminiAudioFor, geminiTtsSupported } from '../../audio/geminiTts'
+import { GeminiError } from '../../ai/gemini'
+import { hasFreeKey, useAiConfig } from '../../ai/keys'
 import { Notice, Toggle } from '../../components/ui'
 import { loadListening } from '../../content/index'
 import { type ListeningPart } from '../../content/schema'
@@ -58,7 +62,7 @@ export default function ListeningSessionPage() {
   )
 }
 
-function ListeningRun({
+export function ListeningRun({
   part,
   initialMode,
   onRetry,
@@ -71,6 +75,7 @@ function ListeningRun({
   const { profileId, ielts } = useIelts()
   const module = ielts.settings.module ?? 'academic'
   const { special, back } = useSpecialRun()
+  const partLabel = part.id.endsWith('-listening') ? 'Parts 1–4' : `Part ${part.part}`
   const [mode, setMode] = useState<RunMode>(initialMode)
   const [phase, setPhase] = useState<'intro' | 'running' | 'done'>('intro')
   const [rate, setRate] = useState(1)
@@ -80,18 +85,26 @@ function ListeningRun({
   const [focusLoc, setFocusLoc] = useState<{ ref: string; quote: string } | null>(null)
   const { voices, loaded, supported } = useEnglishVoices()
 
-  const casting = useMemo(
-    () =>
-      castVoices(
-        [
-          // Speakers first, so they get the best-matching voices; the narrator takes what's left.
-          ...part.speakers.map((s) => ({ id: s.id, accent: s.accent, gender: s.gender })),
-          { id: NARRATOR, accent: 'en-GB', gender: 'm' },
-        ],
-        voices,
-      ),
-    [part.speakers, voices],
-  )
+  // Speakers in different parts of a full test never talk together, so each part gets the
+  // best voices afresh; within a part, speakers get distinct voices.
+  const casting = useMemo(() => {
+    const groups = new Map<string, ListeningPart['speakers']>()
+    for (const sp of part.speakers) {
+      const g = /^p\d+-/.exec(sp.id)?.[0] ?? ''
+      groups.set(g, [...(groups.get(g) ?? []), sp])
+    }
+    const out: ReturnType<typeof castVoices> = {}
+    for (const list of groups.values())
+      Object.assign(
+        out,
+        castVoices(
+          list.map((sp) => ({ id: sp.id, accent: sp.accent, gender: sp.gender })),
+          voices,
+        ),
+      )
+    Object.assign(out, castVoices([{ id: NARRATOR, accent: 'en-GB', gender: 'm' }], voices))
+    return out
+  }, [part.speakers, voices])
   const lines: PlayerLine[] = useMemo(
     () => [
       {
@@ -99,7 +112,12 @@ function ListeningRun({
         text: `Part ${part.part}. ${part.context}`,
         pauseAfterMs: PREVIEW_MS[mode],
       },
-      ...part.lines.map((l) => ({ speaker: l.speaker, text: l.text })),
+      ...part.lines.map((l) => ({
+        speaker: l.speaker,
+        text: l.text,
+        // Reading time between parts: full length in exam mode, short in practice.
+        pauseAfterMs: l.pause ? (mode === 'exam' ? l.pause * 1000 : 3000) : undefined,
+      })),
       {
         speaker: NARRATOR,
         text: `That is the end of Part ${part.part}. You now have half a minute to check your answers.`,
@@ -107,7 +125,18 @@ function ListeningRun({
     ],
     [part, mode],
   )
-  const player = useScriptPlayer(lines, casting, rate)
+  const devicePlayer = useScriptPlayer(lines, casting, rate)
+  // Optional: Gemini voices (pre-rendered with the free key) for parts with up to two speakers.
+  const ai = useAiConfig(profileId)
+  const canGemini = hasFreeKey(ai) && geminiTtsSupported(part)
+  const [engine, setEngine] = useState<'device' | 'gemini'>('device')
+  const [preparing, setPreparing] = useState<string | null>(null)
+  const geminiPlayer = useAudioPlayer(
+    useMemo(() => part.lines.map((l) => l.text.length), [part.lines]),
+    rate,
+    PREVIEW_MS[mode],
+  )
+  const player = engine === 'gemini' ? geminiPlayer : devicePlayer
   const session = useQuestionSession(part.groups, {
     running: phase === 'running',
     stuckAfterMs: 10 * 60_000,
@@ -168,7 +197,7 @@ function ListeningRun({
     return (
       <ExamShell
         title={part.title}
-        subtitle={`Listening · Part ${part.part}`}
+        subtitle={`Listening · ${partLabel}`}
         clock={null}
         onExit={exit}
       >
@@ -176,7 +205,7 @@ function ListeningRun({
           <Card className="mx-auto my-6 grid max-w-xl gap-4">
             <h1 className="font-display text-2xl font-semibold">{part.title}</h1>
             <p className="text-muted text-sm">
-              Part {part.part} · {session.numbers.length} questions · {part.topic}
+              {partLabel} · {session.numbers.length} questions · {part.topic}
             </p>
             {!supported ? (
               <Notice tone="error">
@@ -205,44 +234,78 @@ function ListeningRun({
                 </p>
               </div>
             )}
-            <fieldset className="grid gap-2">
-              <legend className="mb-1 text-sm font-semibold">Mode</legend>
-              {(['practice', 'exam'] as const).map((m) => (
-                <label
-                  key={m}
-                  className={cx(
-                    'flex cursor-pointer gap-3 rounded-2xl border p-3 text-sm',
-                    mode === m ? 'border-primary bg-primary-soft' : 'border-line',
-                  )}
-                >
-                  <input
-                    type="radio"
-                    name="mode"
-                    checked={mode === m}
-                    onChange={() => setMode(m)}
-                    className="accent-[var(--color-primary)]"
-                  />
-                  <span>
-                    <strong>{m === 'practice' ? 'Practice' : 'Exam (heard once)'}</strong>
-                    <span className="text-muted block">
-                      {m === 'practice'
-                        ? 'Pause, replay, slow down to 0.75× and read the transcript.'
-                        : 'You hear the recording once, with 30 seconds to read the questions first — like the real test.'}
+            {!special && (
+              <fieldset className="grid gap-2">
+                <legend className="mb-1 text-sm font-semibold">Mode</legend>
+                {(['practice', 'exam'] as const).map((m) => (
+                  <label
+                    key={m}
+                    className={cx(
+                      'flex cursor-pointer gap-3 rounded-2xl border p-3 text-sm',
+                      mode === m ? 'border-primary bg-primary-soft' : 'border-line',
+                    )}
+                  >
+                    <input
+                      type="radio"
+                      name="mode"
+                      checked={mode === m}
+                      onChange={() => setMode(m)}
+                      className="accent-[var(--color-primary)]"
+                    />
+                    <span>
+                      <strong>{m === 'practice' ? 'Practice' : 'Exam (heard once)'}</strong>
+                      <span className="text-muted block">
+                        {m === 'practice'
+                          ? 'Pause, replay, slow down to 0.75× and read the transcript.'
+                          : 'You hear the recording once, with 30 seconds to read the questions first — like the real test.'}
+                      </span>
                     </span>
-                  </span>
-                </label>
-              ))}
-            </fieldset>
+                  </label>
+                ))}
+              </fieldset>
+            )}
+            {canGemini && (
+              <Toggle
+                label="Use Gemini voices (more natural)"
+                description="Renders this part once with your free Gemini key and keeps the audio on this device. The live transcript highlight is approximate."
+                checked={engine === 'gemini'}
+                onChange={(v) => setEngine(v ? 'gemini' : 'device')}
+              />
+            )}
+            {preparing && (
+              <p role="status" className="text-muted text-sm">
+                {preparing}
+              </p>
+            )}
             <Button
               size="lg"
-              disabled={!supported}
+              disabled={(!supported && engine === 'device') || !!preparing}
               onClick={() => {
+                if (engine === 'gemini') {
+                  setPreparing('Preparing Gemini voices… (about 20–60 seconds the first time)')
+                  geminiAudioFor(profileId, part).then(
+                    (blob) => {
+                      setPreparing(null)
+                      setStartedAt(Date.now())
+                      setPhase('running')
+                      geminiPlayer.start(URL.createObjectURL(blob))
+                    },
+                    (e: unknown) => {
+                      setPreparing(null)
+                      setEngine('device')
+                      alert(
+                        `${e instanceof GeminiError ? e.message : 'Gemini voices failed.'} Using device voices instead.`,
+                      )
+                    },
+                  )
+                  return
+                }
                 setStartedAt(Date.now())
                 setPhase('running')
                 player.play()
               }}
             >
-              <Volume2 size={20} /> Start the recording
+              <Volume2 size={20} /> {preparing ? 'Preparing…' : 'Start the recording'}
             </Button>
           </Card>
         </div>
@@ -259,7 +322,7 @@ function ListeningRun({
     <QuestionContext.Provider value={ctx}>
       <ExamShell
         title={part.title}
-        subtitle={`Listening · Part ${part.part}${mode === 'exam' ? ' · exam mode' : ''}`}
+        subtitle={`Listening · ${partLabel}${mode === 'exam' ? ' · exam mode' : ''}`}
         clock={done ? null : { ms: clock.elapsedMs, countdown: false }}
         onExit={exit}
         action={

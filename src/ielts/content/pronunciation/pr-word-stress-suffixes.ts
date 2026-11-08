@@ -1,0 +1,135 @@
+import { definePronSet } from '../define'
+
+export default definePronSet({
+  id: 'pr-word-stress-suffixes',
+  focus: 'word-stress',
+  title: 'Word stress: suffix rules',
+  intro: [
+    'Academic English is full of long words, and the ending often tells you where the stress goes. With **-tion, -ic, -ity and -ical**, stress the syllable **just before** the suffix: eduCAtion, scienTIFic, aBILity, poLITical.',
+    'A few suffixes take the stress themselves: **-ee** and **-eer** are stressed (trainEE, volunTEER).',
+    'Watch the exceptions. The most useful one for you: **Arabic** is stressed on the first syllable, AR-a-bic, even though it ends in -ic.',
+  ],
+  quiz: 'stress',
+  items: [
+    {
+      text: 'education',
+      options: ['ed', 'u', 'ca', 'tion'],
+      answer: 'ca',
+      note: 'eduCAtion /ˌedʒuˈkeɪʃn/, pattern ooOo. -tion: stress the syllable before it.',
+    },
+    {
+      text: 'information',
+      options: ['in', 'for', 'ma', 'tion'],
+      answer: 'ma',
+      note: 'inforMAtion /ˌɪnfəˈmeɪʃn/, pattern ooOo. Compare the verb inFORM: the suffix moves the stress.',
+    },
+    {
+      text: 'competition',
+      options: ['com', 'pe', 'ti', 'tion'],
+      answer: 'ti',
+      note: 'compeTItion /ˌkɒmpəˈtɪʃn/, pattern ooOo. Compare comPETE: the stress moves.',
+    },
+    {
+      text: 'pollution',
+      options: ['pol', 'lu', 'tion'],
+      answer: 'lu',
+      note: 'polLUtion /pəˈluːʃn/, pattern oOo. The first vowel is a weak /ə/.',
+    },
+    {
+      text: 'scientific',
+      options: ['sci', 'en', 'tif', 'ic'],
+      answer: 'tif',
+      note: 'scienTIFic /ˌsaɪənˈtɪfɪk/, pattern ooOo. -ic: stress the syllable before it.',
+    },
+    {
+      text: 'academic',
+      options: ['ac', 'a', 'dem', 'ic'],
+      answer: 'dem',
+      note: 'acaDEMic /ˌækəˈdemɪk/, pattern ooOo.',
+    },
+    {
+      text: 'specific',
+      options: ['spe', 'cif', 'ic'],
+      answer: 'cif',
+      note: 'speCIFic /spəˈsɪfɪk/, pattern oOo. Do not stress the first syllable.',
+    },
+    {
+      text: 'Arabic',
+      options: ['ar', 'a', 'bic'],
+      answer: 'ar',
+      note: 'ARabic /ˈærəbɪk/, pattern Ooo: an exception to the -ic rule (like politics and Catholic).',
+    },
+    {
+      text: 'ability',
+      options: ['a', 'bil', 'i', 'ty'],
+      answer: 'bil',
+      note: 'aBILity /əˈbɪləti/, pattern oOoo. -ity: stress the syllable before it.',
+    },
+    {
+      text: 'community',
+      options: ['com', 'mu', 'ni', 'ty'],
+      answer: 'mu',
+      note: 'comMUnity /kəˈmjuːnəti/, pattern oOoo.',
+    },
+    {
+      text: 'majority',
+      options: ['ma', 'jor', 'i', 'ty'],
+      answer: 'jor',
+      note: 'maJORity /məˈdʒɒrəti/, pattern oOoo. Compare MAjor: the stress moves.',
+    },
+    {
+      text: 'publicity',
+      options: ['pub', 'lic', 'i', 'ty'],
+      answer: 'lic',
+      note: 'pubLICity /pʌbˈlɪsəti/, pattern oOoo. Compare PUBlic: the stress moves and the c becomes /s/.',
+    },
+    {
+      text: 'political',
+      options: ['po', 'lit', 'i', 'cal'],
+      answer: 'lit',
+      note: 'poLITical /pəˈlɪtɪkl/, pattern oOoo. -ical: stress the syllable before it. Compare POLitics.',
+    },
+    {
+      text: 'historical',
+      options: ['his', 'tor', 'i', 'cal'],
+      answer: 'tor',
+      note: 'hisTORical /hɪˈstɒrɪkl/, pattern oOoo. Compare HIStory.',
+    },
+    {
+      text: 'practical',
+      options: ['prac', 'ti', 'cal'],
+      answer: 'prac',
+      note: 'PRACtical /ˈpræktɪkl/, pattern Ooo. The syllable before -ical is the first one here.',
+    },
+    {
+      text: 'trainee',
+      options: ['train', 'ee'],
+      answer: 'ee',
+      note: 'traiNEE /ˌtreɪˈniː/, pattern oO. -ee takes the stress itself.',
+    },
+    {
+      text: 'refugee',
+      options: ['ref', 'u', 'gee'],
+      answer: 'gee',
+      note: 'refuGEE /ˌrefjuˈdʒiː/, pattern ooO.',
+    },
+    {
+      text: 'interviewee',
+      options: ['in', 'ter', 'view', 'ee'],
+      answer: 'ee',
+      note: 'interviewEE /ˌɪntəvjuːˈiː/, pattern oooO. Compare INterview and INterviewer.',
+    },
+    {
+      text: 'volunteer',
+      options: ['vol', 'un', 'teer'],
+      answer: 'teer',
+      note: 'volunTEER /ˌvɒlənˈtɪə/, pattern ooO. -eer takes the stress itself.',
+    },
+    {
+      text: 'engineer',
+      options: ['en', 'gi', 'neer'],
+      answer: 'neer',
+      note: 'engiNEER /ˌendʒɪˈnɪə/, pattern ooO. Compare ENgine and engiNEERing.',
+    },
+  ],
+})

@@ -8,7 +8,9 @@ import {
   type Passage,
   type QuestionGroup,
   type Lesson,
+  type PronSet,
   type SpeakingItem,
+  type VocabDeck,
   type WritingTask,
 } from './schema'
 import { WRITING } from '../examSpec'
@@ -151,7 +153,11 @@ export function validatePassage(p: Passage): string[] {
   const problems: string[] = []
   const paras = new Map<string, string>()
   p.texts.forEach((t, ti) =>
-    t.paragraphs.forEach((para, pi) => paras.set(paraKey(ti, pi, para.label), para.text)),
+    t.paragraphs.forEach((para, pi) => {
+      paras.set(paraKey(ti, pi, para.label, para.key), para.text)
+      // Merged mock sections: paragraphs also answer to their printed label (for headings).
+      if (para.key && para.label && !paras.has(para.label)) paras.set(para.label, para.text)
+    }),
   )
   checkGroups(p.groups, (ref) => paras.get(ref) ?? null, problems, p.id)
 
@@ -242,5 +248,47 @@ export function validateLesson(l: Lesson): string[] {
     (l.skill === 'reading' || l.skill === 'listening')
   )
     problems.push(`${l.id}: reading and listening lessons need a worked example`)
+  return problems
+}
+
+export function validateVocabDeck(d: VocabDeck): string[] {
+  const problems: string[] = []
+  const ids = d.cards.map((c) => c.id)
+  if (new Set(ids).size !== ids.length) problems.push(`${d.id}: duplicate card ids`)
+  const terms = d.cards.map((c) => c.term.toLowerCase())
+  if (new Set(terms).size !== terms.length) problems.push(`${d.id}: duplicate terms`)
+  for (const c of d.cards) {
+    const head = c.term
+      .toLowerCase()
+      .replace(/\(.*?\)|…|\.\.\./g, '')
+      .split(/[\s/]+/)
+      .filter((w) => w.length > 3)[0]
+    // The example should actually use the term (allowing for inflection: compare the first 4 letters).
+    if (head && !c.example.toLowerCase().includes(head.slice(0, 4)))
+      problems.push(`${d.id}/${c.id}: example doesn't seem to use “${c.term}”`)
+  }
+  const us = britishSpellingIssues(JSON.stringify(d.cards) + d.title + d.description)
+  if (us.length) problems.push(`${d.id}: American spellings: ${[...new Set(us)].join(', ')}`)
+  return problems
+}
+
+export function validatePronSet(p: PronSet): string[] {
+  const problems: string[] = []
+  for (const [i, item] of p.items.entries()) {
+    const where = `${p.id} item ${i + 1}`
+    if (p.quiz === 'listen-repeat') continue
+    if (!item.options || !item.answer)
+      problems.push(`${where}: ${p.quiz} items need options and an answer`)
+    else if (!item.options.includes(item.answer))
+      problems.push(`${where}: answer “${item.answer}” is not an option`)
+    if (
+      p.quiz === 'stress' &&
+      item.options &&
+      item.options.join('').toLowerCase() !== item.text.toLowerCase().replace(/[^a-z]/g, '')
+    )
+      problems.push(`${where}: syllables don't spell “${item.text}”`)
+  }
+  const us = britishSpellingIssues(JSON.stringify(p))
+  if (us.length) problems.push(`${p.id}: American spellings: ${[...new Set(us)].join(', ')}`)
   return problems
 }

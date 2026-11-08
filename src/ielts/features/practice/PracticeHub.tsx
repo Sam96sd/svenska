@@ -1,4 +1,15 @@
-import { BookOpen, CheckCircle2, ChevronRight, Ear, ExternalLink, Scale } from 'lucide-react'
+import {
+  AudioLines,
+  BookOpen,
+  CheckCircle2,
+  ChevronRight,
+  Ear,
+  ExternalLink,
+  FileText,
+  Layers,
+  Scale,
+  Sparkles,
+} from 'lucide-react'
 import { type ReactNode } from 'react'
 import { Link } from 'react-router'
 import { PageHeader } from '../../../components/ui'
@@ -145,6 +156,30 @@ function LessonList({ lessons, ielts }: { lessons: LessonMeta[]; ielts: IeltsPro
 
 function Tools() {
   const tools = [
+    {
+      to: '/ielts/mock',
+      icon: FileText,
+      title: 'Full mock tests',
+      text: 'All four skills, exam conditions',
+    },
+    {
+      to: '/ielts/vocab',
+      icon: Layers,
+      title: 'Vocabulary',
+      text: 'Language banks with spaced repetition',
+    },
+    {
+      to: '/ielts/pronunciation',
+      icon: AudioLines,
+      title: 'Pronunciation',
+      text: 'Stress, endings, tricky sounds',
+    },
+    {
+      to: '/ielts/generate',
+      icon: Sparkles,
+      title: 'Generate with AI',
+      text: 'Extra questions and your error drill',
+    },
     {
       to: '/ielts/drills/dictation',
       icon: Ear,

@@ -7,7 +7,27 @@ import { Tabs } from '../shared/AiWidgets'
 /** The same task answered at Band 6, 7 and 8–9, with notes on what lifts each level. */
 export function ModelAnswers({ task }: { task: WritingTask }) {
   const [band, setBand] = useState<string>('8.5')
-  const model = task.models.find((m) => String(m.band) === band) ?? task.models[2]!
+  if (task.models.length === 0)
+    return (
+      <p className="text-muted text-sm">
+        This is an AI-generated task, so there are no model answers. The AI feedback includes a Band
+        8–9 version of your own answer.
+      </p>
+    )
+  return <ModelAnswersInner task={task} band={band} setBand={setBand} />
+}
+
+function ModelAnswersInner({
+  task,
+  band,
+  setBand,
+}: {
+  task: WritingTask
+  band: string
+  setBand: (b: string) => void
+}) {
+  const model =
+    task.models.find((m) => String(m.band) === band) ?? task.models[2] ?? task.models[0]!
   return (
     <div className="grid gap-4">
       <Tabs

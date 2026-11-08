@@ -1,6 +1,6 @@
 import { Mic, Square, Volume2 } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import { useNavigate, useParams, useSearchParams } from 'react-router'
 import { PageSpinner } from '../../../app/PageSpinner'
 import { cx } from '../../../components/styles'
 import { Button, Card } from '../../../components/ui'
@@ -20,6 +20,8 @@ import { Notice } from '../../components/ui'
 import { newId } from '../../storage/actions'
 import { cueText } from './cue'
 import { SpeakingReview } from './SpeakingReview'
+import { asSpeaking, generatedById } from '../../ai/generatedStore'
+import { useIelts } from '../../storage/hooks'
 import { useSpecialRun } from '../shared/runKind'
 
 export interface Step {
@@ -35,28 +37,52 @@ export interface Answer {
 
 export default function SpeakingSessionPage() {
   const { id = '' } = useParams()
+  const { profileId } = useIelts()
+  const [search] = useSearchParams()
+  // AI-generated sets live on this device, not in the content files.
+  const generated = useMemo(
+    () => (id.startsWith('ai-') ? asSpeaking(generatedById(profileId, id) ?? ({} as never)) : null),
+    [id, profileId],
+  )
+  // Full mock tests run Part 1 questions from another topic before the cue card.
+  const part1Id = search.get('part1')
+  const [part1, setPart1] = useState<string[] | null>(part1Id ? null : [])
   const [item, setItem] = useState<SpeakingItem | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [run, setRun] = useState(0)
   useEffect(() => {
     let alive = true
+    if (generated) return
     loadSpeaking(id).then(
       (x) => alive && setItem(x),
       (e: unknown) =>
         alive && setError(e instanceof Error ? e.message : 'Could not load this topic.'),
     )
+    if (part1Id)
+      void loadSpeaking(part1Id).then(
+        (x) => alive && setPart1(x.kind === 'part1' ? x.questions : []),
+      )
     return () => {
       alive = false
     }
-  }, [id])
+  }, [id, part1Id, generated])
   if (error)
     return (
       <div className="mx-auto max-w-lg p-6">
         <Notice tone="error">{error}</Notice>
       </div>
     )
-  if (!item) return <PageSpinner />
-  return <SpeakingRun key={run} item={item} onRetry={() => setRun((r) => r + 1)} />
+  const shownItem = generated?.cue ?? item
+  const shownPart1 = generated?.part1 ?? part1
+  if (!shownItem || !shownPart1) return <PageSpinner />
+  return (
+    <SpeakingRun
+      key={run}
+      item={shownItem}
+      part1={shownPart1}
+      onRetry={() => setRun((r) => r + 1)}
+    />
+  )
 }
 
 const INTRO_PART2 =
@@ -64,7 +90,15 @@ const INTRO_PART2 =
 const START_PART2 =
   'All right? Remember, you have one to two minutes for this, so don’t worry if I stop you. I’ll tell you when the time is up. Can you start speaking now, please?'
 
-function SpeakingRun({ item, onRetry }: { item: SpeakingItem; onRetry: () => void }) {
+function SpeakingRun({
+  item,
+  part1 = [],
+  onRetry,
+}: {
+  item: SpeakingItem
+  part1?: string[]
+  onRetry: () => void
+}) {
   const navigate = useNavigate()
   const { voices } = useEnglishVoices()
   const examiner = useMemo(
@@ -80,10 +114,13 @@ function SpeakingRun({ item, onRetry }: { item: SpeakingItem; onRetry: () => voi
 
   const steps: Step[] = useMemo(() => {
     if (item.kind === 'part1') return item.questions.map((q) => ({ part: 1 as const, question: q }))
-    const s: Step[] = [{ part: 2, question: cueText(item), cue: item }]
+    const s: Step[] = [
+      ...part1.map((q) => ({ part: 1 as const, question: q })),
+      { part: 2, question: cueText(item), cue: item },
+    ]
     if (withPart3) s.push(...item.part3.map((q) => ({ part: 3 as const, question: q })))
     return s
-  }, [item, withPart3])
+  }, [item, withPart3, part1])
 
   const title =
     item.kind === 'part1'

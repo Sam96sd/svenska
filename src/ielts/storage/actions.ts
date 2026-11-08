@@ -1,4 +1,5 @@
 import { deviceId } from '../../lib/device'
+import { newCard, review, type Rating } from '../../lib/srs'
 import {
   defaultIeltsProfile,
   type Attempt,
@@ -153,5 +154,29 @@ export function setPlanTaskDone(profileId: string, day: number, key: string, don
     if (done) next[k] = Date.now()
     else delete next[k]
     return { ...p, plan: { ...p.plan, done: next, updatedAt: Date.now() } }
+  })
+}
+
+/** Adds up to `count` new cards from a deck to the learner's reviews (due now). */
+export function addVocabCards(profileId: string, cardIds: string[]) {
+  if (cardIds.length === 0) return
+  const now = Date.now()
+  updateIelts(profileId, (p) => {
+    const srs = { ...p.srs }
+    let added = false
+    for (const id of cardIds)
+      if (!srs[id]) {
+        srs[id] = newCard(now, { dueNow: true })
+        added = true
+      }
+    return added ? { ...p, srs } : p
+  })
+}
+
+export function reviewVocabCard(profileId: string, cardId: string, rating: Rating) {
+  updateIelts(profileId, (p) => {
+    const card = p.srs[cardId]
+    if (!card) return p
+    return { ...p, srs: { ...p.srs, [cardId]: review(card, rating) } }
   })
 }

@@ -22,18 +22,24 @@ import { WritingFeedbackView } from './WritingFeedbackView'
 import { useGrader } from '../shared/useGrader'
 import { attemptKind, useSpecialRun } from '../shared/runKind'
 import { taskInput } from './taskInput'
+import { asWritingTask, generatedById } from '../../ai/generatedStore'
 
 type Phase = 'intro' | 'plan' | 'write' | 'feedback'
 
 export default function WritingTaskPage() {
   const { id = '' } = useParams()
+  const { profileId } = useIelts()
   const [search] = useSearchParams()
   const [task, setTask] = useState<WritingTask | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [run, setRun] = useState(0)
   useEffect(() => {
     let alive = true
-    loadWritingTask(id).then(
+    // AI-generated tasks live on this device, not in the content files.
+    const generated = id.startsWith('ai-')
+      ? asWritingTask(generatedById(profileId, id) ?? ({} as never))
+      : null
+    ;(generated ? Promise.resolve(generated) : loadWritingTask(id)).then(
       (t) => alive && setTask(t),
       (e: unknown) =>
         alive && setError(e instanceof Error ? e.message : 'Could not load this task.'),
@@ -41,7 +47,7 @@ export default function WritingTaskPage() {
     return () => {
       alive = false
     }
-  }, [id])
+  }, [id, profileId])
   if (error)
     return (
       <div className="mx-auto max-w-lg p-6">

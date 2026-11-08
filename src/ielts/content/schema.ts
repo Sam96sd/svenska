@@ -267,6 +267,8 @@ export const ParagraphSchema = z.object({
   /** "A", "B"… for lettered paragraphs; omitted for unlettered text. */
   label: z.string().max(3).optional(),
   text: z.string().min(20),
+  /** Internal key when several passages are merged into one mock section (set by the app). */
+  key: z.string().optional(),
 })
 
 export const ReadingTextSchema = z.object({
@@ -322,6 +324,8 @@ export const ScriptLineSchema = z.object({
   id: z.string().regex(/^l\d+$/),
   speaker: z.string(),
   text: z.string().min(1),
+  /** Silence after the line in seconds (e.g. time to read the next questions in a full test). */
+  pause: z.number().min(0).max(60).optional(),
 })
 
 export const ListeningPartSchema = z.object({
@@ -632,3 +636,79 @@ export const LessonSchema = z.object({
   drills: z.array(Id).default([]),
 })
 export type Lesson = z.infer<typeof LessonSchema>
+
+// ---------- Language banks (SRS vocabulary decks) ----------
+
+export const VOCAB_DECK_KINDS = [
+  'topic',
+  'collocations',
+  'hedging',
+  'linking',
+  'structures',
+  'academic-words',
+] as const
+
+export const VocabCardSchema = z.object({
+  /** Unique inside the deck, kebab-case. The SRS card id is `v:{deck}:{id}`. */
+  id: Id,
+  /** The word, phrase, collocation or structure, e.g. "mitigate the effects of". */
+  term: z.string().min(2),
+  /** Plain-English meaning or function (no translation). */
+  meaning: z.string().min(5),
+  /** A natural IELTS-style example sentence using the term. */
+  example: z.string().min(15),
+  /** Word class or pattern, e.g. "verb", "noun + of", "phrase". */
+  pos: z.string().min(2).optional(),
+  /** Register, common mistakes, related forms. */
+  note: z.string().optional(),
+})
+export type VocabCard = z.infer<typeof VocabCardSchema>
+
+export const VocabDeckSchema = z.object({
+  id: Id,
+  kind: z.enum(VOCAB_DECK_KINDS),
+  title: z.string().min(3),
+  /** Topic for topic decks (Education, Technology…). */
+  topic: z.string().optional(),
+  description: z.string().min(15),
+  /** Which skills it helps most. */
+  skills: z.array(z.enum(['listening', 'reading', 'writing', 'speaking'])).min(1),
+  cards: z.array(VocabCardSchema).min(12).max(60),
+})
+export type VocabDeck = z.infer<typeof VocabDeckSchema>
+
+// ---------- Pronunciation trainer ----------
+
+export const PRON_QUIZ = ['stress', 'which-word', 'ending', 'listen-repeat'] as const
+
+export const PronItemSchema = z.object({
+  /** What is shown (a word, a pair, or a sentence). Use | to mark chunks in sentences. */
+  text: z.string().min(1),
+  /** Choices: syllables for stress, the two words for minimal pairs, /t/ /d/ /ɪd/ for endings. */
+  options: z.array(z.string().min(1)).min(2).max(4).optional(),
+  /** The right option (stress: the stressed syllable; which-word: the word that is spoken). */
+  answer: z.string().optional(),
+  /** What text-to-speech says (defaults to `answer` for which-word, else `text`). */
+  say: z.string().optional(),
+  /** Short explanation shown after answering. */
+  note: z.string().optional(),
+})
+export type PronItem = z.infer<typeof PronItemSchema>
+
+export const PronSetSchema = z.object({
+  id: Id,
+  focus: z.enum([
+    'word-stress',
+    'sentence-stress',
+    'connected-speech',
+    'endings',
+    'minimal-pairs',
+    'clusters',
+  ]),
+  title: z.string().min(3),
+  /** Short teaching text before the exercise; **bold** allowed. */
+  intro: z.array(z.string().min(10)).min(1).max(5),
+  quiz: z.enum(PRON_QUIZ),
+  items: z.array(PronItemSchema).min(6).max(30),
+})
+export type PronSet = z.infer<typeof PronSetSchema>

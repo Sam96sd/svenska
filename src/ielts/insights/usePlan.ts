@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { startOfDay } from '../../lib/dates'
 import { useNow } from '../../lib/useNow'
 import { CATALOG, LESSONS } from '../content/catalog'
+import { mocksFor } from '../content/mocks'
 import { type IeltsProfile } from '../storage/schema'
 import { dayDate, planDay, planDayIndex, stageOf, type PlanInputs, type PlanTask } from './plan'
 import { weakestSkills } from './stats'
@@ -33,7 +34,7 @@ export function usePlanDays(p: IeltsProfile, count = 1): PlanDayView[] | null {
         lessons: LESSONS,
         attempted: new Set(attempts.filter((a) => a.finishedAt < dayStart).map((a) => a.contentId)),
         hasDiagnostic: attempts.some((a) => a.kind === 'diagnostic'),
-        hasMocks: CATALOG.some((c) => c.use === 'mock'),
+        hasMocks: mocksFor(module).length > 0,
       }
     }
     // Lessons done before today stay done; for the days ahead, assume the lessons scheduled on

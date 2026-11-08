@@ -271,6 +271,67 @@ export default defineLesson({
 Drills are short: a 200–400-word text (or a 1–2-minute script) with 5–8 questions of the lesson’s
 type. Reading drills use `section: 'drill'`, `use: 'drill'` and usually `module: 'both'`.
 
+## Vocabulary deck (language bank)
+
+Decks become spaced-repetition flashcards (same engine as the Swedish course).
+
+```ts
+import { defineVocabDeck } from '../define'
+
+export default defineVocabDeck({
+  id: 'vb-environment',
+  kind: 'topic',            // topic | collocations | hedging | linking | structures | academic-words
+  title: 'Environment',
+  topic: 'Environment',
+  description: 'Precise words and collocations for Task 2 essays and Part 3 answers on the environment.',
+  skills: ['writing', 'speaking'],
+  cards: [
+    {
+      id: 'mitigate',
+      term: 'mitigate (the effects of)',
+      meaning: 'to make something harmful less severe',
+      example: 'Planting trees along busy roads can mitigate the effects of traffic pollution.',
+      pos: 'verb',
+      note: 'More formal than “reduce”. Not “mitigate against”.',
+    },
+  ],
+})
+```
+
+- 20–40 cards per deck, Band 7–8 level: precise, natural, not obscure. No translations.
+- Every `example` is a natural sentence on an IELTS-type topic that uses the term.
+- Structures decks: `term` is the pattern (“Were governments to…, …”), `example` a full sentence.
+
+## Pronunciation set
+
+```ts
+import { definePronSet } from '../define'
+
+export default definePronSet({
+  id: 'pr-minimal-p-b',
+  focus: 'minimal-pairs',   // word-stress | sentence-stress | connected-speech | endings | minimal-pairs | clusters
+  title: '/p/ and /b/',
+  intro: ['Arabic has no /p/ sound, so …'],
+  quiz: 'which-word',       // stress | which-word | ending | listen-repeat
+  items: [
+    { text: 'pin / bin', options: ['pin', 'bin'], answer: 'bin', note: '/b/ is voiced: your throat vibrates.' },
+  ],
+})
+```
+
+- `stress`: `text` is the word, `options` its syllables in order (they must spell the word), `answer`
+  the stressed syllable.
+- `which-word`: the app speaks `answer` (or `say`); the learner picks from `options`.
+- `ending`: `options` are `/t/`, `/d/`, `/ɪd/` (or `/s/`, `/z/`, `/ɪz/`); `answer` the right one.
+- `listen-repeat`: the app reads `text` (or `say`), the learner records themselves and compares.
+  Mark chunks with `|` and stressed words in CAPITALS in `note`, not in `text`.
+
+## Mock tests
+
+Mock content is ordinary content with `use: 'mock'`, so it never appears in Practice. The ids are
+listed in `src/ielts/content/mocks.ts`; the mock runner renumbers questions 1–40 per section.
+Mock listening parts are numbered 1–10 in their own files like any part.
+
 ## Review pass (do this before committing)
 
 1. Read every question against the text yourself: is the key the **only** defensible answer?

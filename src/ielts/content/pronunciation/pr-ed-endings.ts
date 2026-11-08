@@ -1,0 +1,135 @@
+import { definePronSet } from '../define'
+
+export default definePronSet({
+  id: 'pr-ed-endings',
+  focus: 'endings',
+  title: 'Past tense -ed: /t/, /d/ or /ɪd/',
+  intro: [
+    'The -ed ending has three pronunciations, and the choice depends on the **last sound** of the verb (not the last letter):',
+    '**/ɪd/** (an extra syllable) only after /t/ or /d/: wanted, needed. **/t/** after voiceless sounds /p k f s ʃ tʃ/: worked, watched. **/d/** after all other (voiced) sounds and vowels: played, lived.',
+    'A common error is to say every ending as a full extra syllable (“work-ed”) or to drop it completely, so the examiner cannot hear that you are using the past tense. Most -ed verbs are **one syllable shorter** than you might expect.',
+  ],
+  quiz: 'ending',
+  items: [
+    {
+      text: 'worked',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/t/',
+      note: '“work” ends in voiceless /k/, so -ed = /t/: /wɜːkt/. One syllable.',
+    },
+    {
+      text: 'helped',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/t/',
+      note: '“help” ends in voiceless /p/, so -ed = /t/: /helpt/. Arabic speakers: keep /p/, do not say “helbd”.',
+    },
+    {
+      text: 'watched',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/t/',
+      note: '“watch” ends in voiceless /tʃ/, so -ed = /t/: /wɒtʃt/.',
+    },
+    {
+      text: 'laughed',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/t/',
+      note: '“laugh” ends in the sound /f/ (spelt gh), so -ed = /t/: /lɑːft/. The last sound matters, not the letter.',
+    },
+    {
+      text: 'missed',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/t/',
+      note: '“miss” ends in voiceless /s/, so -ed = /t/: /mɪst/. It sounds the same as “mist”.',
+    },
+    {
+      text: 'finished',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/t/',
+      note: '“finish” ends in voiceless /ʃ/, so -ed = /t/: /ˈfɪnɪʃt/. Two syllables, not three.',
+    },
+    {
+      text: 'increased',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/t/',
+      note: '“increase” ends in /s/ (the final e is silent), so -ed = /t/: /ɪnˈkriːst/. Useful for Writing Task 1 talk.',
+    },
+    {
+      text: 'relaxed',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/t/',
+      note: '“relax” ends in /ks/, voiceless, so -ed = /t/: /rɪˈlækst/.',
+    },
+    {
+      text: 'played',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/d/',
+      note: '“play” ends in a vowel sound, so -ed = /d/: /pleɪd/.',
+    },
+    {
+      text: 'lived',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/d/',
+      note: '“live” ends in voiced /v/, so -ed = /d/: /lɪvd/. Keep the /v/ voiced too.',
+    },
+    {
+      text: 'called',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/d/',
+      note: '“call” ends in voiced /l/, so -ed = /d/: /kɔːld/.',
+    },
+    {
+      text: 'changed',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/d/',
+      note: '“change” ends in voiced /dʒ/, so -ed = /d/: /tʃeɪndʒd/. One syllable.',
+    },
+    {
+      text: 'travelled',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/d/',
+      note: '“travel” ends in voiced /l/, so -ed = /d/: /ˈtrævld/. Two syllables.',
+    },
+    {
+      text: 'explained',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/d/',
+      note: '“explain” ends in voiced /n/, so -ed = /d/: /ɪkˈspleɪnd/. Two syllables, not “explain-ed”.',
+    },
+    {
+      text: 'improved',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/d/',
+      note: '“improve” ends in voiced /v/, so -ed = /d/: /ɪmˈpruːvd/.',
+    },
+    {
+      text: 'wanted',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/ɪd/',
+      note: '“want” ends in /t/, so -ed adds a syllable: /ˈwɒntɪd/.',
+    },
+    {
+      text: 'needed',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/ɪd/',
+      note: '“need” ends in /d/, so -ed adds a syllable: /ˈniːdɪd/.',
+    },
+    {
+      text: 'decided',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/ɪd/',
+      note: '“decide” ends in /d/, so -ed adds a syllable: /dɪˈsaɪdɪd/.',
+    },
+    {
+      text: 'visited',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/ɪd/',
+      note: '“visit” ends in /t/, so -ed adds a syllable: /ˈvɪzɪtɪd/. Stress stays on VIS.',
+    },
+    {
+      text: 'started',
+      options: ['/t/', '/d/', '/ɪd/'],
+      answer: '/ɪd/',
+      note: '“start” ends in /t/, so -ed adds a syllable: /ˈstɑːtɪd/.',
+    },
+  ],
+})

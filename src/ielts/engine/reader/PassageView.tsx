@@ -130,7 +130,7 @@ export function PassageView({
           )}
           {t.title && <h3 className="font-display mb-4 text-xl font-semibold">{t.title}</h3>}
           {t.paragraphs.map((p, pi) => {
-            const key = paraKey(ti, pi, p.label)
+            const key = paraKey(ti, pi, p.label, p.key)
             const marks = highlights.filter((h) => h.key === key)
             const answer = focus && focus.ref === key ? findQuote(p.text, focus.quote) : null
             const openMark = marks.find((m) => m.id === open)

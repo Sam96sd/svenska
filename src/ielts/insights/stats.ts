@@ -24,8 +24,8 @@ function bandPoints(attempts: Attempt[], skill: Skill): BandPoint[] {
       continue
     }
     if (a.skill !== skill || a.band === null) continue
-    // Individual diagnostic sections are counted through the diagnostic's summary instead.
-    if (a.kind === 'diagnostic') continue
+    // Individual diagnostic and mock sections count through their summary attempt instead.
+    if (a.kind === 'diagnostic' || a.kind === 'mock') continue
     // Short drills (< 6 questions) and self-assessments are too noisy for the trend.
     if (a.total !== null && a.total < 6) continue
     if (a.kind === 'drill') continue

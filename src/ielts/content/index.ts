@@ -4,6 +4,10 @@ import {
   SpeakingItemSchema,
   LessonSchema,
   type Lesson,
+  PronSetSchema,
+  type PronSet,
+  VocabDeckSchema,
+  type VocabDeck,
   WritingTaskSchema,
   type ListeningPart,
   type Passage,
@@ -22,6 +26,8 @@ const listeningFiles = import.meta.glob<{ default: unknown }>('./listening/**/*.
 const writingFiles = import.meta.glob<{ default: unknown }>('./writing/**/*.ts')
 const speakingFiles = import.meta.glob<{ default: unknown }>('./speaking/**/*.ts')
 const lessonFiles = import.meta.glob<{ default: unknown }>('./lessons/**/*.ts')
+const vocabFiles = import.meta.glob<{ default: unknown }>('./vocab/**/*.ts')
+const pronFiles = import.meta.glob<{ default: unknown }>('./pronunciation/**/*.ts')
 
 const idOf = (path: string) => path.split('/').pop()!.replace(/\.ts$/, '')
 
@@ -93,6 +99,31 @@ export const loadSpeaking = loader<SpeakingItem>(
 
 export const loadLesson = loader<Lesson>('ls', lessonFiles, (x) => LessonSchema.parse(x), 'lesson')
 
+export const loadPronSet = loader<PronSet>(
+  'p',
+  pronFiles,
+  (x) => PronSetSchema.parse(x),
+  'pronunciation set',
+)
+
+/** Every pronunciation set (small), for the trainer's list. */
+export function loadAllPronSets(): Promise<PronSet[]> {
+  return Promise.all(
+    Object.entries(pronFiles)
+      .filter(([p]) => !p.endsWith('.test.ts'))
+      .map(([, load]) => load().then((m) => PronSetSchema.parse(m.default))),
+  )
+}
+
+/** Every vocabulary deck (they're small; the vocabulary page needs them all for reviews). */
+export function loadAllDecks(): Promise<VocabDeck[]> {
+  return Promise.all(
+    Object.entries(vocabFiles)
+      .filter(([p]) => !p.endsWith('.test.ts'))
+      .map(([, load]) => load().then((m) => VocabDeckSchema.parse(m.default))),
+  )
+}
+
 /** For tests: every content file path by kind. */
 export const contentFiles = {
   reading: readingFiles,
@@ -100,5 +131,7 @@ export const contentFiles = {
   writing: writingFiles,
   speaking: speakingFiles,
   lessons: lessonFiles,
+  vocab: vocabFiles,
+  pronunciation: pronFiles,
   idOf,
 }

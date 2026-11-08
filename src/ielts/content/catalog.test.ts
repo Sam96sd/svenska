@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest'
 import { catalogFromContent, lessonsMeta } from './catalogBuild'
 import { contentFiles } from './index'
 import { DIAGNOSTIC } from './diagnostic'
+import { MOCKS, mockIds } from './mocks'
 import {
   LessonSchema,
   ListeningPartSchema,
@@ -69,5 +70,17 @@ describe('catalog', () => {
         generated.items.some((i) => i.id === id),
         `diagnostic item ${id} missing`,
       ).toBe(true)
+  })
+
+  it('every mock test item exists and is reserved for mocks', async () => {
+    const generated = (await import('./catalog.generated.json')).default as {
+      items: Array<{ id: string; use: string; skill: string; section: string }>
+    }
+    for (const m of MOCKS)
+      for (const id of mockIds(m)) {
+        const item = generated.items.find((i) => i.id === id)
+        expect(item, `${m.id}: ${id} missing (run npm run catalog?)`).toBeDefined()
+        expect(item!.use, `${m.id}: ${id} should have use: "mock"`).toBe('mock')
+      }
   })
 })

@@ -35,6 +35,19 @@ const IeltsResources = lazy(() => import('../ielts/features/resources/ResourcesP
 const IeltsDiagnostic = lazy(() => import('../ielts/features/diagnostic/DiagnosticPage'))
 const IeltsPlan = lazy(() => import('../ielts/features/plan/PlanPage'))
 const IeltsErrors = lazy(() => import('../ielts/features/errors/ErrorLogPage'))
+const IeltsVocab = lazy(() => import('../ielts/features/vocab/VocabPage'))
+const IeltsPronList = lazy(() =>
+  import('../ielts/features/pronunciation/PronunciationPage').then((m) => ({
+    default: m.PronunciationListPage,
+  })),
+)
+const IeltsPronSet = lazy(() => import('../ielts/features/pronunciation/PronunciationPage'))
+const IeltsMockList = lazy(() =>
+  import('../ielts/features/mock/MockTestPage').then((m) => ({ default: m.MockListPage })),
+)
+const IeltsMock = lazy(() => import('../ielts/features/mock/MockTestPage'))
+const IeltsMockSection = lazy(() => import('../ielts/features/mock/MockSectionPage'))
+const IeltsGenerate = lazy(() => import('../ielts/features/generate/GeneratePage'))
 const IeltsSpeaking = lazy(() => import('../ielts/features/speaking/SpeakingSessionPage'))
 
 function RequireProfile({ children }: { children: ReactNode }) {
@@ -76,6 +89,12 @@ export default function App() {
               <Route path="diagnostic" element={<IeltsDiagnostic />} />
               <Route path="plan" element={<IeltsPlan />} />
               <Route path="errors" element={<IeltsErrors />} />
+              <Route path="vocab" element={<IeltsVocab />} />
+              <Route path="pronunciation" element={<IeltsPronList />} />
+              <Route path="pronunciation/:id" element={<IeltsPronSet />} />
+              <Route path="mock" element={<IeltsMockList />} />
+              <Route path="mock/:id" element={<IeltsMock />} />
+              <Route path="generate" element={<IeltsGenerate />} />
             </Route>
           </Route>
           <Route
@@ -123,6 +142,14 @@ export default function App() {
             element={
               <RequireProfile>
                 <IeltsListening />
+              </RequireProfile>
+            }
+          />
+          <Route
+            path="/ielts/mock/:id/:section"
+            element={
+              <RequireProfile>
+                <IeltsMockSection />
               </RequireProfile>
             }
           />

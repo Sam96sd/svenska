@@ -3,11 +3,15 @@ import { contentFiles } from './index'
 import {
   LessonSchema,
   ListeningPartSchema,
+  PronSetSchema,
+  VocabDeckSchema,
   PassageSchema,
   SpeakingItemSchema,
   WritingTaskSchema,
   type Lesson,
   type ListeningPart,
+  type PronSet,
+  type VocabDeck,
   type Passage,
   type SpeakingItem,
   type WritingTask,
@@ -15,6 +19,8 @@ import {
 import {
   britishSpellingIssues,
   validateLesson,
+  validatePronSet,
+  validateVocabDeck,
   validateListening,
   validatePassage,
   validateSpeaking,
@@ -69,6 +75,20 @@ describe('IELTS content', async () => {
     it(`lesson ${data.id} is valid`, () => {
       expect(contentFiles.idOf(path)).toBe(data.id)
       expect(validateLesson(data)).toEqual([])
+    })
+
+  const decks = await loadAll<VocabDeck>(contentFiles.vocab, (x) => VocabDeckSchema.parse(x))
+  for (const { path, data } of decks)
+    it(`vocabulary deck ${data.id} is valid`, () => {
+      expect(contentFiles.idOf(path)).toBe(data.id)
+      expect(validateVocabDeck(data)).toEqual([])
+    })
+
+  const pron = await loadAll<PronSet>(contentFiles.pronunciation, (x) => PronSetSchema.parse(x))
+  for (const { path, data } of pron)
+    it(`pronunciation set ${data.id} is valid`, () => {
+      expect(contentFiles.idOf(path)).toBe(data.id)
+      expect(validatePronSet(data)).toEqual([])
     })
 
   it.skipIf(only.length > 0)('has content to check', () => {
