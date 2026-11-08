@@ -17,6 +17,15 @@ const DictionaryPage = lazy(() => import('../features/dictionary/DictionaryPage'
 const PlacementPage = lazy(() => import('../features/placement/PlacementPage'))
 const ConnectPage = lazy(() => import('../features/sync/ConnectPage'))
 
+// IELTS section: every screen is its own chunk, so Swedish learners never download it.
+const IeltsGate = lazy(() => import('../ielts/features/IeltsGate'))
+const IeltsHome = lazy(() => import('../ielts/features/home/IeltsHome'))
+const IeltsSetup = lazy(() => import('../ielts/features/setup/SetupPage'))
+const IeltsPractice = lazy(() => import('../ielts/features/practice/PracticeHub'))
+const IeltsProgress = lazy(() => import('../ielts/features/progress/ProgressPage'))
+const IeltsSettings = lazy(() => import('../ielts/features/settings/IeltsSettingsPage'))
+const IeltsExamFormat = lazy(() => import('../ielts/features/exam/ExamFormatPage'))
+
 function RequireProfile({ children }: { children: ReactNode }) {
   const profile = useActiveProfile()
   return profile ? children : <Navigate to="/profiles" replace />
@@ -42,6 +51,14 @@ export default function App() {
             <Route path="unit/:unitId" element={<UnitPage />} />
             <Route path="review" element={<ReviewPage />} />
             <Route path="words" element={<DictionaryPage />} />
+            <Route path="ielts/setup" element={<IeltsSetup />} />
+            <Route path="ielts/settings" element={<IeltsSettings />} />
+            <Route path="ielts/format" element={<IeltsExamFormat />} />
+            <Route path="ielts" element={<IeltsGate />}>
+              <Route index element={<IeltsHome />} />
+              <Route path="practice" element={<IeltsPractice />} />
+              <Route path="progress" element={<IeltsProgress />} />
+            </Route>
           </Route>
           <Route
             path="/lesson/:lessonId"

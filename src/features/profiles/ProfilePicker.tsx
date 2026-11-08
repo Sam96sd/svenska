@@ -11,6 +11,7 @@ import {
 } from '../../lib/storage/actions'
 import { useProfiles } from '../../lib/storage/hooks'
 import { AVATAR_COLORS, type Profile } from '../../lib/storage/schema'
+import { lastSection, sectionHome } from '../../ielts/storage/bridge'
 
 export default function ProfilePicker() {
   const profiles = useProfiles()
@@ -21,7 +22,7 @@ export default function ProfilePicker() {
 
   function choose(id: string) {
     setActiveProfile(id)
-    navigate('/')
+    navigate(sectionHome(lastSection(id)))
   }
 
   return (

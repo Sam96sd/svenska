@@ -30,10 +30,10 @@ export default function SettingsPage() {
     e.target.value = ''
     if (!file) return
     try {
-      const state = parseBackup(await file.text())
-      const names = state.profiles.map((p) => p.name).join(', ')
+      const backup = parseBackup(await file.text())
+      const names = backup.state.profiles.map((p) => p.name).join(', ')
       if (!confirm(`Replace ALL progress on this device with the backup (${names})?`)) return
-      restoreBackup(state)
+      restoreBackup(backup)
       setMessage({ tone: 'ok', text: `Restored progress for ${names}.` })
       navigate('/profiles')
     } catch (err) {

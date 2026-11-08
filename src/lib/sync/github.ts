@@ -5,6 +5,8 @@
 
 const API = 'https://api.github.com'
 export const SYNC_FILE = 'svenska-sync.json'
+/** IELTS progress lives in a second file of the same gist. */
+export const IELTS_SYNC_FILE = 'svenska-ielts-sync.json'
 const DESCRIPTION = 'Svenska — learning progress (synced by the app)'
 
 export type SyncErrorKind = 'auth' | 'notFound' | 'rateLimit' | 'network' | 'other'
@@ -85,28 +87,58 @@ export async function findGist(token: string): Promise<string | null> {
   return null
 }
 
-export async function createGist(token: string, content: string): Promise<string> {
+export async function createGist(token: string, files: Record<string, string>): Promise<string> {
   const res = await request(token, '/gists', {
     method: 'POST',
     body: JSON.stringify({
       description: DESCRIPTION,
       public: false,
-      files: { [SYNC_FILE]: { content } },
+      files: Object.fromEntries(
+        Object.entries(files).map(([name, content]) => [name, { content }]),
+      ),
     }),
   })
   return ((await res.json()) as Gist).id
 }
 
-/** The sync file's text, or null when the gist exists but has no sync file yet. */
-export async function readGist(token: string, id: string): Promise<string | null> {
+/** The text of each requested file; null for a file the gist doesn't have (yet). */
+export async function readGistFiles<N extends string>(
+  token: string,
+  id: string,
+  names: readonly N[],
+): Promise<Record<N, string | null>> {
   const res = await request(token, `/gists/${encodeURIComponent(id)}`)
-  const file = ((await res.json()) as Gist).files[SYNC_FILE]
-  return file ? fileContent(file) : null
+  const files = ((await res.json()) as Gist).files
+  const out = {} as Record<N, string | null>
+  for (const name of names) {
+    const file = files[name]
+    out[name] = file ? await fileContent(file) : null
+  }
+  return out
+}
+
+/** The main sync file's text, or null when the gist exists but has no sync file yet. */
+export async function readGist(token: string, id: string): Promise<string | null> {
+  return (await readGistFiles(token, id, [SYNC_FILE]))[SYNC_FILE]
+}
+
+/** Writes the given files in one request (files not listed are left alone). */
+export async function writeGistFiles(
+  token: string,
+  id: string,
+  files: Record<string, string>,
+): Promise<void> {
+  if (Object.keys(files).length === 0) return
+  await request(token, `/gists/${encodeURIComponent(id)}`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      files: Object.fromEntries(
+        Object.entries(files).map(([name, content]) => [name, { content }]),
+      ),
+    }),
+  })
 }
 
 export async function writeGist(token: string, id: string, content: string): Promise<void> {
-  await request(token, `/gists/${encodeURIComponent(id)}`, {
-    method: 'PATCH',
-    body: JSON.stringify({ files: { [SYNC_FILE]: { content } } }),
-  })
+  await writeGistFiles(token, id, { [SYNC_FILE]: content })
 }

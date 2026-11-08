@@ -1,7 +1,24 @@
 import { useSyncExternalStore } from 'react'
 import { canonical, emptyDoc, parseDoc, serializeDoc, syncStep, toDoc } from './merge'
-import { createGist, findGist, readGist, SyncError, writeGist } from './github'
+import {
+  createGist,
+  findGist,
+  IELTS_SYNC_FILE,
+  readGist,
+  readGistFiles,
+  SYNC_FILE,
+  SyncError,
+  writeGistFiles,
+} from './github'
 import { store } from '../storage/store'
+import { ieltsStore } from '../../ielts/storage/store'
+import {
+  emptyIeltsDoc,
+  ieltsSyncStep,
+  parseIeltsDoc,
+  serializeIeltsDoc,
+  toIeltsDoc,
+} from '../../ielts/storage/merge'
 
 /*
  * Keeps this device's progress in sync with the shared gist: pull, merge, push.
@@ -83,31 +100,39 @@ async function runOnce(): Promise<void> {
   if (!c) return
   setStatus({ state: 'syncing' })
   try {
-    const raw = await readGist(c.token, c.gistId)
+    const files = await readGistFiles(c.token, c.gistId, [SYNC_FILE, IELTS_SYNC_FILE] as const)
+    const raw = files[SYNC_FILE]
+    const rawIelts = files[IELTS_SYNC_FILE]
     const remote = raw ? parseDoc(raw) : { doc: emptyDoc(), newer: false }
+    const remoteIelts = rawIelts ? parseIeltsDoc(rawIelts) : { doc: emptyIeltsDoc(), newer: false }
     if (config !== c) return // disconnected meanwhile
 
     // Read local state and apply the merge in one synchronous step, so nothing done
     // during the download is lost.
     const local = store.get()
-    const { state, doc } = syncStep(local, remote.doc, !c.joined)
-    if (canonical(state) !== canonical(local)) {
-      applying = true
-      try {
-        store.set(() => state)
-      } finally {
-        applying = false
-      }
+    const localIelts = ieltsStore.get()
+    const { state, doc, remap } = syncStep(local, remote.doc, !c.joined)
+    const ielts = ieltsSyncStep(localIelts, remoteIelts.doc, remap, doc.deleted)
+    applying = true
+    try {
+      if (canonical(state) !== canonical(local)) store.set(() => state)
+      if (canonical(ielts.state) !== canonical(localIelts)) ieltsStore.set(() => ielts.state)
+    } finally {
+      applying = false
     }
 
-    if (remote.newer) {
+    if (remote.newer || remoteIelts.newer) {
       throw new SyncError(
         'other',
         'Another device has a newer version of the app. Reload to update.',
       )
     }
     const out = serializeDoc(doc)
-    if (out !== raw) await writeGist(c.token, c.gistId, out)
+    const outIelts = serializeIeltsDoc(ielts.doc)
+    const changed: Record<string, string> = {}
+    if (out !== raw) changed[SYNC_FILE] = out
+    if (outIelts !== rawIelts) changed[IELTS_SYNC_FILE] = outIelts
+    await writeGistFiles(c.token, c.gistId, changed)
 
     if (config !== c) return
     saveConfig({ ...c, joined: true, lastSyncedAt: Date.now() })
@@ -159,7 +184,13 @@ export async function connect(token: string, gistId?: string): Promise<void> {
   if (!t) throw new SyncError('auth', 'Paste your GitHub token first.')
   let id = gistId?.trim() || null
   if (id) await readGist(t, id)
-  else id = (await findGist(t)) ?? (await createGist(t, serializeDoc(toDoc(store.get()))))
+  else
+    id =
+      (await findGist(t)) ??
+      (await createGist(t, {
+        [SYNC_FILE]: serializeDoc(toDoc(store.get())),
+        [IELTS_SYNC_FILE]: serializeIeltsDoc(toIeltsDoc(ieltsStore.get())),
+      }))
   saveConfig({ token: t, gistId: id, joined: false, lastSyncedAt: null })
   setStatus({ enabled: true, state: 'idle', error: null, needsToken: false, lastSyncedAt: null })
   await syncNow()
@@ -198,6 +229,7 @@ export function startSync() {
   if (started || typeof window === 'undefined') return
   started = true
   store.subscribe(scheduleSync)
+  ieltsStore.subscribe(scheduleSync)
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') void syncNow()
     // Leaving the app: push pending changes right away instead of waiting for the debounce.

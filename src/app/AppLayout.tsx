@@ -1,21 +1,69 @@
-import { BookOpen, House, Layers, Settings as SettingsIcon } from 'lucide-react'
-import { Suspense } from 'react'
-import { Link, NavLink, Outlet } from 'react-router'
+import {
+  BookOpen,
+  ChartLine,
+  Dumbbell,
+  House,
+  Layers,
+  Settings as SettingsIcon,
+  Target,
+} from 'lucide-react'
+import { Suspense, useEffect } from 'react'
+import { Link, NavLink, Outlet, useLocation } from 'react-router'
 import { cx } from '../components/styles'
 import { Avatar } from '../components/ui'
 import { useProfile } from '../lib/storage/hooks'
 import { SyncBadge } from '../features/sync/SyncBadge'
+import { rememberSection, type Section } from '../ielts/storage/bridge'
 import { PageSpinner } from './PageSpinner'
 
-const NAV = [
-  { to: '/', label: 'Learn', icon: House, end: true },
-  { to: '/review', label: 'Review', icon: Layers, end: false },
-  { to: '/words', label: 'Words', icon: BookOpen, end: false },
-  { to: '/settings', label: 'Settings', icon: SettingsIcon, end: false },
-]
+const NAVS = {
+  swedish: [
+    { to: '/', label: 'Learn', icon: House, end: true },
+    { to: '/review', label: 'Review', icon: Layers, end: false },
+    { to: '/words', label: 'Words', icon: BookOpen, end: false },
+    { to: '/settings', label: 'Settings', icon: SettingsIcon, end: false },
+  ],
+  ielts: [
+    { to: '/ielts', label: 'Today', icon: Target, end: true },
+    { to: '/ielts/practice', label: 'Practice', icon: Dumbbell, end: false },
+    { to: '/ielts/progress', label: 'Progress', icon: ChartLine, end: false },
+    { to: '/ielts/settings', label: 'Settings', icon: SettingsIcon, end: false },
+  ],
+}
+
+function sectionOf(pathname: string): Section {
+  return pathname === '/ielts' || pathname.startsWith('/ielts/') ? 'ielts' : 'swedish'
+}
+
+/** The Swedish | IELTS switch in the header. */
+function SectionSwitch({ section }: { section: Section }) {
+  const item = (to: string, label: string, active: boolean) => (
+    <Link
+      to={to}
+      aria-current={active ? 'page' : undefined}
+      className={cx(
+        'flex h-9 items-center rounded-xl px-3 text-sm font-semibold transition-colors',
+        active ? 'bg-surface text-ink shadow-sm' : 'text-muted hover:text-ink',
+      )}
+    >
+      {label}
+    </Link>
+  )
+  return (
+    <nav aria-label="Section" className="bg-surface-2 flex shrink-0 gap-0.5 rounded-2xl p-0.5">
+      {item('/', 'Swedish', section === 'swedish')}
+      {item('/ielts', 'IELTS', section === 'ielts')}
+    </nav>
+  )
+}
 
 export default function AppLayout() {
   const profile = useProfile()
+  const { pathname } = useLocation()
+  const section = sectionOf(pathname)
+  const NAV = NAVS[section]
+
+  useEffect(() => rememberSection(profile.id, section), [profile.id, section])
 
   return (
     <div className="min-h-dvh pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0">
@@ -27,11 +75,14 @@ export default function AppLayout() {
         Skip to content
       </button>
       <header className="bg-bg/85 border-line sticky top-0 z-30 border-b backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-5xl items-center gap-6 px-5">
-          <Link to="/" className="flex items-center gap-2.5" aria-label="Svenska home">
+        <div className="mx-auto flex h-16 max-w-5xl items-center gap-3 px-4 sm:px-5 md:gap-5">
+          <Link to="/" className="flex shrink-0 items-center gap-2.5" aria-label="Svenska home">
             <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" className="h-8 w-8" />
-            <span className="font-display text-xl font-semibold tracking-tight">Svenska</span>
+            <span className="font-display hidden text-xl font-semibold tracking-tight lg:inline">
+              Svenska
+            </span>
           </Link>
+          <SectionSwitch section={section} />
           <nav aria-label="Main" className="hidden flex-1 gap-1 md:flex">
             {NAV.map(({ to, label, end }) => (
               <NavLink
@@ -49,21 +100,23 @@ export default function AppLayout() {
               </NavLink>
             ))}
           </nav>
-          <div className="ml-auto flex items-center gap-1">
+          <div className="ml-auto flex min-w-0 items-center gap-1">
             <SyncBadge />
             <Link
               to="/profiles"
-              className="hover:bg-surface-2 flex items-center gap-2 rounded-full py-1 pr-3 pl-1 transition-colors"
+              className="hover:bg-surface-2 flex min-w-0 items-center gap-2 rounded-full py-1 pr-1 pl-1 transition-colors sm:pr-3"
               aria-label={`Switch learner (current: ${profile.name})`}
             >
               <Avatar name={profile.name} color={profile.color} size={32} />
-              <span className="text-sm font-semibold">{profile.name}</span>
+              <span className="hidden truncate text-sm font-semibold sm:inline">
+                {profile.name}
+              </span>
             </Link>
           </div>
         </div>
       </header>
 
-      <main id="main" tabIndex={-1} className="mx-auto max-w-5xl px-5 pt-6 pb-10">
+      <main id="main" tabIndex={-1} className="mx-auto max-w-5xl px-4 pt-6 pb-10 sm:px-5">
         <Suspense fallback={<PageSpinner />}>
           <Outlet />
         </Suspense>

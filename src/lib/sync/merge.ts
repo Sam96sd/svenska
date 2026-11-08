@@ -81,12 +81,12 @@ export function parseDoc(text: string): ParsedDoc {
 }
 
 /** Newest wins; on a tie the larger value wins, so both sides pick the same one. */
-function newest<T>(a: T, aAt: number, b: T, bAt: number): T {
+export function newest<T>(a: T, aAt: number, b: T, bAt: number): T {
   if (aAt !== bAt) return aAt > bAt ? a : b
   return canonical(a) >= canonical(b) ? a : b
 }
 
-function mergeRecords<T>(
+export function mergeRecords<T>(
   a: Record<string, T>,
   b: Record<string, T>,
   pick: (x: T, y: T) => T,
@@ -106,7 +106,7 @@ const mergeLesson = (x: LessonProgress, y: LessonProgress): LessonProgress => ({
 })
 
 /** The card that was reviewed most recently (then: most reps, then: due soonest). */
-function mergeCard(x: SrsCard, y: SrsCard): SrsCard {
+export function mergeCard(x: SrsCard, y: SrsCard): SrsCard {
   const key = (c: SrsCard) => [c.last ?? -1, c.reps, -c.due, -c.added]
   const kx = key(x)
   const ky = key(y)
@@ -185,6 +185,18 @@ const isPristine = (p: Profile) =>
  * its untouched default profiles that have no synced counterpart are dropped.
  */
 export function matchProfiles(local: AppState, remote: SyncDoc, joining: boolean): AppState {
+  return matchProfilesWithRemap(local, remote, joining).state
+}
+
+/**
+ * Same as matchProfiles, and also returns which local ids changed: old id → new id, or null
+ * for a dropped profile. Data kept elsewhere by profile id (IELTS) uses it to follow along.
+ */
+export function matchProfilesWithRemap(
+  local: AppState,
+  remote: SyncDoc,
+  joining: boolean,
+): { state: AppState; remap: Map<string, string | null> } {
   const localIds = new Set(local.profiles.map((p) => p.id))
   const remoteIds = new Set(remote.profiles.map((p) => p.id))
   const claimed = new Set<string>()
@@ -202,7 +214,7 @@ export function matchProfiles(local: AppState, remote: SyncDoc, joining: boolean
       remap.set(p.id, null)
     }
   }
-  if (remap.size === 0) return local
+  if (remap.size === 0) return { state: local, remap }
 
   const profiles = local.profiles.flatMap((p) => {
     if (!remap.has(p.id)) return [p]
@@ -211,7 +223,7 @@ export function matchProfiles(local: AppState, remote: SyncDoc, joining: boolean
   })
   const active = local.activeProfileId
   const activeProfileId = active && remap.has(active) ? (remap.get(active) ?? null) : active
-  return { ...local, profiles, activeProfileId }
+  return { state: { ...local, profiles, activeProfileId }, remap }
 }
 
 /**
@@ -242,8 +254,8 @@ export function syncStep(
   local: AppState,
   remote: SyncDoc,
   joining: boolean,
-): { state: AppState; doc: SyncDoc } {
-  const matched = matchProfiles(local, remote, joining)
+): { state: AppState; doc: SyncDoc; remap: Map<string, string | null> } {
+  const { state: matched, remap } = matchProfilesWithRemap(local, remote, joining)
   const doc = mergeDocs(toDoc(matched), remote)
-  return { state: applyDoc(matched, doc), doc }
+  return { state: applyDoc(matched, doc), doc, remap }
 }

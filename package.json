@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "check:secrets": "node scripts/check-secrets.mjs dist",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
